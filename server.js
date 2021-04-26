@@ -11,4 +11,4 @@ require('./UserRouter/index')(app);
 require('./BlogRouter/index')(app);
 
 const port = process.env.PORT || 5000;
-app.listen(port,()=> console.log(`Port ${port} active`));
+app.listen(port, () => console.log(`Port ${port} active`));
