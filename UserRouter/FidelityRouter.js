@@ -6,8 +6,8 @@ let yyyymmdd = require("yyyy-mm-dd");
 router.post('/create', (req, res) => {
     database.query("insert into fidelity_cards values (NULL,?,?)",
         [
-            req.body.userId,
             req.body.points,
+            req.body.userId,
         ],
         function (err, data) {
             if (err) {
@@ -19,10 +19,10 @@ router.post('/create', (req, res) => {
 })
 
 router.post('/addPoints', (req, res) => {
-    database.query("update fidelity_cards set points = ? where user_id = ?",
+    database.query("update fidelity_cards set points = points + ? where user_id = ?",
         [
-            req.body.userId,
             req.body.points,
+            req.body.userId,
         ],
         function (err, data) {
             if (err) {
@@ -37,7 +37,7 @@ router.post('/addPoints', (req, res) => {
 })
 
 router.get('/user/get/:userId', async (req, res) => {
-    database.query('SELECT * FROM fidelity_cards WHERE user_id = ?', [req.params.userId], async (err, rows, fields) => {
+    database.query('SELECT f.*,u.full_name FROM fidelity_cards f JOIN user u on f.user_id = u.id WHERE user_id = ?', [req.params.userId], async (err, rows, fields) => {
         if (err) {
             res.send(err);
         } else {
@@ -47,7 +47,7 @@ router.get('/user/get/:userId', async (req, res) => {
 })
 
 
-router.post('/delete/:userId', (req, res) => {
+router.get('/delete/:userId', (req, res) => {
     database.query("delete from fidelity_cards where user_id = ?",
         [
             req.params.userId,
