@@ -20,13 +20,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b04fed90-904e-45f3-9671-64262759d3d6" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/Booksotre.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Booksotre.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources/9e3b96a3-a9ec-4cbd-bd4e-ca31d296af0b.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources/9e3b96a3-a9ec-4cbd-bd4e-ca31d296af0b/storage_v2/_src_/schema/information_schema.FNRwLQ.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BookRouter/BookCommentRouter.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BookRouter/BookRateRouter.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/OnlineBookRouter/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BlogRouter/PostsRouter.js" beforeDir="false" afterPath="$PROJECT_DIR$/BlogRouter/PostsRouter.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserRouter/FidelityRouter.js" beforeDir="false" afterPath="$PROJECT_DIR$/UserRouter/FidelityRouter.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookRouter/OnlineBookRouter.js" beforeDir="false" afterPath="$PROJECT_DIR$/OnlineBookRouter/OnlineBookRouter.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookRouter/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/BookRouter/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/server.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,15 +57,28 @@
   </component>
   <component name="PropertiesComponent">
     <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="DatabaseDriversLRU" value="mysql" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RunManager">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="start" type="js.build_tools.npm" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
@@ -83,6 +100,12 @@
       <updated>1619344838368</updated>
       <workItem from="1619344840495" duration="5215000" />
       <workItem from="1619453350545" duration="1191000" />
+      <workItem from="1619526230097" duration="422000" />
+      <workItem from="1619526684104" duration="975000" />
+      <workItem from="1619530872089" duration="955000" />
+      <workItem from="1619619458131" duration="1870000" />
+      <workItem from="1619621372265" duration="5299000" />
+      <workItem from="1619704672043" duration="2323000" />
     </task>
     <task id="LOCAL-00001" summary="update">
       <created>1619386325176</created>
@@ -91,7 +114,14 @@
       <option name="project" value="LOCAL" />
       <updated>1619386325176</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Crud Book &amp; OnlineBook">
+      <created>1619628180383</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1619628180383</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -111,40 +141,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="update" />
-    <option name="LAST_COMMIT_MESSAGE" value="update" />
-  </component>
-  <component name="WindowStateProjectService">
-    <state x="414" y="180" width="1092" height="714" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1619373426726">
-      <screen x="0" y="0" width="1920" height="1050" />
-    </state>
-    <state x="414" y="180" width="1092" height="714" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1050/1920.0.1920.1050@0.0.1920.1050" timestamp="1619373426726" />
-    <state x="734" y="327" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1619386166988">
-      <screen x="0" y="0" width="1920" height="1050" />
-    </state>
-    <state x="734" y="327" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1050/1920.0.1920.1050@0.0.1920.1050" timestamp="1619386166988" />
-    <state width="1899" height="166" key="GridCell.Tab.0.bottom" timestamp="1619388082457">
-      <screen x="0" y="0" width="1920" height="1050" />
-    </state>
-    <state width="1899" height="166" key="GridCell.Tab.0.bottom/0.0.1920.1050/1920.0.1920.1050@0.0.1920.1050" timestamp="1619388082457" />
-    <state width="1899" height="166" key="GridCell.Tab.0.center" timestamp="1619388082457">
-      <screen x="0" y="0" width="1920" height="1050" />
-    </state>
-    <state width="1899" height="166" key="GridCell.Tab.0.center/0.0.1920.1050/1920.0.1920.1050@0.0.1920.1050" timestamp="1619388082457" />
-    <state width="1899" height="166" key="GridCell.Tab.0.left" timestamp="1619388082456">
-      <screen x="0" y="0" width="1920" height="1050" />
-    </state>
-    <state width="1899" height="166" key="GridCell.Tab.0.left/0.0.1920.1050/1920.0.1920.1050@0.0.1920.1050" timestamp="1619388082456" />
-    <state width="1899" height="166" key="GridCell.Tab.0.right" timestamp="1619388082457">
-      <screen x="0" y="0" width="1920" height="1050" />
-    </state>
-    <state width="1899" height="166" key="GridCell.Tab.0.right/0.0.1920.1050/1920.0.1920.1050@0.0.1920.1050" timestamp="1619388082457" />
-    <state x="461" y="170" key="SettingsEditor" timestamp="1619345049327">
-      <screen x="0" y="0" width="1920" height="1050" />
-    </state>
-    <state x="461" y="170" key="SettingsEditor/0.0.1920.1050/1920.0.1920.1050@0.0.1920.1050" timestamp="1619345049327" />
-    <state x="552" y="258" key="Vcs.Push.Dialog.v2" timestamp="1619386327590">
-      <screen x="0" y="0" width="1920" height="1050" />
-    </state>
-    <state x="552" y="258" key="Vcs.Push.Dialog.v2/0.0.1920.1050/1920.0.1920.1050@0.0.1920.1050" timestamp="1619386327590" />
+    <MESSAGE value="Crud Book &amp; OnlineBook" />
+    <option name="LAST_COMMIT_MESSAGE" value="Crud Book &amp; OnlineBook" />
   </component>
 </project>

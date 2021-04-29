@@ -1,6 +1,7 @@
 
 module.exports = function (app) {
     app.use('/book', require('./BookRouter'));
-    app.use('/onlineBook', require('./OnlineBookRouter'));
+    app.use('/bookRate', require('./BookRateRouter'));
+    app.use('/bookComment', require('./BookCommentRouter'));
 
 }
