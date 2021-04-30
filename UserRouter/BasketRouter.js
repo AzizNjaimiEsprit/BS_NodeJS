@@ -38,8 +38,21 @@ router.post('/update', (req, res) => {
         });
 })
 
+router.get('/cart',(req, res) => {
+    req.session.username ="test"
+    console.log(req.session.username)
+    database.query('SELECT * FROM basket bs join book bk on bs.book_id = bk.id WHERE user_id = 3', [req.params.userId], async (err, rows, fields) => {
+        if (err) {
+            res.render('../Views/basket.twig',{rows : []})
+        } else {
+            res.render('../Views/basket.twig',{rows : rows})
+        }
+    })
+})
+
 router.get('/user/get/:userId', async (req, res) => {
-    database.query('SELECT * FROM basket WHERE user_id = ?', [req.params.userId], async (err, rows, fields) => {
+    console.log(req.session.username)
+    database.query('SELECT * FROM basket bs join book bk on bs.book_id = bk.id WHERE user_id = ?', [req.params.userId], async (err, rows, fields) => {
         if (err) {
             res.send(err);
         } else {

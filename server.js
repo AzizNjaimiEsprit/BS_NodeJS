@@ -1,9 +1,14 @@
 const express = require('express');
+var cookieSession = require('cookie-session')
 var cors = require('cors');
+var path = require('path');
 const app = express();
+const session = require('express-session');
 app.use(cors());
 var bodyParser = require('body-parser')
 app.use(bodyParser.json())
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(session({secret: 'ssshhhhh'}));
 ////////////////////////////////////////////////////////////////////////////
 
 require('./CommandsRouter/index')(app);
