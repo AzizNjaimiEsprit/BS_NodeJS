@@ -57,8 +57,8 @@ router.get('/get/:id', (req, res) => {
     })
 })
 
-router.get('/user/get/:userId', async (req, res) => {
-    database.query('SELECT * FROM orders WHERE user_id = ?', [req.params.userId], async (err, rows, fields) => {
+router.get('/user/get/:userId', (req, res) => {
+    database.query('SELECT * FROM orders WHERE user_id = ?', [req.params.userId], (err, rows, fields) => {
         if (!err && rows.length != 0) {
 
             for (let i = 0; i < rows.length; i++) {

@@ -26,8 +26,8 @@ router.post('/addBook', (req, res) => {
             }
         });
 })
-router.get('/getById/:bookId', async (req, res) => {
-    database.query('SELECT * FROM book WHERE id = ?', [req.params.bookId], async (err, rows, fields) => {
+router.get('/getById/:bookId', (req, res) => {
+    database.query('SELECT * FROM book WHERE id = ?', [req.params.bookId], (err, rows, fields) => {
         if (err) {
             res.send(err);
         } else {
@@ -36,8 +36,8 @@ router.get('/getById/:bookId', async (req, res) => {
     })
 })
 
-router.get('/getAll', async (req, res) => {
-    database.query('SELECT * FROM book ', async (err, rows, fields) => {
+router.get('/getAll', (req, res) => {
+    database.query('SELECT * FROM book ', (err, rows, fields) => {
         if (err) {
             res.send(err);
         } else {

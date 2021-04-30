@@ -39,7 +39,7 @@ router.post('/update', (req, res) => {
 })
 
 router.get('/user/get/:userId', (req, res) => {
-    database.query('SELECT p.*,u.full_name FROM post_comment p JOIN user u on p.publisher_id = u.id WHERE publisher_id = ?', [req.params.userId], async (err, rows, fields) => {
+    database.query('SELECT p.*,u.full_name FROM post_comment p JOIN user u on p.publisher_id = u.id WHERE publisher_id = ?', [req.params.userId], (err, rows, fields) => {
         if (err) {
             res.send(err);
         } else {
@@ -49,7 +49,7 @@ router.get('/user/get/:userId', (req, res) => {
 })
 
 router.get('/post/get/:postId', (req, res) => {
-    database.query('SELECT * FROM post_comment WHERE post_id = ?', [req.params.postId], async (err, rows, fields) => {
+    database.query('SELECT * FROM post_comment WHERE post_id = ?', [req.params.postId], (err, rows, fields) => {
         if (err) {
             res.send(err);
         } else {

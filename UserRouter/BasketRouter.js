@@ -38,10 +38,8 @@ router.post('/update', (req, res) => {
         });
 })
 
-router.get('/cart',(req, res) => {
-    req.session.username ="test"
-    console.log(req.session.username)
-    database.query('SELECT * FROM basket bs join book bk on bs.book_id = bk.id WHERE user_id = 3', [req.params.userId], async (err, rows, fields) => {
+router.get('/',(req, res) => {
+    database.query('SELECT *,bs.quantity as bQuantity FROM basket bs join book bk on bs.book_id = bk.id WHERE user_id = ?', [req.session.userId], (err, rows, fields) => {
         if (err) {
             res.render('../Views/basket.twig',{rows : []})
         } else {
@@ -50,9 +48,9 @@ router.get('/cart',(req, res) => {
     })
 })
 
-router.get('/user/get/:userId', async (req, res) => {
+router.get('/user/get/:userId', (req, res) => {
     console.log(req.session.username)
-    database.query('SELECT * FROM basket bs join book bk on bs.book_id = bk.id WHERE user_id = ?', [req.params.userId], async (err, rows, fields) => {
+    database.query('SELECT *,bs.quantity as bQuantity FROM basket bs join book bk on bs.book_id = bk.id WHERE user_id = ?', [req.params.userId], (err, rows, fields) => {
         if (err) {
             res.send(err);
         } else {

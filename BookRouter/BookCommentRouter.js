@@ -38,7 +38,7 @@ router.post('/updateComment', (req, res) => {
 })
 
 router.get('/getComment/:bookId',  (req, res) => {
-    database.query('SELECT * FROM comment WHERE book_id = ?', [req.params.bookId], async (err, rows, fields) => {
+    database.query('SELECT * FROM comment WHERE book_id = ?', [req.params.bookId], (err, rows, fields) => {
         if (err) {
             res.send(err);
         } else {

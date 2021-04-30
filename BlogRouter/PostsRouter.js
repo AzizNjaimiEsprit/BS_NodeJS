@@ -15,6 +15,17 @@ var storage = multer.diskStorage({
 var upload = multer({ storage: storage })
 var path = require('path');
 
+
+router.get('/',(req, res) => {
+    database.query('SELECT * FROM post p join user u on p.publisher_id = u.id', (err, rows, fields) => {
+        if (err) {
+            res.render('../Views/blog.twig',{rows : []})
+        } else {
+            res.render('../Views/blog.twig',{rows : rows})
+        }
+    })
+})
+
 router.post('/addAttachment/:postId',upload.single('attachment'), function (req, res, next) {
     let filename = req.file.filename;
     database.query("insert into attachment values (?,?)",
@@ -32,7 +43,7 @@ router.post('/addAttachment/:postId',upload.single('attachment'), function (req,
 })
 
 router.get('/getPostAttachment/:postId',((req, res) => {
-    database.query('SELECT * FROM attachment WHERE post_id = ?', [req.params.postId], async (err, rows, fields) => {
+    database.query('SELECT * FROM attachment WHERE post_id = ?', [req.params.postId], (err, rows, fields) => {
         if (err) {
             res.send(err);
         } else {
@@ -44,11 +55,12 @@ router.get('/getPostAttachment/:postId',((req, res) => {
 }))
 
 router.post('/add', (req, res) => {
-    database.query("insert into post values (NULL,?,?,?)",
+    database.query("insert into post values (NULL,?,?,?,?)",
         [
             req.body.publisherId,
             yyyymmdd.withTime(),
             req.body.body,
+            req.body.title,
         ],
         function (err, data) {
             if (err) {
@@ -60,9 +72,10 @@ router.post('/add', (req, res) => {
 })
 
 router.post('/update', (req, res) => {
-    database.query("update post set body = ? where id = ?",
+    database.query("update post set body = ? and title = ? where id = ?",
         [
             req.body.body,
+            req.body.title,
             req.body.id,
         ],
         function (err, data) {
@@ -78,7 +91,7 @@ router.post('/update', (req, res) => {
 })
 
 router.get('/user/get/:userId', (req, res) => {
-    database.query('SELECT * FROM post WHERE publisher_id = ?', [req.params.userId], async (err, rows, fields) => {
+    database.query('SELECT * FROM post p join user u on p.publisher_id = u.id WHERE publisher_id = ?', [req.params.userId], (err, rows, fields) => {
         if (err) {
             res.send(err);
         } else {
@@ -86,6 +99,8 @@ router.get('/user/get/:userId', (req, res) => {
         }
     })
 })
+
+
 
 
 router.get('/delete/:id', (req, res) => {

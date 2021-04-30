@@ -38,7 +38,7 @@ router.post('/updateRate', (req, res) => {
 })
 
 router.get('/getListRate/:bookId',  (req, res) => {
-    database.query('SELECT * FROM rate WHERE book_id = ?', [req.params.bookId], async (err, rows, fields) => {
+    database.query('SELECT * FROM rate WHERE book_id = ?', [req.params.bookId], (err, rows, fields) => {
         if (err) {
             res.send(err);
         } else {
@@ -66,7 +66,7 @@ router.post('/deleteRate', (req, res) => {
         });
 })
 router.get('/getMoyenneRate/:bookId',  (req, res) => {
-    database.query('SELECT AVG(rate) FROM rate WHERE book_id = ?', [req.params.bookId], async (err, rows, fields) => {
+    database.query('SELECT AVG(rate) FROM rate WHERE book_id = ?', [req.params.bookId], (err, rows, fields) => {
         if (err) {
             res.send(err);
         } else {

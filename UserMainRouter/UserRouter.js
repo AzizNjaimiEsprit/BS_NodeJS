@@ -2,6 +2,12 @@ const express = require('express');
 const router = express.Router();
 const database = require('../config/db.config');
 
+router.get('/login',(req, res) => {
+    req.session.username = "aziz";
+    req.session.userId = 3;
+    res.send("Ok")
+})
+
 // Add new user to database
 router.post('/add', (req, res) => {
     database.query('INSERT INTO user VALUES (NULL,?,?,?,?,?,?,?,?)', [
@@ -21,6 +27,7 @@ router.post('/add', (req, res) => {
         }
     })
 });
+
 
 
 // Update existing user in the database

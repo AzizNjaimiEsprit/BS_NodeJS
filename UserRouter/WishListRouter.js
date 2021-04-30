@@ -17,9 +17,18 @@ router.post('/add', (req, res) => {
         });
 })
 
+router.get('/', (req, res) => {
+    database.query('SELECT * FROM wishlist bs join book bk on bs.book_id = bk.id  WHERE user_id = ?', [req.session.userId], (err, rows, fields) => {
+        if (err) {
+            res.render('../Views/wishlist.twig',{rows : []})
+        } else {
+            res.render('../Views/wishlist.twig',{rows : rows})
+        }
+    })
+})
 
 router.get('/user/get/:userId', (req, res) => {
-    database.query('SELECT * FROM wishlist WHERE user_id = ?', [req.params.userId], async (err, rows, fields) => {
+    database.query('SELECT * FROM wishlist bs join book bk on bs.book_id = bk.id WHERE user_id = ?', [req.params.userId], (err, rows, fields) => {
         if (err) {
             res.send(err);
         } else {

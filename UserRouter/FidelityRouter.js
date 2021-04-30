@@ -36,8 +36,8 @@ router.post('/addPoints', (req, res) => {
         });
 })
 
-router.get('/user/get/:userId', async (req, res) => {
-    database.query('SELECT f.*,u.full_name FROM fidelity_cards f JOIN user u on f.user_id = u.id WHERE user_id = ?', [req.params.userId], async (err, rows, fields) => {
+router.get('/user/get/:userId', (req, res) => {
+    database.query('SELECT f.*,u.full_name FROM fidelity_cards f JOIN user u on f.user_id = u.id WHERE user_id = ?', [req.params.userId], (err, rows, fields) => {
         if (err) {
             res.send(err);
         } else {

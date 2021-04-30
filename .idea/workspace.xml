@@ -20,16 +20,42 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b04fed90-904e-45f3-9671-64262759d3d6" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources/9e3b96a3-a9ec-4cbd-bd4e-ca31d296af0b.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources/9e3b96a3-a9ec-4cbd-bd4e-ca31d296af0b/storage_v2/_src_/schema/information_schema.FNRwLQ.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BookRouter/BookCommentRouter.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BookRouter/BookRateRouter.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/OnlineBookRouter/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BookRouter/OnlineBookRouter.js" beforeDir="false" afterPath="$PROJECT_DIR$/OnlineBookRouter/OnlineBookRouter.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BookRouter/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/BookRouter/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BlogRouter/CommentRouter.js" beforeDir="false" afterPath="$PROJECT_DIR$/BlogRouter/CommentRouter.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BlogRouter/PostsRouter.js" beforeDir="false" afterPath="$PROJECT_DIR$/BlogRouter/PostsRouter.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookRouter/BookCommentRouter.js" beforeDir="false" afterPath="$PROJECT_DIR$/BookRouter/BookCommentRouter.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookRouter/BookRateRouter.js" beforeDir="false" afterPath="$PROJECT_DIR$/BookRouter/BookRateRouter.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookRouter/BookRouter.js" beforeDir="false" afterPath="$PROJECT_DIR$/BookRouter/BookRouter.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CommandsRouter/OrdersRouter.js" beforeDir="false" afterPath="$PROJECT_DIR$/CommandsRouter/OrdersRouter.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserMainRouter/UserRouter.js" beforeDir="false" afterPath="$PROJECT_DIR$/UserMainRouter/UserRouter.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserRouter/BasketRouter.js" beforeDir="false" afterPath="$PROJECT_DIR$/UserRouter/BasketRouter.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserRouter/FidelityRouter.js" beforeDir="false" afterPath="$PROJECT_DIR$/UserRouter/FidelityRouter.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserRouter/WishListRouter.js" beforeDir="false" afterPath="$PROJECT_DIR$/UserRouter/WishListRouter.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/about.twig" beforeDir="false" afterPath="$PROJECT_DIR$/Views/about.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/basket.twig" beforeDir="false" afterPath="$PROJECT_DIR$/Views/basket.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/blog-no-sidebar.twig" beforeDir="false" afterPath="$PROJECT_DIR$/Views/blog.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/cart.twig" beforeDir="false" afterPath="$PROJECT_DIR$/Views/cart.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/checkout.twig" beforeDir="false" afterPath="$PROJECT_DIR$/Views/checkout.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/contact.twig" beforeDir="false" afterPath="$PROJECT_DIR$/Views/contact.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/error404.twig" beforeDir="false" afterPath="$PROJECT_DIR$/Views/error404.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/faq.twig" beforeDir="false" afterPath="$PROJECT_DIR$/Views/faq.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/index-2.twig" beforeDir="false" afterPath="$PROJECT_DIR$/Views/index-2.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/index-box.twig" beforeDir="false" afterPath="$PROJECT_DIR$/Views/index-box.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/index.twig" beforeDir="false" afterPath="$PROJECT_DIR$/Views/index.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/my-account.twig" beforeDir="false" afterPath="$PROJECT_DIR$/Views/my-account.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/portfolio-details.twig" beforeDir="false" afterPath="$PROJECT_DIR$/Views/portfolio-details.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/portfolio-three-column.twig" beforeDir="false" afterPath="$PROJECT_DIR$/Views/portfolio-three-column.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/portfolio.twig" beforeDir="false" afterPath="$PROJECT_DIR$/Views/portfolio.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/shop-grid.twig" beforeDir="false" afterPath="$PROJECT_DIR$/Views/shop-grid.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/shop-left-sidebar.twig" beforeDir="false" afterPath="$PROJECT_DIR$/Views/shop-left-sidebar.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/shop-list.twig" beforeDir="false" afterPath="$PROJECT_DIR$/Views/shop-list.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/shop-no-sidebar.twig" beforeDir="false" afterPath="$PROJECT_DIR$/Views/shop-no-sidebar.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/shop-right-sidebar.twig" beforeDir="false" afterPath="$PROJECT_DIR$/Views/shop-right-sidebar.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/single-product.twig" beforeDir="false" afterPath="$PROJECT_DIR$/Views/single-product.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/team.twig" beforeDir="false" afterPath="$PROJECT_DIR$/Views/team.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/wishlist.twig" beforeDir="false" afterPath="$PROJECT_DIR$/Views/wishlist.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/server.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -43,6 +69,9 @@
         <option value="JavaScript File" />
       </list>
     </option>
+  </component>
+  <component name="Git.Pull.Settings">
+    <option name="BRANCH" value="master" />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -91,6 +120,9 @@
     </configuration>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="b04fed90-904e-45f3-9671-64262759d3d6" name="Default Changelist" comment="" />
@@ -143,5 +175,39 @@
     <MESSAGE value="update" />
     <MESSAGE value="Crud Book &amp; OnlineBook" />
     <option name="LAST_COMMIT_MESSAGE" value="Crud Book &amp; OnlineBook" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state width="1899" height="245" key="GridCell.Tab.0.bottom" timestamp="1619796581741">
+      <screen x="1920" y="0" width="1920" height="1050" />
+    </state>
+    <state width="1899" height="245" key="GridCell.Tab.0.bottom/0.0.1920.1050/1920.0.1920.1050@1920.0.1920.1050" timestamp="1619796581741" />
+    <state width="1899" height="245" key="GridCell.Tab.0.center" timestamp="1619796581741">
+      <screen x="1920" y="0" width="1920" height="1050" />
+    </state>
+    <state width="1899" height="245" key="GridCell.Tab.0.center/0.0.1920.1050/1920.0.1920.1050@1920.0.1920.1050" timestamp="1619796581741" />
+    <state width="1899" height="245" key="GridCell.Tab.0.left" timestamp="1619796581741">
+      <screen x="1920" y="0" width="1920" height="1050" />
+    </state>
+    <state width="1899" height="245" key="GridCell.Tab.0.left/0.0.1920.1050/1920.0.1920.1050@1920.0.1920.1050" timestamp="1619796581741" />
+    <state width="1899" height="245" key="GridCell.Tab.0.right" timestamp="1619796581741">
+      <screen x="1920" y="0" width="1920" height="1050" />
+    </state>
+    <state width="1899" height="245" key="GridCell.Tab.0.right/0.0.1920.1050/1920.0.1920.1050@1920.0.1920.1050" timestamp="1619796581741" />
+    <state x="2518" y="286" key="MultipleFileMergeDialog" timestamp="1619793647929">
+      <screen x="1920" y="0" width="1920" height="1050" />
+    </state>
+    <state x="2518" y="286" key="MultipleFileMergeDialog/0.0.1920.1050/1920.0.1920.1050@1920.0.1920.1050" timestamp="1619793647929" />
+    <state width="498" height="446" key="SwitcherDM" timestamp="1619796735902">
+      <screen x="1920" y="0" width="1920" height="1050" />
+    </state>
+    <state width="498" height="446" key="SwitcherDM/0.0.1920.1050/1920.0.1920.1050@1920.0.1920.1050" timestamp="1619796735902" />
+    <state x="2119" y="229" width="1053" height="592" key="find.popup" timestamp="1619795744701">
+      <screen x="1920" y="0" width="1920" height="1050" />
+    </state>
+    <state x="2119" y="229" width="1053" height="592" key="find.popup/0.0.1920.1050/1920.0.1920.1050@1920.0.1920.1050" timestamp="1619795744701" />
+    <state x="2685" y="371" key="git4idea.ui.GitUnstashDialog" timestamp="1619793648178">
+      <screen x="1920" y="0" width="1920" height="1050" />
+    </state>
+    <state x="2685" y="371" key="git4idea.ui.GitUnstashDialog/0.0.1920.1050/1920.0.1920.1050@1920.0.1920.1050" timestamp="1619793648178" />
   </component>
 </project>

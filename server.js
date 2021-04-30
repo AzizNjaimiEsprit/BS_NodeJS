@@ -1,5 +1,4 @@
 const express = require('express');
-var cookieSession = require('cookie-session')
 var cors = require('cors');
 var path = require('path');
 const app = express();
