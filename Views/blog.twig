@@ -13,12 +13,12 @@
                     {% for row in rows %}
                         <article class="blog__post d-flex flex-wrap">
                             <div class="thumb">
-                                <a href="blog-details.html">
+                                <a href="blog-details.twig">
                                     <img src="/images/blog/blog-3/1.jpg" alt="blog images">
                                 </a>
                             </div>
                             <div class="content">
-                                <h4><a href="blog-details.html">{{ row.title }}</a></h4>
+                                <h4><a href="blog-details.twig">{{ row.title }}</a></h4>
                                 <ul class="post__meta">
                                     <li>Posts by : <a href="#">{{ row.full_name }}</a></li>
                                     <li class="post_separator">/</li>
@@ -26,7 +26,7 @@
                                 </ul>
                                 <p>{{ row.body }}</p>
                                 <div class="blog__btn">
-                                    <a class="shopbtn" href="blog-details.html">read more</a>
+                                    <a class="shopbtn" href="blog-details.twig">read more</a>
                                 </div>
                             </div>
                         </article>
