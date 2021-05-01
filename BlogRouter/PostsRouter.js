@@ -17,14 +17,31 @@ var path = require('path');
 
 
 router.get('/',(req, res) => {
-    database.query('SELECT * FROM post p join user u on p.publisher_id = u.id', (err, rows, fields) => {
+    database.query('SELECT *,p.id as blogId FROM post p join user u on p.publisher_id = u.id', (err, rows, fields) => {
         if (err) {
-            res.render('../Views/blog.twig',{rows : []})
+            res.render('../Views/blog.twig',{rows : [],pageName : "Blogs"})
         } else {
-            res.render('../Views/blog.twig',{rows : rows})
+            res.render('../Views/blog.twig',{rows : rows,pageName : "Blogs"})
         }
     })
 })
+
+router.get('/blogDetails/:blogId',(req, res) => {
+    database.query('SELECT *,p.id as blogId FROM post p join user u on p.publisher_id = u.id where p.id=?',[req.params.blogId], (err, rows, fields) => {
+        if (err || rows.length == 0) {
+            res.render('../Views/blog-details.twig',{blog : [],pageName : "Blog Details"})
+        } else {
+            database.query('SELECT * FROM post_comment pc join user u on pc.publisher_id = u.id WHERE post_id = ?', [rows[0].blogId], (err, comments, fields) => {
+                if (err || comments.length == 0) {
+                    res.render('../Views/blog-details.twig',{blog : rows[0],comments : [],pageName : "Blog Details"})
+                } else {
+                    res.render('../Views/blog-details.twig',{blog : rows[0],comments : comments,pageName : "Blog Details"})
+                }
+            })
+        }
+    })
+})
+
 
 router.post('/addAttachment/:postId',upload.single('attachment'), function (req, res, next) {
     let filename = req.file.filename;
@@ -45,10 +62,13 @@ router.post('/addAttachment/:postId',upload.single('attachment'), function (req,
 router.get('/getPostAttachment/:postId',((req, res) => {
     database.query('SELECT * FROM attachment WHERE post_id = ?', [req.params.postId], (err, rows, fields) => {
         if (err) {
-            res.send(err);
+            res.sendFile(path.resolve(__dirname+'/../uploads/no_image.png'));
         } else {
-            console.log(__dirname+'/../uploads/'+rows[0].file_name)
-            res.sendFile(path.resolve(__dirname+'/../uploads/'+rows[0].file_name));
+            if(rows.length == 0){
+                res.sendFile(path.resolve(__dirname+'/../uploads/no_image.png'));
+            }
+            else
+                res.sendFile(path.resolve(__dirname+'/../uploads/'+rows[0].file_name));
             //res.send(rows)
         }
     })
@@ -91,7 +111,7 @@ router.post('/update', (req, res) => {
 })
 
 router.get('/user/get/:userId', (req, res) => {
-    database.query('SELECT * FROM post p join user u on p.publisher_id = u.id WHERE publisher_id = ?', [req.params.userId], (err, rows, fields) => {
+    database.query('SELECT *,p.id as blogId FROM post p join user u on p.publisher_id = u.id WHERE publisher_id = ?', [req.params.userId], (err, rows, fields) => {
         if (err) {
             res.send(err);
         } else {

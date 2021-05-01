@@ -1,0 +1,97 @@
+﻿{% include 'header.twig' %}
+
+<!-- cart-main-area start -->
+<div class="cart-main-area section-padding--lg bg--white">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 ol-lg-12">
+                <form action="#">
+                    <div class="table-content wnro__table table-responsive">
+                        <table>
+                            <thead>
+                            <tr class="title-top">
+                                <th class="product-thumbnail">#</th>
+                                <th class="product-name">Order Date</th>
+                                <th class="product-price">Address</th>
+                                <th class="product-quantity">Zip Code</th>
+                                <th class="product-quantity">Num Tel</th>
+                                <th class="product-subtotal">Total</th>
+                                <th class="product-subtotal">Payment Id</th>
+                                <th class="product-subtotal">Status</th>
+                                <th class="product-remove">Remove</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for row in orders %}
+                                <tr>
+                                    <td class="product-remove">{{ row.id }}</td>
+                                    <td class="product-price">{{ row.order_date }}</a></td>
+                                    <td class="product-price">{{ row.address }}</td>
+                                    <td class="product-price">{{ row.zip_code }}</td>
+                                    <td class="product-price">{{ row.num_tel }}</td>
+                                    <td class="product-price">{{ row.total_price }}</td>
+                                    <td class="product-quantity">{{ row.paymentid }}</td>
+                                    <td class="product-price">{{ row.status }}</td>
+                                    <td class="product-remove"><img
+                                                data-toggle="modal"
+                                                data-target="#orderItemsModal{{ row.id }}"
+                                                style="width: 40px;" src="/images/icons/show.png">
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </form>
+                <div class="cartbox__btn">
+                    <ul class="cart__btn__list d-flex flex-wrap flex-md-nowrap flex-lg-nowrap justify-content-between">
+                        <li><a href="#">Coupon Code</a></li>
+                        <li><a href="#">Apply Code</a></li>
+                        <li><a href="#">Update Cart</a></li>
+                        <li><a href="#">Check Out</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+{% for order in orders %}
+    <div id="orderItemsModal{{ order.id }}" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog"
+         aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content" style="padding: 10px;">
+                <div class="table-content wnro__table table-responsive">
+                    <table>
+                        <thead>
+                        <tr class="title-top">
+                            <th class="product-thumbnail">Image {{ index }}</th>
+                            <th class="product-name">Product</th>
+                            <th class="product-price">Price</th>
+                            <th class="product-quantity">Quantity</th>
+                            <th class="product-subtotal">Total</th>
+                            <th class="product-remove">Remove</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for row in order.items %}
+                            <tr>
+                                <td class="product-thumbnail"><a href="#"><img src="/images/product/sm-3/1.jpg"
+                                                                               alt="product img"></a></td>
+                                <td class="product-name"><a href="#">{{ row.title }}</a></td>
+                                <td class="product-price"><span class="amount">${{ row.price }}</span></td>
+                                <td class="product-quantity"><input readonly type="number"
+                                                                    value="{{ row.orderedQuantity }}"></td>
+                                <td class="product-subtotal">{{ row.price * row.orderedQuantity }}</td>
+                                <td class="product-remove"><a href="#">X</a></td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endfor %}
+<!-- cart-main-area end -->
+{% include 'footer.twig' %}

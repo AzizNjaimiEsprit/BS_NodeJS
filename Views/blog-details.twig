@@ -1,0 +1,94 @@
+﻿{% include 'header.twig' %}
+<!-- End Bradcaump area -->
+<div class="page-blog-details section-padding--lg bg--white">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-9 col-12">
+                <div class="blog-details content">
+                    <article class="blog-post-details">
+                        <div class="post-thumbnail">
+                            <img src="http://localhost:5000/blog/getPostAttachment/{{ blog.blogId }}" alt="blog images">
+                        </div>
+                        <div class="post_wrapper">
+                            <div class="post_header">
+                                <h2>{{ blog.title }}</h2>
+                                <ul class="post_author">
+                                    <li>Posts by : <a href="#">{{ blog.full_name }}</a></li>
+                                    <li class="post-separator">/</li>
+                                    <li>{{ blog.publish_date }}</li>
+                                </ul>
+                            </div>
+                            <div class="post_content">
+                                <p>{{ blog.body }}</p>
+
+                            </div>
+                            <ul class="blog_meta">
+
+                            </ul>
+                            <ul class="social__net--4 d-flex justify-content-start">
+                                <li><a href="#"><i class="zmdi zmdi-rss"></i></a></li>
+                                <li><a href="#"><i class="zmdi zmdi-linkedin"></i></a></li>
+                                <li><a href="#"><i class="zmdi zmdi-vimeo"></i></a></li>
+                                <li><a href="#"><i class="zmdi zmdi-tumblr"></i></a></li>
+                                <li><a href="#"><i class="zmdi zmdi-google-plus"></i></a></li>
+                            </ul>
+                        </div>
+                    </article>
+                    <div class="comments_area">
+                        <h3 class="comment__title">{{ comments.length}} {{ comments.length <= 1 ? 'comment' : 'comments' }}</h3>
+                        <ul class="comment__list">
+                            {% for comment in comments %}
+                                <li>
+                                    <div class="wn__comment">
+                                        <div class="thumb">
+                                            <img src="/images/blog/comment/1.jpeg" alt="comment images">
+                                        </div>
+                                        <div class="content">
+                                            <div class="comnt__author d-block d-sm-flex">
+                                                <span>{{ comment.full_name }}</span>
+                                                <span>{{ comment.publish_date }}</span>
+
+                                            </div>
+                                            <p>{{ comment.body }}</p>
+                                        </div>
+                                    </div>
+                                </li>
+                            {% endfor %}
+
+                        </ul>
+                    </div>
+                    <div class="comment_respond">
+                        <h3 class="reply_title">Leave a Comment</h3>
+                        <form class="comment__form" action="#">
+                            <p>Your email address will not be published.Required fields are marked </p>
+                            <div class="input__box">
+                                <label>Comment</label>
+                                <textarea name="comment"></textarea>
+                            </div>
+                            <div class="input__wrapper clearfix">
+                                <div class="input__box name one--third">
+                                    <label>Name</label>
+                                    <input type="text" placeholder="name">
+                                </div>
+                                <div class="input__box email one--third">
+                                    <label>email</label>
+                                    <input type="email" placeholder="email">
+                                </div>
+                                <div class="input__box website one--third">
+                                    <label>Website</label>
+                                    <input type="text" placeholder="website">
+                                </div>
+                            </div>
+                            <div class="submite__btn">
+                                <a href="#">Post Comment</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% include 'footer.twig' %}

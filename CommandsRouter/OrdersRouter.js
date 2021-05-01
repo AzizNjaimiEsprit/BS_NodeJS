@@ -3,6 +3,33 @@ const router = express.Router();
 const database = require('../config/db.config');
 let yyyymmdd = require("yyyy-mm-dd");
 
+
+router.get('/checkout',(req, res) => {
+    database.query('SELECT *,bs.quantity as bQuantity FROM basket bs join book bk on bs.book_id = bk.id WHERE user_id = ?', [req.session.userId], (err, rows, fields) => {
+        if (err) {
+            res.render('../Views/checkout.twig',{rows : []})
+        } else {
+            res.render('../Views/checkout.twig',{rows : rows})
+        }
+    })
+})
+
+router.get('/', (req, res) => {
+    database.query('SELECT * FROM orders WHERE user_id = ?', [req.session.userId], (err, rows, fields) => {
+        if (!err && rows.length != 0) {
+            for (let i = 0; i < rows.length; i++) {
+                database.query('SELECT *, oi.quantity as orderedQuantity FROM order_item oi join book b on b.id = oi.book_id WHERE order_id = ' + Number(rows[i].id), [], (err2, rows2, fields2) => {
+                    rows[i]['items'] = rows2;
+                    if (i == rows.length - 1)
+                        res.render('../Views/myOrders.twig',{orders : rows,pageName : "My Orders"})
+                })
+            }
+        } else
+            res.render('../Views/myOrders.twig',{orders : [],pageName : "My Orders"})
+    })
+})
+
+
 router.post('/add', (req, res) => {
     let items = req.body.items;
     database.query("insert into orders values (NULL,?,?,?,?,?,?,?,?)", [req.body.address, req.body.numTel, yyyymmdd.withTime(), req.body.paymentID, req.body.status, req.body.totalPrice, req.body.zipCode, req.body.userId], function (err, data) {
@@ -60,9 +87,8 @@ router.get('/get/:id', (req, res) => {
 router.get('/user/get/:userId', (req, res) => {
     database.query('SELECT * FROM orders WHERE user_id = ?', [req.params.userId], (err, rows, fields) => {
         if (!err && rows.length != 0) {
-
             for (let i = 0; i < rows.length; i++) {
-                database.query('SELECT * FROM order_item WHERE order_id = ' + Number(rows[i].id), [], async (err2, rows2, fields2) => {
+                database.query('SELECT * FROM order_item oi join book b on b.id = oi.book_id WHERE order_id = ' + Number(rows[i].id), [], (err2, rows2, fields2) => {
                     rows[i]['items'] = rows2;
                     if (i == rows.length - 1)
                         res.send(rows);

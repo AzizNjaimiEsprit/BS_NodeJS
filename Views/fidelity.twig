@@ -1,0 +1,30 @@
+{% include 'header.twig' %}
+
+<!-- cart-main-area start -->
+<div class="cart-main-area section-padding--lg bg--white">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 ol-lg-12">
+                <div class="container">
+                    <div class="row">
+                        <div class="col">
+                            <img src="/images/icons/fidelity.png" style="width: 330px;">
+                        </div>
+                        <div class="col-6" style="font-size: 30px;padding-left: 100px;">
+                            <div>
+                                <p style="margin-bottom: 60px; margin-top: 80px;">You current balance : {{ card.points }} {{ card.points <= 1 ? 'Point' : 'Points' }}</p>
+                                <button style="font-size: 24px;" type="button" class="btn btn-primary">Convert</button>
+                            </div>
+                        </div>
+                        <div class="col">
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+{% include 'footer.twig' %}
