@@ -19,20 +19,17 @@ router.post('/addRate', (req, res) => {
 })
 
 router.post('/updateRate', (req, res) => {
-    database.query("update rate set text = ? where user_id = ? and book_id = ?",
+    database.query("update rate set rate = ? where user_id = ? and book_id = ?",
         [
             req.body.rate,
             req.body.userId,
-            req.body.bookId
+            req.body.bookId,
         ],
         function (err, data) {
             if (err) {
                 res.send(err);
             } else {
-                if (data.affectedRows == 1)
-                    res.send("Updated");
-                else
-                    res.send("No record found !!!")
+                res.send('updated rate' )
             }
         });
 })

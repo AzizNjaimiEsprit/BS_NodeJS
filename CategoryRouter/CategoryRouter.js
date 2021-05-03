@@ -1,44 +1,55 @@
 const express = require('express');
 const router = express.Router();
 const database = require('../config/db.config');
+let yyyymmdd = require("yyyy-mm-dd");
 
-router.post('/addComment', (req, res) => {
-    database.query("insert into comment values (null,?,?,?)",
+router.post('/add', (req, res) => {
+    database.query("insert into category values (?,?)",
         [
-            req.body.text,
-            req.body.bookId,
-            req.body.userId,
+            req.body.id,
+            req.body.name,
+
         ],
         function (err, data) {
             if (err) {
                 res.send(err);
             } else {
-                res.send('Inserted comment' + data.insertId)
+                res.send('Inserted category' + data.insertId)
             }
         });
 })
 
-router.post('/updateComment', (req, res) => {
-    database.query("update comment set text = ? where user_id = ? and book_id = ?",
+router.post('/update', (req, res) => {
+    database.query("update category set name = ? where id = ? ",
         [
-            req.body.text,
-            req.body.userId,
-            req.body.bookId
+            req.body.name,
+            req.body.id,
         ],
         function (err, data) {
             if (err) {
                 res.send(err);
             } else {
                 if (data.affectedRows == 1)
-                    res.send("Comment Updated");
+                    res.send("Updated");
                 else
                     res.send("No record found !!!")
             }
         });
 })
 
-router.get('/getComment/:bookId',  (req, res) => {
-    database.query('SELECT * FROM comment WHERE book_id = ?', [req.params.bookId], (err, rows, fields) => {
+router.get('/getAll',(req, res) => {
+    database.query('SELECT * FROM category ', (err, rows, fields) => {
+        if (err) {
+            res.send(err);
+        } else {
+            res.send(rows)
+        }
+    })
+})
+
+router.get('/get/:catId', (req, res) => {
+    database.query('SELECT * FROM category WHERE id = ?',
+        [req.params.catId], (err, rows, fields) => {
         if (err) {
             res.send(err);
         } else {
@@ -48,11 +59,10 @@ router.get('/getComment/:bookId',  (req, res) => {
 })
 
 
-router.post('/deleteComment', (req, res) => {
-    database.query("delete from comment where user_id = ? and book_id = ?",
+router.post('/delete', (req, res) => {
+    database.query("delete from category where  id = ?",
         [
-            req.body.userId,
-            req.body.bookId
+            req.body.id
         ],
         function (err, data) {
             if (err) {
