@@ -4,6 +4,7 @@ const database = require('../config/db.config');
 let yyyymmdd = require("yyyy-mm-dd");
 
 router.post('/add', (req, res) => {
+    console.log("Body = ",req.body)
     database.query("insert into post_comment values (NULL,?,?,?,?)",
         [
             req.body.publisherId,

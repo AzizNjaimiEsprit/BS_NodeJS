@@ -39,7 +39,7 @@ router.post('/update', (req, res) => {
 })
 
 router.get('/',(req, res) => {
-    database.query('SELECT *,bs.quantity as bQuantity FROM basket bs join book bk on bs.book_id = bk.id WHERE user_id = ?', [req.session.userId], (err, rows, fields) => {
+    database.query('SELECT *,bs.quantity as bQuantity FROM basket bs join book bk on bs.book_id = bk.id WHERE user_id = ?', [req.session.currentUser.userId], (err, rows, fields) => {
         if (err) {
             res.render('../Views/basket.twig',{rows : []})
         } else {

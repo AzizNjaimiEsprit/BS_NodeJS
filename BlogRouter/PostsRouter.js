@@ -15,7 +15,6 @@ var storage = multer.diskStorage({
 var upload = multer({ storage: storage })
 var path = require('path');
 
-
 router.get('/',(req, res) => {
     database.query('SELECT *,p.id as blogId FROM post p join user u on p.publisher_id = u.id', (err, rows, fields) => {
         if (err) {
@@ -33,9 +32,9 @@ router.get('/blogDetails/:blogId',(req, res) => {
         } else {
             database.query('SELECT * FROM post_comment pc join user u on pc.publisher_id = u.id WHERE post_id = ?', [rows[0].blogId], (err, comments, fields) => {
                 if (err || comments.length == 0) {
-                    res.render('../Views/blog-details.twig',{blog : rows[0],comments : [],pageName : "Blog Details"})
+                    res.render('../Views/blog-details.twig',{blog : rows[0],comments : [],userId : req.session.currentUser.userId ,pageName : "Blog Details"})
                 } else {
-                    res.render('../Views/blog-details.twig',{blog : rows[0],comments : comments,pageName : "Blog Details"})
+                    res.render('../Views/blog-details.twig',{blog : rows[0],comments : comments,userId : req.session.currentUser.userId,pageName : "Blog Details"})
                 }
             })
         }

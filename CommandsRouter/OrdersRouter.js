@@ -5,17 +5,17 @@ let yyyymmdd = require("yyyy-mm-dd");
 
 
 router.get('/checkout',(req, res) => {
-    database.query('SELECT *,bs.quantity as bQuantity FROM basket bs join book bk on bs.book_id = bk.id WHERE user_id = ?', [req.session.userId], (err, rows, fields) => {
+    database.query('SELECT *,bs.quantity as bQuantity FROM basket bs join book bk on bs.book_id = bk.id WHERE user_id = ?', [req.session.currentUser.userId], (err, rows, fields) => {
         if (err) {
-            res.render('../Views/checkout.twig',{rows : []})
+            res.render('../Views/checkout.twig',{rows : [],currentUser : req.session.currentUser })
         } else {
-            res.render('../Views/checkout.twig',{rows : rows})
+            res.render('../Views/checkout.twig',{rows : rows,currentUser : req.session.currentUser })
         }
     })
 })
 
 router.get('/', (req, res) => {
-    database.query('SELECT * FROM orders WHERE user_id = ?', [req.session.userId], (err, rows, fields) => {
+    database.query('SELECT * FROM orders WHERE user_id = ?', [req.session.currentUser.userId], (err, rows, fields) => {
         if (!err && rows.length != 0) {
             for (let i = 0; i < rows.length; i++) {
                 database.query('SELECT *, oi.quantity as orderedQuantity FROM order_item oi join book b on b.id = oi.book_id WHERE order_id = ' + Number(rows[i].id), [], (err2, rows2, fields2) => {

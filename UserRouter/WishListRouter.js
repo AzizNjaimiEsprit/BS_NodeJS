@@ -18,7 +18,7 @@ router.post('/add', (req, res) => {
 })
 
 router.get('/', (req, res) => {
-    database.query('SELECT * FROM wishlist bs join book bk on bs.book_id = bk.id  WHERE user_id = ?', [req.session.userId], (err, rows, fields) => {
+    database.query('SELECT * FROM wishlist bs join book bk on bs.book_id = bk.id  WHERE user_id = ?', [req.session.currentUser.userId], (err, rows, fields) => {
         if (err) {
             res.render('../Views/wishlist.twig',{rows : []})
         } else {

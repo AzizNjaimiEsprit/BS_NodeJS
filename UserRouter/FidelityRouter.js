@@ -4,7 +4,7 @@ const database = require('../config/db.config');
 let yyyymmdd = require("yyyy-mm-dd");
 
 router.get('/',(req, res) => {
-    database.query('SELECT f.*,u.full_name FROM fidelity_cards f JOIN user u on f.user_id = u.id WHERE user_id = ?', [req.session.userId], (err, rows, fields) => {
+    database.query('SELECT f.*,u.full_name FROM fidelity_cards f JOIN user u on f.user_id = u.id WHERE user_id = ?', [req.session.currentUser.userId], (err, rows, fields) => {
         if (err) {
             res.render('../Views/fidelity.twig',{card : [],pageName : "Fidelity Card"})
         } else {

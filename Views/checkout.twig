@@ -26,20 +26,11 @@
                 <div class="customer_details">
                     <h3>Billing details</h3>
                     <div class="customar__field">
-                        <div class="margin_between">
-                            <div class="input_box space_between">
-                                <label>First name <span>*</span></label>
-                                <input type="text">
-                            </div>
-                            <div class="input_box space_between">
-                                <label>last name <span>*</span></label>
-                                <input type="text">
-                            </div>
-                        </div>
                         <div class="input_box">
-                            <label>Company name <span>*</span></label>
-                            <input type="text">
+                            <label>Full Name <span>*</span></label>
+                            <input type="text" id="fullName" value="{{ currentUser.full_name }}">
                         </div>
+
                         <div class="input_box">
                             <label>Country<span>*</span></label>
                             <select class="select__option">
@@ -65,27 +56,16 @@
                         <div class="margin_between">
                             <div class="input_box space_between">
                                 <label>Phone <span>*</span></label>
-                                <input type="text">
+                                <input type="text" id="numTel" value="{{ currentUser.numTel }}">
                             </div>
 
                             <div class="input_box space_between">
                                 <label>Email address <span>*</span></label>
-                                <input type="email">
+                                <input type="email" id="email" value="{{ currentUser.email }}">
                             </div>
                         </div>
                     </div>
-                    <div class="create__account">
-                        <div class="wn__accountbox">
-                            <input class="input-checkbox" name="createaccount" value="1" type="checkbox">
-                            <span>Create an account ?</span>
-                        </div>
-                        <div class="account__field">
-                            <form action="#">
-                                <label>Account password <span>*</span></label>
-                                <input type="text" placeholder="password">
-                            </form>
-                        </div>
-                    </div>
+
                 </div>
 
             </div>
@@ -185,6 +165,9 @@
 </section>
 <!-- End Checkout Area -->
 <script>
+    function checkSubmit(){
+        var name= document.getElementById()
+    }
 
     $("#submitBtn").click(function () {
         $.ajax({
@@ -198,16 +181,15 @@
             }),
             contentType: "application/json; charset=utf-8",
             dataType: "json",
-            success: function (data) {
-                console.log("hahhhhhhiiiiiiii")
-                console.log(data)
-                if (data == "ok"){
-                    $.get( "http://localhost:5000/payment/checkBalance/"+document.getElementById("totalPrice"), function( data ) {
 
-                        alert( data );
+            error: (errMsg) =>{
+                console.log("Return of check cred = ",errMsg.responseText)
+                alert(errMsg.responseText)
+                if (errMsg.responseText == "ok")
+                    $.get( "http://localhost:5000/payment/checkBalance/"+document.getElementById("totalPrice").innerHTML, function( data ) {
+                        console.log("check price",data)
                     });
-                }
-            },
+            }
 
         });
     });

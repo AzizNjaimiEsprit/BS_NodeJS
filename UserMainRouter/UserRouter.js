@@ -3,8 +3,15 @@ const router = express.Router();
 const database = require('../config/db.config');
 
 router.get('/login',(req, res) => {
-    req.session.username = "aziz";
-    req.session.userId = 3;
+    var obj = {
+        full_name : "Mohamed Aziz Njaimi",
+        userId : 3,
+        numTel  : 52650101,
+        email : "a52650101@gmail.com",
+
+    }
+    req.session.currentUser = obj;
+
     res.send("Ok")
 })
 

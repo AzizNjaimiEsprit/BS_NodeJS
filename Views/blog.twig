@@ -13,18 +13,18 @@
                     {% for row in rows %}
                         <article class="blog__post d-flex flex-wrap">
                             <div class="thumb">
-                                <a href="blog-details.twig">
+                                <a href="/blog/blogDetails/{{ row.blogId }}">
                                     <img src="http://localhost:5000/blog/getPostAttachment/{{ row.blogId }}" alt="blog images">
                                 </a>
                             </div>
                             <div class="content">
-                                <h4><a href="blog-details.twig">{{ row.title }}</a></h4>
+                                <h4><a href="/blog/blogDetails/{{ row.blogId }}">{{ row.title }}</a></h4>
                                 <ul class="post__meta">
                                     <li>Posts by : <a href="#">{{ row.full_name }}</a></li>
                                     <li class="post_separator">/</li>
                                     <li>{{ row.publish_date }}</li>
                                 </ul>
-                                <p>{{ row.body | slice(1,200) }} ...</p>
+                                <p>{{ row.body | slice(0,200) }} ...</p>
                                 <div class="blog__btn">
                                     <a class="shopbtn" href="/blog/blogDetails/{{ row.blogId }}">read more</a>
                                 </div>

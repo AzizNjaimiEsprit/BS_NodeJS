@@ -1,9 +1,11 @@
 ﻿{% include 'header.twig' %}
 <!-- End Bradcaump area -->
+<input id="postId" value="{{ blog.blogId }}" hidden>
+<input id="userId" value="{{ userId }}" hidden>
 <div class="page-blog-details section-padding--lg bg--white">
     <div class="container">
         <div class="row">
-            <div class="col-lg-9 col-12">
+            <div class="col-lg-14 col-14">
                 <div class="blog-details content">
                     <article class="blog-post-details">
                         <div class="post-thumbnail">
@@ -60,27 +62,13 @@
                     <div class="comment_respond">
                         <h3 class="reply_title">Leave a Comment</h3>
                         <form class="comment__form" action="#">
-                            <p>Your email address will not be published.Required fields are marked </p>
                             <div class="input__box">
                                 <label>Comment</label>
-                                <textarea name="comment"></textarea>
+                                <textarea id="commentBody" name="comment"></textarea>
                             </div>
-                            <div class="input__wrapper clearfix">
-                                <div class="input__box name one--third">
-                                    <label>Name</label>
-                                    <input type="text" placeholder="name">
-                                </div>
-                                <div class="input__box email one--third">
-                                    <label>email</label>
-                                    <input type="email" placeholder="email">
-                                </div>
-                                <div class="input__box website one--third">
-                                    <label>Website</label>
-                                    <input type="text" placeholder="website">
-                                </div>
-                            </div>
+
                             <div class="submite__btn">
-                                <a href="#">Post Comment</a>
+                                <a onclick="addComment()">Post Comment</a>
                             </div>
                         </form>
                     </div>
@@ -90,5 +78,25 @@
         </div>
     </div>
 </div>
+<script>
+    function addComment(){
+        $.ajax({
+            type: "POST",
+            url: "http://localhost:5000/comment/add",
+            data: JSON.stringify({
+                "publisherId" : document.getElementById("userId").value,
+                "postId" : document.getElementById("postId").value,
+                "body" : document.getElementById("commentBody").value,
+            }),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            error: function(errMsg) {
+                console.log("Return of add comment = ",errMsg.responseText)
+                if (errMsg.responseText == "OK")
+                    location.reload();
+            }
+        });
+    }
+</script>
 
 {% include 'footer.twig' %}
