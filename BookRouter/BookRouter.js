@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const database = require('../config/db.config');
 
+var path = require('path');
 
 router.post('/addBook', (req, res) => {
     database.query("insert into book values (null,?,?,?,?,?,?,?,?,?,?,?)",
@@ -61,5 +62,26 @@ router.post('/deleteBook', (req, res) => {
             }
         });
 })
+router.get('/bookDetails/:bookId', (req, res) => {
+    database.query('SELECT * from book b join category c on b.category_id = c.id WHERE b.id = ?', [req.params.bookId], (err, rows, fields) => {
+        if (err) {
+            res.render('../Views/single-product.twig', {book: []})
+        } else {
+            res.render('../Views/single-product.twig', {book: rows[0]})
+        }
+    })
+})
+router.get('/getBookImage/:image',((req, res) => {
+                res.sendFile(path.resolve(__dirname+'/../uploads/BooksImage/'+req.params.image));
 
+}))
+router.get('/', (req, res) => {
+    database.query('SELECT * FROM book ', (err, rows, fields) => {
+        if (err) {
+            res.render('../Views/shop-grid.twig', {books: [],pageName:"Shop"})
+        } else {
+            res.render('../Views/shop-grid.twig', {books: rows,pageName:"Shop"})
+        }
+    })
+})
 module.exports = router;

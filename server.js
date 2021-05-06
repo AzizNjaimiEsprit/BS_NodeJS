@@ -21,6 +21,9 @@ require('./OfferRouter/index')(app);
 require('./CouponRouter/index')(app);
 require('./OnlineBookRouter/index')(app);
 require('./CategoryRouter/index')(app);
+app.get("/home",(req, res) => {
+    res.render('../Views/homePage.twig')
+})
 
 app.use(function(req, res, next) {
     res.render('../Views/error404.twig',{pageName : "404"})
