@@ -1,5 +1,12 @@
 ﻿{% include 'header.twig' %}
 <!-- Start Checkout Area -->
+<script>
+    // var currentUser = JSON.parse(sessionStorage.getItem("currentUser"));
+    // console.log("Checkout User => ",currentUser)
+    // document.getElementById("fullName").value = currentUser.full_name;
+    // document.getElementById("numTel").value = currentUser.numTel;
+    // document.getElementById("email").value = currentUser.email;
+</script>
 <section class="wn__checkout__area section-padding--lg bg__white">
     <div class="container">
         <div class="row">
@@ -28,40 +35,28 @@
                     <div class="customar__field">
                         <div class="input_box">
                             <label>Full Name <span>*</span></label>
-                            <input type="text" id="fullName" value="{{ currentUser.full_name }}">
+                            <input type="text" id="fullName" value="">
                         </div>
 
                         <div class="input_box">
-                            <label>Country<span>*</span></label>
-                            <select class="select__option">
-                                <option>Select a country…</option>
-                                <option>Afghanistan</option>
-                                <option>American Samoa</option>
-                                <option>Anguilla</option>
-                                <option>American Samoa</option>
-                                <option>Antarctica</option>
-                                <option>Antigua and Barbuda</option>
-                            </select>
-                        </div>
-                        <div class="input_box">
                             <label>Address <span>*</span></label>
-                            <input type="text" placeholder="Street address">
+                            <input id="address" type="text" placeholder="Address">
                         </div>
 
 
                         <div class="input_box">
                             <label>Postcode / ZIP <span>*</span></label>
-                            <input type="text">
+                            <input type="text" id="zipCode" placeholder="Zip Code">
                         </div>
                         <div class="margin_between">
                             <div class="input_box space_between">
                                 <label>Phone <span>*</span></label>
-                                <input type="text" id="numTel" value="{{ currentUser.numTel }}">
+                                <input type="text" id="numTel" value="">
                             </div>
 
                             <div class="input_box space_between">
                                 <label>Email address <span>*</span></label>
-                                <input type="email" id="email" value="{{ currentUser.email }}">
+                                <input type="email" id="email" value="">
                             </div>
                         </div>
                     </div>
@@ -82,11 +77,11 @@
                             <li>{{ row.title }} × {{ row.bQuantity }}<span>${{ row.price * row.bQuantity }}</span></li>
                             {% set total = total + row.price * row.bQuantity %}
                         {% endfor %}
-
                     </ul>
 
                     <ul class="total__amount">
-                        <li>Order Total $<span id="totalPrice">{{ total }}</span></li>
+                        <li>Order Total <span>{{ total }} TND</span></li>
+                        <span hidden id="totalPrice">{{ total }}</span>
                     </ul>
                 </div>
                 <div id="accordion" class="checkout_accordion mt--30" role="tablist">
@@ -157,7 +152,7 @@
             </div>
         </div>
         <div class="col-md-12 text-center">
-            <button id="submitBtn" type="button" class="btn btn-primary">Submit</button>
+            <button id="submitBtn" onclick="checkSubmit()" type="button" class="btn btn-primary">Submit</button>
             <button type="button" class="btn btn-warning">Cancel</button>
         </div>
     </div>
@@ -165,11 +160,30 @@
 </section>
 <!-- End Checkout Area -->
 <script>
-    function checkSubmit(){
-        var name= document.getElementById()
+    var currentUser = JSON.parse(sessionStorage.getItem("currentUser"));
+    console.log("Checkout User => ", currentUser)
+    document.getElementById("fullName").value = currentUser.full_name;
+    document.getElementById("numTel").value = currentUser.numTel;
+    document.getElementById("email").value = currentUser.email;
+
+    function checkSubmit() {
+        var BreakException = {};
+        try {
+            let champs = ['fullName', 'address', 'zipCode', 'numTel', 'email', 'exp_month', 'exp_year', 'cardNumber'];
+            champs.forEach(champ => {
+                if (document.getElementById(champ).value.length == 0) {
+                    alert("Merci de completer le champ " + champ);
+                    throw BreakException
+                }
+            })
+            doPayment()
+        } catch (e) {
+            return false
+        }
+        return true;
     }
 
-    $("#submitBtn").click(function () {
+    function doPayment() {
         $.ajax({
             type: "POST",
             url: "http://localhost:5000/payment/checkCredentials",
@@ -177,22 +191,47 @@
             data: JSON.stringify({
                 "exp_month": document.getElementById("exp_month").value,
                 "exp_year": document.getElementById("exp_year").value,
-                "cardNumber" : document.getElementById("cardNumber").value
+                "cardNumber": document.getElementById("cardNumber").value
             }),
             contentType: "application/json; charset=utf-8",
             dataType: "json",
 
-            error: (errMsg) =>{
-                console.log("Return of check cred = ",errMsg.responseText)
+            error: (errMsg) => {
+                console.log("Return of check cred = ", errMsg.responseText)
                 alert(errMsg.responseText)
                 if (errMsg.responseText == "ok")
-                    $.get( "http://localhost:5000/payment/checkBalance/"+document.getElementById("totalPrice").innerHTML, function( data ) {
-                        console.log("check price",data)
+                    $.get("http://localhost:5000/payment/checkBalance/" + document.getElementById("totalPrice").innerHTML, function (data) {
+                        console.log("check price", data)
+                        if (data == "true") {
+                            doOrderSave()
+                        }
                     });
             }
 
         });
-    });
+    }
+
+    function doOrderSave() {
+        $.ajax({
+            type: "POST",
+            url: "http://localhost:5000/order/add",
+
+            data: JSON.stringify({
+                "userId": Number(currentUser.userId),
+                "totalPrice": Number(document.getElementById("totalPrice").innerHTML),
+                "address": document.getElementById("address").value,
+                "zipCode": Number(document.getElementById("zipCode").value),
+                "numTel": document.getElementById("numTel").value,
+                "status": "Non Traite"
+            }),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+
+            error: (errMsg) => {
+
+            }
+        });
+    }
 
 </script>
 {% include 'footer.twig' %}

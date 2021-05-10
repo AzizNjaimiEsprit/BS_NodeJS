@@ -8,11 +8,9 @@ router.get('/login',(req, res) => {
         userId : 3,
         numTel  : 52650101,
         email : "a52650101@gmail.com",
-
     }
     req.session.currentUser = obj;
-
-    res.send("Ok")
+    res.render('../Views/login.twig',{ currentUser : req.session.currentUser })
 })
 
 // Add new user to database

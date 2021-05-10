@@ -4,12 +4,12 @@ const database = require('../config/db.config');
 let yyyymmdd = require("yyyy-mm-dd");
 
 
-router.get('/checkout',(req, res) => {
+router.get('/checkout', (req, res) => {
     database.query('SELECT *,bs.quantity as bQuantity FROM basket bs join book bk on bs.book_id = bk.id WHERE user_id = ?', [req.session.currentUser.userId], (err, rows, fields) => {
         if (err) {
-            res.render('../Views/checkout.twig',{rows : [],currentUser : req.session.currentUser })
+            res.render('../Views/checkout.twig', {rows: [], currentUser: req.session.currentUser})
         } else {
-            res.render('../Views/checkout.twig',{rows : rows,currentUser : req.session.currentUser })
+            res.render('../Views/checkout.twig', {rows: rows, currentUser: req.session.currentUser})
         }
     })
 })
@@ -21,11 +21,11 @@ router.get('/', (req, res) => {
                 database.query('SELECT *, oi.quantity as orderedQuantity FROM order_item oi join book b on b.id = oi.book_id WHERE order_id = ' + Number(rows[i].id), [], (err2, rows2, fields2) => {
                     rows[i]['items'] = rows2;
                     if (i == rows.length - 1)
-                        res.render('../Views/myOrders.twig',{orders : rows,pageName : "My Orders"})
+                        res.render('../Views/myOrders.twig', {orders: rows, pageName: "My Orders"})
                 })
             }
         } else
-            res.render('../Views/myOrders.twig',{orders : [],pageName : "My Orders"})
+            res.render('../Views/myOrders.twig', {orders: [], pageName: "My Orders"})
     })
 })
 
@@ -36,17 +36,22 @@ router.post('/add', (req, res) => {
         if (err) {
             res.send(err);
         } else {
-
-            for (let i = 0; i < items.length; i++) {
-                database.query("insert into order_item values (NULL,?,?,?)", [items[i].quantity, items[i].bookId, data.insertId], function (err, data2) {
-                    if (err) {
-                        console.log(err);
-                    } else {
-                        console.log("Done" + data2.insertId);
+            database.query('SELECT * FROM basket WHERE user_id = ?', [req.session.currentUser.userId], (err, items, fields) => {
+                if (err) {
+                    res.send(err);
+                } else {
+                    for (let i = 0; i < items.length; i++) {
+                        database.query("insert into order_item values (NULL,?,?,?)", [items[i].quantity, items[i].book_id, data.insertId], function (err, data2) {
+                            if (err) {
+                                console.log(err);
+                            } else {
+                                console.log("Done" + data2.insertId);
+                            }
+                        });
                     }
-                });
-            }
-            res.send("Done" + data.insertId);
+                    res.send("Done" + data.insertId);
+                }
+            })
         }
     });
 })

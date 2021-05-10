@@ -27,11 +27,9 @@ router.post('/checkCredentials',async (req, res) => {
     else if (card.last4 != req.body.cardNumber.substr(req.body.cardNumber.length - 4))
         flag = false;
     else {
-        console.log("ookk")
         res.send("ok")
     }
     if (flag == false){
-        console.log("not ok")
         res.send( "Wrong Credentials")
     }
 })

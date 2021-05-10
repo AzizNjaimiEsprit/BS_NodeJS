@@ -8,12 +8,8 @@
                 <div class="wn__single__product">
                     <div class="row">
                         <div class="col-lg-6 col-12">
-                            <div class="wn__fotorama__wrapper">
-                                <div class="fotorama wn__fotorama__action" data-nav="thumbs" >
-                                    <a href="1.jpg"><img  src="http://localhost:5000/book/getBookImage/{{ book.image }}" alt=""></a>
+                            <a href="1.jpg"><img style="width: 325px;" src="http://localhost:5000/book/getBookImage/{{ book.image }}" alt=""></a>
 
-                                </div>
-                            </div>
                         </div>
                         <div class="col-lg-6 col-12">
                             <div class="product__info__main">
@@ -50,8 +46,8 @@
                                         <button class="tocart" type="submit" title="Add to Cart">Add to Cart</button>
                                     </div>
                                 </div>
-                                <div class="product-addto-links clearfix">
-                                    <p class="categories-title">Share</p>
+                                <div class="product-addto-links clearfix" style="display: inline-flex">
+                                    <p class="categories-title" style="margin-top: 8px;margin-right: 10px">Share: </p>
                                     <a class="wishlist" href="#"></a>
                                     <a class="compare" href="#"></a>
                                     <a class="email" href="#"></a>
