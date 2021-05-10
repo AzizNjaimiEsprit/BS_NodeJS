@@ -71,17 +71,17 @@ router.get('/bookDetails/:bookId', (req, res) => {
         }
     })
 })
-router.get('/getBookImage/:image',((req, res) => {
-                res.sendFile(path.resolve(__dirname+'/../uploads/BooksImage/'+req.params.image));
+router.get('/getBookImage/:image', ((req, res) => {
+    res.sendFile(path.resolve(__dirname + '/../uploads/BooksImage/' + req.params.image));
 
 }))
 router.get('/', (req, res) => {
-    database.query('SELECT * FROM book ', (err, rows, fields) => {
-        if (err) {
-            res.render('../Views/shop-grid.twig', {books: [],pageName:"Shop"})
-        } else {
-            res.render('../Views/shop-grid.twig', {books: rows,pageName:"Shop"})
-        }
+    database.query('SELECT book.*,c.name FROM book join category c on c.id = book.category_id', (err, rows, fields) => {
+        database.query('select category.name,count(b.id) as count from category left join book b on category.id = b.category_id group by category.name order by count desc',
+            (err2, rows2, fields) => {
+                res.render('../Views/shop-grid.twig', {books: rows, categories: rows2, pageName: "Shop"})
+            })
+
     })
 })
 module.exports = router;

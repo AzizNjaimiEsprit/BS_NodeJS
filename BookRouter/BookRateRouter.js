@@ -63,12 +63,13 @@ router.post('/deleteRate', (req, res) => {
         });
 })
 router.get('/getMoyenneRate/:bookId',  (req, res) => {
-    database.query('SELECT AVG(rate) FROM rate WHERE book_id = ?', [req.params.bookId], (err, rows, fields) => {
+    database.query('SELECT AVG(rate) as rate FROM rate WHERE book_id = ?', [req.params.bookId], (err, rows, fields) => {
         if (err) {
             res.send(err);
         } else {
-            res.send(rows)
+            res.send(""+rows[0].rate)
         }
     })
 })
+
 module.exports = router;

@@ -490,11 +490,11 @@
         max: 500,
         values: [110, 400],
         slide: function (event, ui) {
-            $('#amount').val('$' + ui.values[0] + ' - $' + ui.values[1]);
+            $('#amount').val('TND' + ui.values[0] + ' - TND' + ui.values[1]);
         }
     });
-    $('#amount').val('$' + $('#slider-range').slider('values', 0) +
-        " - $" + $('#slider-range').slider('values', 1));
+    $('#amount').val('TND' + $('#slider-range').slider('values', 0) +
+        " - TND" + $('#slider-range').slider('values', 1));
 
 
     /*====== Dropdown ======*/
