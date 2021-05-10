@@ -204,8 +204,13 @@
                         console.log("check price", data)
                         if (data == "true") {
                             doOrderSave()
+                        }else{
+                            alert("You don't have enough money !!!")
                         }
                     });
+                else{
+                    alert("Please check your payment credentials !!!")
+                }
             }
 
         });
