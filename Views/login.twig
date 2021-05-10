@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Page Title</title>
+    </head>
+    <body>
+        <input type="text" id="userId" value="{{ currentUser.userId }}">
+        <input type="text" id="email" value="{{ currentUser.email }}">
+        <input type="text" id="numTel" value="{{ currentUser.numTel }}">
+        <input type="text" id="full_name" value="{{ currentUser.full_name }}">
+        <script>
+            var obj = {
+                full_name : document.getElementById("full_name").value,
+                userId : document.getElementById("userId").value,
+                numTel  : document.getElementById("numTel").value,
+                email : document.getElementById("email").value,
+            }
+            sessionStorage.setItem("currentUser", JSON.stringify(obj) );
+
+
+        </script>
+    </body>
+</html>
