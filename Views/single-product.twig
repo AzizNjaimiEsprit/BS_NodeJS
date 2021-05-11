@@ -1,6 +1,11 @@
 ﻿{% include 'header.twig' %}
 
 <!-- Start main Content -->
+<style>
+    .rate-star{
+        width: 40px;
+    }
+</style>
 <div class="maincontent bg--white pt--80 pb--55">
     <div class="container">
         <div class="row">
@@ -20,11 +25,14 @@
                                 </div>
                                 <div class="product-reviews-summary d-flex">
                                     <ul class="rating-summary d-flex">
-                                        <li><i class="zmdi zmdi-star-outline"></i></li>
-                                        <li><i class="zmdi zmdi-star-outline"></i></li>
-                                        <li><i class="zmdi zmdi-star-outline"></i></li>
-                                        <li class="off"><i class="zmdi zmdi-star-outline"></i></li>
-                                        <li class="off"><i class="zmdi zmdi-star-outline"></i></li>
+
+
+                                        {% for i in 0..4 %}
+                                            <div class="rate-star"><img class="star" onclick="hover(this,{{ i }});" src="/images/png-img/blank.png"> </div>
+                                        {% endfor %}
+                                        <input type="text" id="rate" hidden value="0">
+
+
                                     </ul>
                                     <div class="reviews-actions d-flex">
                                         <a href="#">(1 Review)</a>
@@ -246,6 +254,21 @@
         </div>
     </div>
 </section>
+<script>
+    function hover(element,index) {
+        let tab = document.getElementsByClassName("star")
+        for (let i=0;i<=index;i++){
+            tab[i].setAttribute('src', "/images/png-img/full.png");
+        }
+        for(let i=index+1;i<tab.length;i++){
+            tab[i].setAttribute('src', "/images/png-img/blank.png");
+        }
+        document.getElementById("rate").value = index+1
+        console.log(index+1)
+        //element.setAttribute('src', "/images/png-img/full.png");
+    }
+
+</script>
 <!-- End NEwsletter Area -->
 
 {% include 'footer.twig' %}
