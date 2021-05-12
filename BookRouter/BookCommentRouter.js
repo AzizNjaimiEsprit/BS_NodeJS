@@ -13,7 +13,7 @@ router.post('/addComment', (req, res) => {
             if (err) {
                 res.send(err);
             } else {
-                res.send('Inserted comment' + data.insertId)
+                res.send('ok')
             }
         });
 })
@@ -65,5 +65,6 @@ router.post('/deleteComment', (req, res) => {
             }
         });
 })
+
 
 module.exports = router;

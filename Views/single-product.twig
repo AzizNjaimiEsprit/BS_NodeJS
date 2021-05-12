@@ -2,10 +2,15 @@
 
 <!-- Start main Content -->
 <style>
-    .rate-star{
-        width: 40px;
+    .rate-star {
+        width: 20px;
+    }
+
+    .rate-star2 {
+        width: 30px;
     }
 </style>
+<input type="text" value="{{ book.bookId }}" hidden>
 <div class="maincontent bg--white pt--80 pb--55">
     <div class="container">
         <div class="row">
@@ -13,32 +18,26 @@
                 <div class="wn__single__product">
                     <div class="row">
                         <div class="col-lg-6 col-12">
-                            <a href="1.jpg"><img style="width: 325px;" src="http://localhost:5000/book/getBookImage/{{ book.image }}" alt=""></a>
-
+                            <a href="1.jpg"><img style="width: 325px;"
+                                                 src="http://localhost:5000/book/getBookImage/{{ book.image }}" alt=""></a>
                         </div>
                         <div class="col-lg-6 col-12">
                             <div class="product__info__main">
                                 <h1>{{ book.title }}</h1>
                                 <div class="product-info-stock-sku d-flex">
-                                    <p>Availability:<span> In stock</span></p>
-                                    <p>SKU:<span> MH01</span></p>
+                                    <p>Availability:<span> {{ book.quantity }}</span></p>
                                 </div>
                                 <div class="product-reviews-summary d-flex">
                                     <ul class="rating-summary d-flex">
-
-
                                         {% for i in 0..4 %}
-                                            <div class="rate-star"><img class="star" onclick="hover(this,{{ i }});" src="/images/png-img/blank.png"> </div>
+                                            <div class="rate-star"><img class="bookRate"
+                                                                        src="/images/png-img/blank.png"></div>
                                         {% endfor %}
                                         <input type="text" id="rate" hidden value="0">
 
-
                                     </ul>
-                                    <div class="reviews-actions d-flex">
-                                        <a href="#">(1 Review)</a>
-                                        <a href="#">Add Your Review</a>
-                                    </div>
                                 </div>
+
                                 <div class="price-box">
                                     <span>{{ book.price }} TND</span>
                                 </div>
@@ -51,7 +50,9 @@
                                     <input id="qty" class="input-text qty" name="qty" min="1" value="1" title="Qty"
                                            type="number">
                                     <div class="addtocart__actions">
-                                        <button class="tocart" type="submit" title="Add to Cart">Add to Cart</button>
+                                        <button class="tocart" type="button" title="Add to Cart"
+                                                onclick="addToCard({{ book.bookId }})">Add to Cart
+                                        </button>
                                     </div>
                                 </div>
                                 <div class="product-addto-links clearfix" style="display: inline-flex">
@@ -80,105 +81,55 @@
                         </div>
                         <!-- End Single Tab Content -->
                         <!-- Start Single Tab Content -->
-                        <div class="pro__tab_label tab-pane fade" id="nav-review" role="tabpanel">
-                            <div class="review__attribute">
-                                <h1>Customer Reviews</h1>
-                                <h2>Hastech</h2>
-                                <div class="review__ratings__type d-flex">
-                                    <div class="review-ratings">
-                                        <div class="rating-summary d-flex">
-                                            <span>Quality</span>
-                                            <ul class="rating d-flex">
-                                                <li><i class="zmdi zmdi-star"></i></li>
-                                                <li><i class="zmdi zmdi-star"></i></li>
-                                                <li><i class="zmdi zmdi-star"></i></li>
-                                                <li class="off"><i class="zmdi zmdi-star"></i></li>
-                                                <li class="off"><i class="zmdi zmdi-star"></i></li>
-                                            </ul>
-                                        </div>
+                        <div class="pro__tab_label tab-pane fade blog-details content" id="nav-review" role="tabpanel">
+                            <div class="comments_area">
+                                <h3 class="comment__title">Rate</h3>
+                                <div style="padding-bottom: 50px">
+                                    <div class="product-reviews-summary d-flex">
+                                        <ul class="rating-summary d-flex">
+                                            {% for i in 0..4 %}
+                                                <div class="rate-star2"><img class="star"
+                                                                             onclick="rateManagement({{ i }},{{ book.bookId }},4);"
+                                                                             src="/images/png-img/blank.png"></div>
+                                            {% endfor %}
+                                            <input type="text" id="rate" hidden value="0">
 
-                                        <div class="rating-summary d-flex">
-                                            <span>Price</span>
-                                            <ul class="rating d-flex">
-                                                <li><i class="zmdi zmdi-star"></i></li>
-                                                <li><i class="zmdi zmdi-star"></i></li>
-                                                <li><i class="zmdi zmdi-star"></i></li>
-                                                <li class="off"><i class="zmdi zmdi-star"></i></li>
-                                                <li class="off"><i class="zmdi zmdi-star"></i></li>
-                                            </ul>
-                                        </div>
-                                        <div class="rating-summary d-flex">
-                                            <span>value</span>
-                                            <ul class="rating d-flex">
-                                                <li><i class="zmdi zmdi-star"></i></li>
-                                                <li><i class="zmdi zmdi-star"></i></li>
-                                                <li><i class="zmdi zmdi-star"></i></li>
-                                                <li class="off"><i class="zmdi zmdi-star"></i></li>
-                                                <li class="off"><i class="zmdi zmdi-star"></i></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="review-content">
-                                        <p>Hastech</p>
-                                        <p>Review by Hastech</p>
-                                        <p>Posted on 11/6/2018</p>
+                                        </ul>
                                     </div>
                                 </div>
+
+                                <h3 class="comment__title">{{ comments.length }} {{ comments.length <= 1 ? 'comment' : 'comments' }}</h3>
+                                <ul class="comment__list">
+                                    {% for comment in comments %}
+                                        <li>
+                                            <div class="wn__comment">
+                                                <div class="thumb">
+                                                    <img src="/images/blog/comment/1.jpeg" alt="comment images">
+                                                </div>
+                                                <div class="content">
+                                                    <div class="comnt__author d-block d-sm-flex">
+                                                        <span>{{ comment.full_name }}</span>
+                                                    </div>
+                                                    <p>{{ comment.text }}</p>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    {% endfor %}
+
+                                </ul>
                             </div>
-                            <div class="review-fieldset">
-                                <h2>You're reviewing:</h2>
-                                <h3>Chaz Kangeroo Hoodie</h3>
-                                <div class="review-field-ratings">
-                                    <div class="product-review-table">
-                                        <div class="review-field-rating d-flex">
-                                            <span>Quality</span>
-                                            <ul class="rating d-flex">
-                                                <li class="off"><i class="zmdi zmdi-star"></i></li>
-                                                <li class="off"><i class="zmdi zmdi-star"></i></li>
-                                                <li class="off"><i class="zmdi zmdi-star"></i></li>
-                                                <li class="off"><i class="zmdi zmdi-star"></i></li>
-                                                <li class="off"><i class="zmdi zmdi-star"></i></li>
-                                            </ul>
-                                        </div>
-                                        <div class="review-field-rating d-flex">
-                                            <span>Price</span>
-                                            <ul class="rating d-flex">
-                                                <li class="off"><i class="zmdi zmdi-star"></i></li>
-                                                <li class="off"><i class="zmdi zmdi-star"></i></li>
-                                                <li class="off"><i class="zmdi zmdi-star"></i></li>
-                                                <li class="off"><i class="zmdi zmdi-star"></i></li>
-                                                <li class="off"><i class="zmdi zmdi-star"></i></li>
-                                            </ul>
-                                        </div>
-                                        <div class="review-field-rating d-flex">
-                                            <span>Value</span>
-                                            <ul class="rating d-flex">
-                                                <li class="off"><i class="zmdi zmdi-star"></i></li>
-                                                <li class="off"><i class="zmdi zmdi-star"></i></li>
-                                                <li class="off"><i class="zmdi zmdi-star"></i></li>
-                                                <li class="off"><i class="zmdi zmdi-star"></i></li>
-                                                <li class="off"><i class="zmdi zmdi-star"></i></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="review_form_field">
+                            <div class="comment_respond">
+                                <h3 class="reply_title">Leave a Comment</h3>
+                                <form class="comment__form" action="#">
                                     <div class="input__box">
-                                        <span>Nickname</span>
-                                        <input id="nickname_field" type="text" name="nickname">
+                                        <label>Comment</label>
+                                        <textarea id="commentBody" name="comment"></textarea>
                                     </div>
-                                    <div class="input__box">
-                                        <span>Summary</span>
-                                        <input id="summery_field" type="text" name="summery">
+
+                                    <div class="submite__btn">
+                                        <a onclick="addComment({{ book.bookId }})">Post Comment</a>
                                     </div>
-                                    <div class="input__box">
-                                        <span>Review</span>
-                                        <textarea name="review"></textarea>
-                                    </div>
-                                    <div class="review-form-actions">
-                                        <button>Submit Review</button>
-                                    </div>
-                                </div>
+                                </form>
                             </div>
                         </div>
                         <!-- End Single Tab Content -->
@@ -186,28 +137,15 @@
                 </div>
 
 
-</div>
+            </div>
             <div class="col-lg-3 col-12 md-mt-40 sm-mt-40">
                 <div class="shop__sidebar">
                     <aside class="wedget__categories poroduct--cat">
                         <h3 class="wedget__title">Product Categories</h3>
                         <ul>
-                            <li><a href="#">Biography <span>(3)</span></a></li>
-                            <li><a href="#">Business <span>(4)</span></a></li>
-                            <li><a href="#">Cookbooks <span>(6)</span></a></li>
-                            <li><a href="#">Health & Fitness <span>(7)</span></a></li>
-                            <li><a href="#">History <span>(8)</span></a></li>
-                            <li><a href="#">Mystery <span>(9)</span></a></li>
-                            <li><a href="#">Inspiration <span>(13)</span></a></li>
-                            <li><a href="#">Romance <span>(20)</span></a></li>
-                            <li><a href="#">Fiction/Fantasy <span>(22)</span></a></li>
-                            <li><a href="#">Self-Improvement <span>(13)</span></a></li>
-                            <li><a href="#">Humor Books <span>(17)</span></a></li>
-                            <li><a href="#">Harry Potter <span>(20)</span></a></li>
-                            <li><a href="#">Land of Stories <span>(34)</span></a></li>
-                            <li><a href="#">Kids' Music <span>(60)</span></a></li>
-                            <li><a href="#">Toys & Games <span>(3)</span></a></li>
-                            <li><a href="#">hoodies <span>(3)</span></a></li>
+                            {% for c in categories %}
+                                <li><a href="#">{{ c.name }} <span>({{ c.count }})</span></a></li>
+                            {% endfor %}
                         </ul>
                     </aside>
 
@@ -255,19 +193,134 @@
     </div>
 </section>
 <script>
-    function hover(element,index) {
+    function setRate(index){
         let tab = document.getElementsByClassName("star")
-        for (let i=0;i<=index;i++){
+        for (let i = 0; i <= index; i++) {
             tab[i].setAttribute('src', "/images/png-img/full.png");
         }
-        for(let i=index+1;i<tab.length;i++){
+        for (let i = index + 1; i < tab.length; i++) {
             tab[i].setAttribute('src', "/images/png-img/blank.png");
         }
-        document.getElementById("rate").value = index+1
-        console.log(index+1)
+    }
+    function addRate(index, bookId) {
+
+        document.getElementById("rate").value = index + 1
+        console.log(index + 1)
+        $.ajax({
+            type: "POST",
+            url: "http://localhost:5000/bookRate/addRate",
+            data: JSON.stringify({
+                "userId": 4/*userId*/,
+                "bookId": bookId,
+                "rate": index + 1,
+            }),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            error: function (errMsg) {
+                console.log("Return of add book rate  = ", errMsg.responseText)
+                if (errMsg.responseText == "ok")
+                    alert("Rate added successfully")
+            }
+        });
         //element.setAttribute('src', "/images/png-img/full.png");
     }
 
+    var currentUser = JSON.parse(sessionStorage.getItem("currentUser"));
+
+    function addToCard(bookId) {
+        $.ajax({
+            type: "POST",
+            url: "http://localhost:5000/basket/add",
+            data: JSON.stringify({
+                "userId": 4/*userId*/,
+                "bookId": bookId,
+                "quantity": document.getElementById("qty").value,
+            }),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            error: function (errMsg) {
+                console.log("Return of add product to basket = ", errMsg.responseText)
+                if (errMsg.responseText == "ok")
+                    alert("Book added to basket successfully")
+            }
+        });
+    }
+
+    function addComment(bookId) {
+        $.ajax({
+            type: "POST",
+            url: "http://localhost:5000/bookComment/addComment",
+            data: JSON.stringify({
+                "userId": 4/*userId*/,
+                "bookId": bookId,
+                "text": document.getElementById("commentBody").value,
+            }),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            error: function (errMsg) {
+                console.log("Return of add comment = ", errMsg.responseText)
+                if (errMsg.responseText == "ok")
+                    location.reload();
+            }
+        });
+    }
+
+    function loadRate(bookId) {
+        $.get("http://localhost:5000/bookRate/getMoyenneRate/" + bookId, function (data, status) {
+            console.log("Data: " + data + "\nStatus: " + status);
+            let tab = document.getElementsByClassName("bookRate")
+            for (let i = 0; i < Number(data); i++) {
+                tab[i].setAttribute('src', "/images/png-img/full.png");
+            }
+
+        });
+    }
+    function loadRatePerUser(bookId,userId) {
+        $.get("http://localhost:5000/bookRate/getListRatePerUser/" + bookId + "/" + userId, function (data, status) {
+            console.log("Data: " + data + "\nStatus: " + status);
+            let tab = document.getElementsByClassName("bookRate")
+            for (let i = 0; i < Number(data); i++) {
+                tab[i].setAttribute('src', "/images/png-img/full.png");
+            }
+
+        });
+    }
+
+    function updateRate(index, bookId) {
+        $.ajax({
+            type: "POST",
+            url: "http://localhost:5000/bookRate/updateRate",
+            data: JSON.stringify({
+                "userId": 4/*userId*/,
+                "bookId": bookId,
+                "rate": index ,
+            }),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            error: function (errMsg) {
+                console.log("Return of add book rate  = ", errMsg.responseText)
+                if (errMsg.responseText == "ok")
+                    alert("Rate updated successfully")
+            }
+        });
+    }
+
+    function rateManagement(index, bookId, userId) {
+        $.get("http://localhost:5000/bookRate/getListRatePerUser/" + bookId + "/" + userId, function (data, status) {
+            console.log("Data 1: " + data + "\nStatus: " + status);
+
+            if (Number(data) == 0) {
+                addRate(index, bookId)
+                setRate(index)
+            } else {
+                updateRate(index, bookId)
+                setRate(index)
+
+            }
+        })
+    }
+    loadRate(document.getElementById("bookId"))
+    loadRatePerUser(document.getElementById("bookId"))
 </script>
 <!-- End NEwsletter Area -->
 

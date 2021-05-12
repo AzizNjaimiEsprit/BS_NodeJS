@@ -21,7 +21,7 @@ require('./OfferRouter/index')(app);
 require('./CouponRouter/index')(app);
 require('./OnlineBookRouter/index')(app);
 require('./CategoryRouter/index')(app);
-app.get("/home",(req, res) => {
+app.get("",(req, res) => {
     res.render('../Views/homePage.twig')
 })
 

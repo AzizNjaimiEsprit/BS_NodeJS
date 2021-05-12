@@ -14,7 +14,7 @@ router.post('/add', (req, res) => {
             if (err) {
                 res.send(err);
             } else {
-                res.send('Inserted ' + data.insertId)
+                res.send('ok')
             }
         });
 })

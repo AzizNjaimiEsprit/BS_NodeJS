@@ -13,7 +13,7 @@ router.post('/addRate', (req, res) => {
             if (err) {
                 res.send(err);
             } else {
-                res.send('Inserted rate' + data.insertId)
+                res.send('ok')
             }
         });
 })
@@ -29,7 +29,7 @@ router.post('/updateRate', (req, res) => {
             if (err) {
                 res.send(err);
             } else {
-                res.send('updated rate' )
+                res.send('ok' )
             }
         });
 })
@@ -43,6 +43,19 @@ router.get('/getListRate/:bookId',  (req, res) => {
         }
     })
 })
+router.get('/getListRatePerUser/:bookId/:userId',  (req, res) => {
+    database.query('SELECT rate FROM rate WHERE book_id = ? AND user_id=?',
+        [req.params.bookId,
+        req.params.userId],
+        (err, rows, fields) => {
+        if (err||rows.length==0) {
+            res.send("0");
+        } else {
+            res.send(""+rows[0].rate)
+        }
+    })
+})
+
 
 
 router.post('/deleteRate', (req, res) => {

@@ -57,15 +57,7 @@
                                 <a class="nav-item nav-link" data-toggle="tab" href="#nav-list" role="tab"><i
                                             class="fa fa-list"></i></a>
                             </div>
-                            <p>Showing 1–12 of {{ books.length }} results</p>
-                            <div class="orderby__wrapper">
-                                <span>Sort By</span>
-                                <select class="shot__byselect" onclick="">
-                                    {% for c in categories %}
-                                        <option>{{ c.name }}</option>
-                                    {% endfor %}
-                                </select>
-                            </div>
+                            <p>Showing all items ({{ books.length }}) </p>
                         </div>
                     </div>
                 </div>
