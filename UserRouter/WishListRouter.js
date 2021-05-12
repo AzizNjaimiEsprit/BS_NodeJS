@@ -12,7 +12,7 @@ router.post('/add', (req, res) => {
             if (err) {
                 res.send(err);
             } else {
-                res.send('Inserted')
+                res.send('ok')
             }
         });
 })

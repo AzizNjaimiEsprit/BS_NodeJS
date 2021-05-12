@@ -83,7 +83,7 @@
                         <!-- Start Single Tab Content -->
                         <div class="pro__tab_label tab-pane fade blog-details content" id="nav-review" role="tabpanel">
                             <div class="comments_area">
-                                <h3 class="comment__title">Rate</h3>
+                                <h3 class="comment__title">Leave a Rate</h3>
                                 <div style="padding-bottom: 50px">
                                     <div class="product-reviews-summary d-flex">
                                         <ul class="rating-summary d-flex">
@@ -227,24 +227,7 @@
 
     var currentUser = JSON.parse(sessionStorage.getItem("currentUser"));
 
-    function addToCard(bookId) {
-        $.ajax({
-            type: "POST",
-            url: "http://localhost:5000/basket/add",
-            data: JSON.stringify({
-                "userId": 4/*userId*/,
-                "bookId": bookId,
-                "quantity": document.getElementById("qty").value,
-            }),
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            error: function (errMsg) {
-                console.log("Return of add product to basket = ", errMsg.responseText)
-                if (errMsg.responseText == "ok")
-                    alert("Book added to basket successfully")
-            }
-        });
-    }
+
 
     function addComment(bookId) {
         $.ajax({

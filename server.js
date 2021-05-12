@@ -4,7 +4,7 @@ var path = require('path');
 const app = express();
 var bodyParser = require('body-parser')
 const session = require('express-session');
-
+const database = require('./config/db.config');
 ///////////////////////////////////////////////////////////////////////////////
 app.use(cors());
 app.use(bodyParser.json())
@@ -21,8 +21,14 @@ require('./OfferRouter/index')(app);
 require('./CouponRouter/index')(app);
 require('./OnlineBookRouter/index')(app);
 require('./CategoryRouter/index')(app);
-app.get("",(req, res) => {
-    res.render('../Views/homePage.twig')
+app.get("/home",(req, res) => {
+    database.query('SELECT book.*,c.name FROM book join category c on c.id = book.category_id',
+        (err, rows, fields) => {
+        database.query('select category.name,count(b.id) as count from category left join book b on category.id = b.category_id group by category.name order by count desc',
+            (err2, rows2, fields) => {
+                res.render('../Views/homePage.twig', {books: rows, categories: rows2, pageName: "Home"})
+            })
+    })
 })
 
 app.use(function(req, res, next) {
