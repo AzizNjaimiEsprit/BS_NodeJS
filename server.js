@@ -26,12 +26,12 @@ require('./CategoryRouter/index')(app);
 require('./LibraryRouter/index')(app);
 
 app.get("/home",(req, res) => {
-    database.query('SELECT book.*,c.name as cat FROM book join category c on c.id = book.category_id',
-        (err, rows, fields) => {
-        database.query('select category.name,count(b.id) as count from category left join book b on category.id = b.category_id group by category.name order by count desc',
-            (err2, rows2, fields) => {
-                res.render('../Views/homePage.twig', {books: rows, categories: rows2, pageName: "Home"})
+    database.query('SELECT book.*,c.name as cat FROM book join category c on c.id = book.category_id', (err, rows, fields) => {
+        database.query('select category.name,count(b.id) as count from category left join book b on category.id = b.category_id group by category.name order by count desc', (err2, rows2, fields) => {
+            database.query('SELECT *,p.id as blogId FROM post p join user u on p.publisher_id = u.id', (err3, rows3, fields) => {
+                res.render('../Views/homePage.twig', {books: rows, categories: rows2,blogs : rows3, pageName: "Home"})
             })
+        })
     })
 })
 
