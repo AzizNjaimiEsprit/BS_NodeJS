@@ -86,5 +86,16 @@ router.get('/', (req, res) => {
             })
     })
 })
-
+router.get('/library', (req, res) => {
+    database.query('SELECT * from library l join book b on l.book_id = b.id WHERE user_id = ?', 3, (err, rows, fields) => {
+        if (err) {
+            res.render('../Views/library.twig', {books: []})
+        } else {
+            res.render('../Views/library.twig', {books: rows})
+        }
+    })
+})
+router.get('/getBookPDF/:bookId', ((req, res) => {
+    res.sendFile(path.resolve(__dirname + '/../uploads/BooksPDF/' + req.params.bookId+'.pdf'));
+}))
 module.exports = router;
