@@ -1,8 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const database = require('../config/db.config');
+const authController = require('../public/js/authConroller');
 
-router.post('/addRate', (req, res) => {
+router.post('/addRate',authController, (req, res) => {
     database.query("insert into rate values (null,?,?,?)",
         [
             req.body.rate,
@@ -18,7 +19,7 @@ router.post('/addRate', (req, res) => {
         });
 })
 
-router.post('/updateRate', (req, res) => {
+router.post('/updateRate',authController,  (req, res) => {
     database.query("update rate set rate = ? where user_id = ? and book_id = ?",
         [
             req.body.rate,

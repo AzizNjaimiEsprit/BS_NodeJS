@@ -24,15 +24,8 @@
   <component name="ChangeListManager">
     <list default="true" id="b04fed90-904e-45f3-9671-64262759d3d6" name="Default Changelist" comment="Crud Category added">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BlogRouter/PostsRouter.js" beforeDir="false" afterPath="$PROJECT_DIR$/BlogRouter/PostsRouter.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CommandsRouter/OrdersRouter.js" beforeDir="false" afterPath="$PROJECT_DIR$/CommandsRouter/OrdersRouter.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LibraryRouter/LibraryRouter.js" beforeDir="false" afterPath="$PROJECT_DIR$/LibraryRouter/LibraryRouter.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OnlineBookRouter/OnlineBookRouter.js" beforeDir="false" afterPath="$PROJECT_DIR$/OnlineBookRouter/OnlineBookRouter.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Views/adminOrdersList.twig" beforeDir="false" afterPath="$PROJECT_DIR$/Views/adminOrdersList.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Views/header.twig" beforeDir="false" afterPath="$PROJECT_DIR$/Views/header.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Views/library.twig" beforeDir="false" afterPath="$PROJECT_DIR$/Views/library.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/webServicesCalls.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/webServicesCalls.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/server.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/homePage.twig" beforeDir="false" afterPath="$PROJECT_DIR$/Views/homePage.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -151,7 +144,7 @@
       <workItem from="1620321654645" duration="1918000" />
       <workItem from="1620378336971" duration="608000" />
       <workItem from="1620653645261" duration="6451000" />
-      <workItem from="1620904257071" duration="11947000" />
+      <workItem from="1620904257071" duration="12629000" />
     </task>
     <task id="LOCAL-00001" summary="update">
       <created>1619386325176</created>
@@ -188,7 +181,14 @@
       <option name="project" value="LOCAL" />
       <updated>1620913325158</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Updated">
+      <created>1620916389673</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1620916389673</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -222,7 +222,8 @@
     <MESSAGE value="Imports Fixed" />
     <MESSAGE value="Crud Category added" />
     <MESSAGE value="Admin side added" />
-    <option name="LAST_COMMIT_MESSAGE" value="Admin side added" />
+    <MESSAGE value="Updated" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated" />
   </component>
   <component name="WindowStateProjectService">
     <state x="718" y="327" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1620912787936">
@@ -234,34 +235,34 @@
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state x="92" y="92" width="1736" height="866" key="DiffContextDialog/0.0.1920.1050@0.0.1920.1050" timestamp="1620914488525" />
-    <state width="1899" height="261" key="GridCell.Tab.0.bottom" timestamp="1620915965857">
+    <state width="1899" height="261" key="GridCell.Tab.0.bottom" timestamp="1620916481871">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state width="1899" height="244" key="GridCell.Tab.0.bottom/0.0.1920.1048@0.0.1920.1048" timestamp="1620856395229" />
-    <state width="1899" height="261" key="GridCell.Tab.0.bottom/0.0.1920.1050@0.0.1920.1050" timestamp="1620915965857" />
-    <state width="1899" height="261" key="GridCell.Tab.0.center" timestamp="1620915965857">
+    <state width="1899" height="261" key="GridCell.Tab.0.bottom/0.0.1920.1050@0.0.1920.1050" timestamp="1620916481871" />
+    <state width="1899" height="261" key="GridCell.Tab.0.center" timestamp="1620916481871">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state width="1899" height="244" key="GridCell.Tab.0.center/0.0.1920.1048@0.0.1920.1048" timestamp="1620856395229" />
-    <state width="1899" height="261" key="GridCell.Tab.0.center/0.0.1920.1050@0.0.1920.1050" timestamp="1620915965857" />
-    <state width="1899" height="261" key="GridCell.Tab.0.left" timestamp="1620915965857">
+    <state width="1899" height="261" key="GridCell.Tab.0.center/0.0.1920.1050@0.0.1920.1050" timestamp="1620916481871" />
+    <state width="1899" height="261" key="GridCell.Tab.0.left" timestamp="1620916481871">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state width="1899" height="244" key="GridCell.Tab.0.left/0.0.1920.1048@0.0.1920.1048" timestamp="1620856395229" />
-    <state width="1899" height="261" key="GridCell.Tab.0.left/0.0.1920.1050@0.0.1920.1050" timestamp="1620915965857" />
-    <state width="1899" height="261" key="GridCell.Tab.0.right" timestamp="1620915965857">
+    <state width="1899" height="261" key="GridCell.Tab.0.left/0.0.1920.1050@0.0.1920.1050" timestamp="1620916481871" />
+    <state width="1899" height="261" key="GridCell.Tab.0.right" timestamp="1620916481871">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state width="1899" height="244" key="GridCell.Tab.0.right/0.0.1920.1048@0.0.1920.1048" timestamp="1620856395229" />
-    <state width="1899" height="261" key="GridCell.Tab.0.right/0.0.1920.1050@0.0.1920.1050" timestamp="1620915965857" />
+    <state width="1899" height="261" key="GridCell.Tab.0.right/0.0.1920.1050@0.0.1920.1050" timestamp="1620916481871" />
     <state x="797" y="227" key="RollbackChangesDialog" timestamp="1620913375613">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state x="797" y="227" key="RollbackChangesDialog/0.0.1920.1050@0.0.1920.1050" timestamp="1620913375613" />
-    <state x="552" y="258" key="Vcs.Push.Dialog.v2" timestamp="1620913337523">
+    <state x="552" y="258" key="Vcs.Push.Dialog.v2" timestamp="1620916391865">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state x="552" y="258" key="Vcs.Push.Dialog.v2/0.0.1920.1050@0.0.1920.1050" timestamp="1620913337523" />
+    <state x="552" y="258" key="Vcs.Push.Dialog.v2/0.0.1920.1050@0.0.1920.1050" timestamp="1620916391865" />
     <state x="464" y="102" width="788" height="823" key="find.popup" timestamp="1620914682805">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
