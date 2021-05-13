@@ -1,6 +1,12 @@
 ﻿
 {% include 'header.twig' %}
 <!-- cart-main-area start -->
+<style>
+    .book-image-small{
+        height: 100px;
+        width: 80px;
+    }
+</style>
 <div class="wishlist-area section-padding--lg bg__white">
     <div class="container">
         <div class="row">
@@ -22,9 +28,12 @@
                                 <tbody>
                                 {% for row in rows %}
                                     <tr>
-                                        <td class="product-remove"><a href="#">×</a></td>
-                                        <td class="product-thumbnail"><a href="#"><img src="/images/product/sm-3/1.jpg"
-                                                                                       alt=""></a></td>
+                                        <td class="product-remove"><a onclick="removeElement({{ row.book_id }})">×</a></td>
+                                        <td class="product-thumbnail">
+                                            <a href="#">
+                                                <img class="book-image-small" src="http://localhost:5000/book/getBookImage/{{ row.image }}" alt="">
+                                            </a>
+                                        </td>
                                         <td class="product-name"><a href="#">{{ row.title }}</a></td>
                                         <td class="product-price"><span class="amount">${{ row.price }}</span></td>
                                         <td class="product-stock-status">
@@ -36,7 +45,7 @@
                                                         {% endif %}
 													</span>
                                         </td>
-                                        <td class="product-add-to-cart"><a href="#"> Add to Cart</a></td>
+                                        <td class="product-add-to-cart"><a onclick="addToCard({{ row.book_id }})"> Add to Cart</a></td>
                                     </tr>
                                 {% endfor %}
 
@@ -50,5 +59,25 @@
         </div>
     </div>
 </div>
+<script>
+
+    function removeElement(bookId){
+        $.ajax({
+            type: "POST",
+            url: "http://localhost:5000/wishList/delete",
+            data: JSON.stringify({
+                "userId" : 3/*userId*/,
+                "bookId" : bookId
+            }),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            error: function(errMsg) {
+                console.log("Return of delete book from wishList = ",errMsg.responseText)
+                if (errMsg.responseText == "Deleted")
+                    location.reload()
+            }
+        });
+    }
+</script>
 <!-- cart-main-area end -->
 {% include 'footer.twig' %}

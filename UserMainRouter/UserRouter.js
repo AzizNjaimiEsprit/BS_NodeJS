@@ -2,16 +2,21 @@ const express = require('express');
 const router = express.Router();
 const database = require('../config/db.config');
 
-router.get('/login',(req, res) => {
-    var obj = {
-        full_name : "Mohamed Aziz Njaimi",
-        userId : 3,
-        numTel  : 52650101,
-        email : "a52650101@gmail.com",
-    }
-    req.session.currentUser = obj;
-    res.render('../Views/login.twig',{ currentUser : req.session.currentUser })
+router.get('/login/:login',(req, res) => {
+    database.query('SELECT *, id as userId FROM user WHERE login = ?', [req.params.login], (err, rows, fields) => {
+        if (!err) {
+            if (rows.length > 0){
+                req.session.currentUser = rows[0];
+                res.render('../Views/login.twig',{ currentUser : req.session.currentUser })
+            }
+            else
+                res.send('No such login found');
+        } else {
+            res.send('Database operation failed');
+        }
+    });
 })
+
 
 // Add new user to database
 router.post('/add', (req, res) => {

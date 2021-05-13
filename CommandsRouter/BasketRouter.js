@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const database = require('../config/db.config');
+const authController = require('../public/js/authConroller');
 let yyyymmdd = require("yyyy-mm-dd");
 
 router.post('/add', (req, res) => {
@@ -38,13 +39,9 @@ router.post('/update', (req, res) => {
         });
 })
 
-router.get('/',(req, res) => {
+router.get('/' , authController ,(req, res) => {
     database.query('SELECT *,bs.quantity as bQuantity FROM basket bs join book bk on bs.book_id = bk.id WHERE user_id = ?', [req.session.currentUser.userId], (err, rows, fields) => {
-        if (err) {
-            res.render('../Views/basket.twig',{rows : []})
-        } else {
-            res.render('../Views/basket.twig',{rows : rows})
-        }
+        res.render('../Views/basket.twig',{rows : rows,pageName : 'Basket'})
     })
 })
 
@@ -56,6 +53,12 @@ router.get('/user/get/:userId', (req, res) => {
         } else {
             res.send(rows)
         }
+    })
+})
+
+router.get('/getCount/:bookId', (req, res) => {
+    database.query('SELECT count(user_id) as count FROM basket WHERE book_id = ? and user_id = ?', [req.params.bookId,req.session.currentUser.userId], (err, rows, fields) => {
+        res.send(''+rows[0].count)
     })
 })
 

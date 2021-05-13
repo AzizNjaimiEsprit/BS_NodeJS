@@ -83,7 +83,7 @@
                                             <div class="switcher-currency-trigger">
                                                 <div class="setting__menu">
                                                     <span><a href="#">My Account</a></span>
-                                                    <span><a href="/order">My Orders</a></span>
+                                                    <span><a href="/order/myOrders/open">My Orders</a></span>
                                                     <span><a href="/wishlist">My Wishlist</a></span>
                                                     <span><a href="/fidelity">Fidelity Card</a></span>
                                                     <span><a href="#">Sign In</a></span>
@@ -93,6 +93,17 @@
                                         </div>
                                     </div>
                                 </div>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown" id="adminMenu">
+                            <img class="admin-icon" src="/images/png-img/admin-icon.png" data-toggle="dropdown">
+                            <div class="dropdown-menu" style="left: -90px; padding: 10px">
+                                <a class="admin-menu" href="/book/addBook">Add book</a>
+                                <a class="admin-menu" href="/book/booksList">List of books</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="admin-menu" href="/order/ordersList/open">List of orders</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="admin-menu" href="#">List of offers</a>
                             </div>
                         </li>
                     </ul>
@@ -191,4 +202,3 @@
             </div>
         </div>
     </div>
-    <!-- End Bradcaump area -->

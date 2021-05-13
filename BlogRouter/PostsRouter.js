@@ -1,11 +1,12 @@
 const express = require('express');
 const router = express.Router();
 const database = require('../config/db.config');
+const authController = require('../public/js/authConroller');
 let yyyymmdd = require("yyyy-mm-dd");
 var multer  = require('multer')
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, 'uploads/')
+        cb(null, 'uploads/BlogsImages/')
     },
     filename: function (req, file, cb) {
         cb(null, file.fieldname + '-' + Date.now()+path.extname(file.originalname))
@@ -15,7 +16,7 @@ var storage = multer.diskStorage({
 var upload = multer({ storage: storage })
 var path = require('path');
 
-router.get('/',(req, res) => {
+router.get('/',authController,(req, res) => {
     database.query('SELECT *,p.id as blogId FROM post p join user u on p.publisher_id = u.id', (err, rows, fields) => {
         if (err) {
             res.render('../Views/blog.twig',{rows : [],pageName : "Blogs"})
@@ -25,7 +26,7 @@ router.get('/',(req, res) => {
     })
 })
 
-router.get('/blogDetails/:blogId',(req, res) => {
+router.get('/blogDetails/:blogId',authController,(req, res) => {
     database.query('SELECT *,p.id as blogId FROM post p join user u on p.publisher_id = u.id where p.id=?',[req.params.blogId], (err, rows, fields) => {
         if (err || rows.length == 0) {
             res.render('../Views/blog-details.twig',{blog : [],pageName : "Blog Details"})
@@ -67,7 +68,7 @@ router.get('/getPostAttachment/:postId',((req, res) => {
                 res.sendFile(path.resolve(__dirname+'/../uploads/no_image.png'));
             }
             else
-                res.sendFile(path.resolve(__dirname+'/../uploads/'+rows[0].file_name));
+                res.sendFile(path.resolve(__dirname+'/../uploads/BlogsImages/'+rows[0].file_name));
             //res.send(rows)
         }
     })

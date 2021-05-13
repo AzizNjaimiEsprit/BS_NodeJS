@@ -6171,3 +6171,18 @@ a.checkout__title {
   padding-bottom: 80px;
 }
 }
+.admin-icon{
+  height: 20px;
+  margin-left: 12px;
+}
+.admin-menu{
+  color: #797979;
+  display: block;
+  font-weight: normal;
+  height: inherit;
+  line-height: 20px;
+  padding: 5px 0;
+  text-align: left;
+  text-transform: capitalize;
+  font-size: 12px;
+}

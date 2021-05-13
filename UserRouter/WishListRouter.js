@@ -19,11 +19,7 @@ router.post('/add', (req, res) => {
 
 router.get('/', (req, res) => {
     database.query('SELECT * FROM wishlist bs join book bk on bs.book_id = bk.id  WHERE user_id = ?', [req.session.currentUser.userId], (err, rows, fields) => {
-        if (err) {
-            res.render('../Views/wishlist.twig',{rows : []})
-        } else {
-            res.render('../Views/wishlist.twig',{rows : rows})
-        }
+        res.render('../Views/wishlist.twig',{rows : rows,pageName : 'WishList'})
     })
 })
 
@@ -34,6 +30,12 @@ router.get('/user/get/:userId', (req, res) => {
         } else {
             res.send(rows)
         }
+    })
+})
+
+router.get('/getCount/:bookId', (req, res) => {
+    database.query('SELECT count(user_id) as count FROM wishlist WHERE book_id = ? and user_id = ?', [req.params.bookId,req.session.currentUser.userId], (err, rows, fields) => {
+        res.send(''+rows[0].count)
     })
 })
 
