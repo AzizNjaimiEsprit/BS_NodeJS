@@ -105,6 +105,24 @@ router.post('/update', (req, res) => {
         });
 })
 
+router.post('/updateStatus', (req, res) => {
+    let items = req.body.items;
+    database.query("update orders set status=? where id=?",
+        [
+            req.body.status,
+            req.body.id
+        ], function (err, data) {
+            if (err) {
+                res.send(err);
+            } else {
+                if (data.affectedRows == 1)
+                    res.send("Updated");
+                else
+                    res.send("No record found !!!")
+            }
+        });
+})
+
 router.get('/get/:id', (req, res) => {
     database.query('SELECT * FROM orders WHERE id = ?', [req.params.id], (err, rows, fields) => {
         if (!err) {

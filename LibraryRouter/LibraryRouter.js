@@ -1,6 +1,14 @@
 const express = require('express');
 const router = express.Router();
 const database = require('../config/db.config');
+var path = require('path');
+const authController = require('../public/js/authConroller');
+
+router.get('/',authController, (req, res) => {
+    database.query('SELECT * from library l join book b on l.book_id = b.id WHERE user_id = ?', [req.session.currentUser.userId], (err, rows, fields) => {
+        res.render('../Views/library.twig', {books: rows , pageName : 'Library'})
+    })
+})
 
 router.post('/add', (req, res) => {
     database.query("insert into library values (?,?,?)",
@@ -65,14 +73,6 @@ router.post('/delete', (req, res) => {
             }
         });
 })
-router.get('/library', (req, res) => {
-    database.query('SELECT * from library l join book b on l.book_id = b.id WHERE user_id = ?', 3, (err, rows, fields) => {
-        if (err) {
-            res.render('../Views/library.twig', {books: []})
-        } else {
-            res.render('../Views/library.twig', {books: rows})
-        }
-    })
-})
+
 
 module.exports = router;

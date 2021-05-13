@@ -23,31 +23,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b04fed90-904e-45f3-9671-64262759d3d6" name="Default Changelist" comment="Crud Category added">
-      <change afterPath="$PROJECT_DIR$/public/js/authConroller.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BlogRouter/CommentRouter.js" beforeDir="false" afterPath="$PROJECT_DIR$/BlogRouter/CommentRouter.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BlogRouter/PostsRouter.js" beforeDir="false" afterPath="$PROJECT_DIR$/BlogRouter/PostsRouter.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BookRouter/BookRouter.js" beforeDir="false" afterPath="$PROJECT_DIR$/BookRouter/BookRouter.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CommandsRouter/BasketRouter.js" beforeDir="false" afterPath="$PROJECT_DIR$/CommandsRouter/BasketRouter.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CommandsRouter/OrdersRouter.js" beforeDir="false" afterPath="$PROJECT_DIR$/CommandsRouter/OrdersRouter.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserMainRouter/UserRouter.js" beforeDir="false" afterPath="$PROJECT_DIR$/UserMainRouter/UserRouter.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserRouter/FidelityRouter.js" beforeDir="false" afterPath="$PROJECT_DIR$/UserRouter/FidelityRouter.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserRouter/WishListRouter.js" beforeDir="false" afterPath="$PROJECT_DIR$/UserRouter/WishListRouter.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Views/basket.twig" beforeDir="false" afterPath="$PROJECT_DIR$/Views/basket.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Views/checkout.twig" beforeDir="false" afterPath="$PROJECT_DIR$/Views/checkout.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LibraryRouter/LibraryRouter.js" beforeDir="false" afterPath="$PROJECT_DIR$/LibraryRouter/LibraryRouter.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OnlineBookRouter/OnlineBookRouter.js" beforeDir="false" afterPath="$PROJECT_DIR$/OnlineBookRouter/OnlineBookRouter.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/adminOrdersList.twig" beforeDir="false" afterPath="$PROJECT_DIR$/Views/adminOrdersList.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Views/header.twig" beforeDir="false" afterPath="$PROJECT_DIR$/Views/header.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Views/login.twig" beforeDir="false" afterPath="$PROJECT_DIR$/Views/login.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Views/myOrders.twig" beforeDir="false" afterPath="$PROJECT_DIR$/Views/myOrders.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Views/wishlist.twig" beforeDir="false" afterPath="$PROJECT_DIR$/Views/wishlist.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/db.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/config/db.config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/logo/3.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/logo/3.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/logo/logo.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/logo/logo.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/library.twig" beforeDir="false" afterPath="$PROJECT_DIR$/Views/library.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/webServicesCalls.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/webServicesCalls.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/server.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/uploads/attachment-1619871507135.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/uploads/BlogsImages/attachment-1619871507135.jpg" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -166,7 +151,7 @@
       <workItem from="1620321654645" duration="1918000" />
       <workItem from="1620378336971" duration="608000" />
       <workItem from="1620653645261" duration="6451000" />
-      <workItem from="1620904257071" duration="8534000" />
+      <workItem from="1620904257071" duration="11947000" />
     </task>
     <task id="LOCAL-00001" summary="update">
       <created>1619386325176</created>
@@ -196,11 +181,28 @@
       <option name="project" value="LOCAL" />
       <updated>1620061844857</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Admin side added">
+      <created>1620913325157</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1620913325158</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.History.Properties">
+    <option name="COLUMN_ORDER">
+      <list>
+        <option value="0" />
+        <option value="2" />
+        <option value="3" />
+        <option value="1" />
+      </list>
+    </option>
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -219,7 +221,8 @@
     <MESSAGE value="Crud Book &amp; OnlineBook" />
     <MESSAGE value="Imports Fixed" />
     <MESSAGE value="Crud Category added" />
-    <option name="LAST_COMMIT_MESSAGE" value="Crud Category added" />
+    <MESSAGE value="Admin side added" />
+    <option name="LAST_COMMIT_MESSAGE" value="Admin side added" />
   </component>
   <component name="WindowStateProjectService">
     <state x="718" y="327" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1620912787936">
@@ -227,37 +230,45 @@
     </state>
     <state x="718" y="326" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1048@0.0.1920.1048" timestamp="1620841474757" />
     <state x="718" y="327" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1050@0.0.1920.1050" timestamp="1620912787936" />
-    <state width="1899" height="244" key="GridCell.Tab.0.bottom" timestamp="1620907790576">
+    <state x="92" y="92" width="1736" height="866" key="DiffContextDialog" timestamp="1620914488525">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="92" y="92" width="1736" height="866" key="DiffContextDialog/0.0.1920.1050@0.0.1920.1050" timestamp="1620914488525" />
+    <state width="1899" height="261" key="GridCell.Tab.0.bottom" timestamp="1620915965857">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state width="1899" height="244" key="GridCell.Tab.0.bottom/0.0.1920.1048@0.0.1920.1048" timestamp="1620856395229" />
-    <state width="1899" height="244" key="GridCell.Tab.0.bottom/0.0.1920.1050@0.0.1920.1050" timestamp="1620907790576" />
-    <state width="1899" height="244" key="GridCell.Tab.0.center" timestamp="1620907790576">
+    <state width="1899" height="261" key="GridCell.Tab.0.bottom/0.0.1920.1050@0.0.1920.1050" timestamp="1620915965857" />
+    <state width="1899" height="261" key="GridCell.Tab.0.center" timestamp="1620915965857">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state width="1899" height="244" key="GridCell.Tab.0.center/0.0.1920.1048@0.0.1920.1048" timestamp="1620856395229" />
-    <state width="1899" height="244" key="GridCell.Tab.0.center/0.0.1920.1050@0.0.1920.1050" timestamp="1620907790576" />
-    <state width="1899" height="244" key="GridCell.Tab.0.left" timestamp="1620907790576">
+    <state width="1899" height="261" key="GridCell.Tab.0.center/0.0.1920.1050@0.0.1920.1050" timestamp="1620915965857" />
+    <state width="1899" height="261" key="GridCell.Tab.0.left" timestamp="1620915965857">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state width="1899" height="244" key="GridCell.Tab.0.left/0.0.1920.1048@0.0.1920.1048" timestamp="1620856395229" />
-    <state width="1899" height="244" key="GridCell.Tab.0.left/0.0.1920.1050@0.0.1920.1050" timestamp="1620907790576" />
-    <state width="1899" height="244" key="GridCell.Tab.0.right" timestamp="1620907790576">
+    <state width="1899" height="261" key="GridCell.Tab.0.left/0.0.1920.1050@0.0.1920.1050" timestamp="1620915965857" />
+    <state width="1899" height="261" key="GridCell.Tab.0.right" timestamp="1620915965857">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state width="1899" height="244" key="GridCell.Tab.0.right/0.0.1920.1048@0.0.1920.1048" timestamp="1620856395229" />
-    <state width="1899" height="244" key="GridCell.Tab.0.right/0.0.1920.1050@0.0.1920.1050" timestamp="1620907790576" />
-    <state x="797" y="227" key="RollbackChangesDialog" timestamp="1620867575274">
+    <state width="1899" height="261" key="GridCell.Tab.0.right/0.0.1920.1050@0.0.1920.1050" timestamp="1620915965857" />
+    <state x="797" y="227" key="RollbackChangesDialog" timestamp="1620913375613">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state x="797" y="227" key="RollbackChangesDialog/0.0.1920.1050@0.0.1920.1050" timestamp="1620867575274" />
-    <state x="667" y="124" width="585" height="801" key="find.popup" timestamp="1620910408483">
+    <state x="797" y="227" key="RollbackChangesDialog/0.0.1920.1050@0.0.1920.1050" timestamp="1620913375613" />
+    <state x="552" y="258" key="Vcs.Push.Dialog.v2" timestamp="1620913337523">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state x="667" y="124" width="585" height="801" key="find.popup/0.0.1920.1050@0.0.1920.1050" timestamp="1620910408483" />
-    <state x="623" y="227" width="672" height="678" key="search.everywhere.popup" timestamp="1620905676638">
+    <state x="552" y="258" key="Vcs.Push.Dialog.v2/0.0.1920.1050@0.0.1920.1050" timestamp="1620913337523" />
+    <state x="464" y="102" width="788" height="823" key="find.popup" timestamp="1620914682805">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state x="623" y="227" width="672" height="678" key="search.everywhere.popup/0.0.1920.1050@0.0.1920.1050" timestamp="1620905676638" />
+    <state x="464" y="102" width="788" height="823" key="find.popup/0.0.1920.1050@0.0.1920.1050" timestamp="1620914682805" />
+    <state x="623" y="227" width="672" height="678" key="search.everywhere.popup" timestamp="1620914956142">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="623" y="227" width="672" height="678" key="search.everywhere.popup/0.0.1920.1050@0.0.1920.1050" timestamp="1620914956142" />
   </component>
 </project>

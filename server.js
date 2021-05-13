@@ -23,8 +23,9 @@ require('./OfferRouter/index')(app);
 require('./CouponRouter/index')(app);
 require('./OnlineBookRouter/index')(app);
 require('./CategoryRouter/index')(app);
+require('./LibraryRouter/index')(app);
 
-app.get("/home",authController,(req, res) => {
+app.get("/home",(req, res) => {
     database.query('SELECT book.*,c.name as cat FROM book join category c on c.id = book.category_id',
         (err, rows, fields) => {
         database.query('select category.name,count(b.id) as count from category left join book b on category.id = b.category_id group by category.name order by count desc',

@@ -16,7 +16,7 @@ var storage = multer.diskStorage({
 var upload = multer({ storage: storage })
 var path = require('path');
 
-router.get('/',authController,(req, res) => {
+router.get('/',(req, res) => {
     database.query('SELECT *,p.id as blogId FROM post p join user u on p.publisher_id = u.id', (err, rows, fields) => {
         if (err) {
             res.render('../Views/blog.twig',{rows : [],pageName : "Blogs"})
@@ -26,7 +26,7 @@ router.get('/',authController,(req, res) => {
     })
 })
 
-router.get('/blogDetails/:blogId',authController,(req, res) => {
+router.get('/blogDetails/:blogId',(req, res) => {
     database.query('SELECT *,p.id as blogId FROM post p join user u on p.publisher_id = u.id where p.id=?',[req.params.blogId], (err, rows, fields) => {
         if (err || rows.length == 0) {
             res.render('../Views/blog-details.twig',{blog : [],pageName : "Blog Details"})
