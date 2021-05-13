@@ -53,5 +53,7 @@ router.post('/deleteOnlineBook', (req, res) => {
             }
         });
 })
-
+router.get('/getBookPDF/:bookId', ((req, res) => {
+    res.sendFile(path.resolve(__dirname + '/../uploads/BooksPDF/' + req.params.bookId+'.pdf'));
+}))
 module.exports = router;

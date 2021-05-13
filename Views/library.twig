@@ -41,11 +41,11 @@
         pdfOpenParams: { view: 'FitV', page: '34' }
     };
 
-    PDFObject.embed("http://localhost:5000/book/getBookPDF/34", "#example1",options);
+    PDFObject.embed("http://localhost:5000/onlineBook/getBookPDF/34", "#example1",options);
 
 
     function showPDF(bookId){
-        PDFObject.embed("http://localhost:5000/book/getBookPDF/"+bookId, "#example1",options);
+        PDFObject.embed("http://localhost:5000/onlineBook/getBookPDF/"+bookId, "#example1",options);
     }
 
 </script>
