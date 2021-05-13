@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const database = require('../config/db.config');
+const authController = require('../public/js/authConroller');
 let yyyymmdd = require("yyyy-mm-dd");
 
 router.post('/add', (req, res) => {

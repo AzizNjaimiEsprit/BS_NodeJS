@@ -75,7 +75,12 @@ router.get('/bookDetails/:bookId', (req, res) => {
 
 
 router.get('/getBookImage/:image', ((req, res) => {
-    res.sendFile(path.resolve(__dirname + '/../uploads/BooksImage/' + req.params.image));
+    try{
+        res.sendFile(path.resolve(__dirname + '/../uploads/BooksImage/' + req.params.image));
+    }catch (ex){
+        res.sendFile(path.resolve(__dirname + '/../uploads/BooksImage/unfound.jpg'));
+    }
+
 
 }))
 router.get('/', (req, res) => {

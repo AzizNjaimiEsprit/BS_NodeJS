@@ -5,6 +5,8 @@ const app = express();
 var bodyParser = require('body-parser')
 const session = require('express-session');
 const database = require('./config/db.config');
+const authController = require('./public/js/authConroller');
+
 ///////////////////////////////////////////////////////////////////////////////
 app.use(cors());
 app.use(bodyParser.json())
@@ -21,7 +23,8 @@ require('./OfferRouter/index')(app);
 require('./CouponRouter/index')(app);
 require('./OnlineBookRouter/index')(app);
 require('./CategoryRouter/index')(app);
-app.get("/home",(req, res) => {
+
+app.get("/home",authController,(req, res) => {
     database.query('SELECT book.*,c.name as cat FROM book join category c on c.id = book.category_id',
         (err, rows, fields) => {
         database.query('select category.name,count(b.id) as count from category left join book b on category.id = b.category_id group by category.name order by count desc',
@@ -32,7 +35,15 @@ app.get("/home",(req, res) => {
 })
 
 app.use(function(req, res, next) {
-    res.render('../Views/error404.twig',{pageName : "404"})
+    if (req.originalUrl == '/'){
+        if (req.session.currentUser){
+            res.redirect('/home');
+        }else{
+            res.redirect('/users/login/aziz');
+        }
+    }else{
+        res.render('../Views/error404.twig',{pageName : "404"})
+    }
 });
 
 const port = process.env.PORT || 5000;

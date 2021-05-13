@@ -1,21 +1,49 @@
 const express = require('express');
 const router = express.Router();
 const database = require('../config/db.config');
+const authController = require('../public/js/authConroller');
 let yyyymmdd = require("yyyy-mm-dd");
 
 
-router.get('/checkout', (req, res) => {
+router.get('/checkout',authController, (req, res) => {
     database.query('SELECT *,bs.quantity as bQuantity FROM basket bs join book bk on bs.book_id = bk.id WHERE user_id = ?', [req.session.currentUser.userId], (err, rows, fields) => {
-        if (err) {
-            res.render('../Views/checkout.twig', {rows: [], currentUser: req.session.currentUser})
-        } else {
-            res.render('../Views/checkout.twig', {rows: rows, currentUser: req.session.currentUser})
-        }
+        res.render('../Views/checkout.twig', {rows: rows, currentUser: req.session.currentUser,pageName : 'Checkout'})
     })
 })
 
-router.get('/', (req, res) => {
-    database.query('SELECT * FROM orders WHERE user_id = ?', [req.session.currentUser.userId], (err, rows, fields) => {
+router.get('/ordersList/:status',authController, (req, res) => {
+    let critere = ""
+    if (req.params.status == "all"){
+        critere = "status" //all
+    }else if (req.params.status == "closed"){
+        critere = "'treated'"
+    }else if (req.params.status == "open"){
+        critere = "'untreated' OR status = 'inDelivery'"
+    }
+    database.query('SELECT * FROM orders WHERE status = '+critere+' ORDER BY order_date ASC', (err, rows, fields) => {
+        if (!err && rows.length != 0) {
+            for (let i = 0; i < rows.length; i++) {
+                database.query('SELECT *, oi.quantity as orderedQuantity FROM order_item oi join book b on b.id = oi.book_id WHERE order_id = ' + Number(rows[i].id), [], (err2, rows2, fields2) => {
+                    rows[i]['items'] = rows2;
+                    if (i == rows.length - 1)
+                        res.render('../Views/adminOrdersList.twig', {orders: rows, pageName: "My Orders"})
+                })
+            }
+        } else
+            res.render('../Views/adminOrdersList.twig', {orders: [], pageName: "My Orders"})
+    })
+})
+
+router.get('/myOrders/:status',authController, (req, res) => {
+    let critere = ""
+    if (req.params.status == "all"){
+        critere = "status" //all
+    }else if (req.params.status == "closed"){
+        critere = "'treated'"
+    }else if (req.params.status == "open"){
+        critere = "'untreated' OR status = 'inDelivery'"
+    }
+    database.query('SELECT * FROM orders WHERE user_id = ? and status = '+critere+' ORDER BY order_date ASC', [req.session.currentUser.userId], (err, rows, fields) => {
         if (!err && rows.length != 0) {
             for (let i = 0; i < rows.length; i++) {
                 database.query('SELECT *, oi.quantity as orderedQuantity FROM order_item oi join book b on b.id = oi.book_id WHERE order_id = ' + Number(rows[i].id), [], (err2, rows2, fields2) => {

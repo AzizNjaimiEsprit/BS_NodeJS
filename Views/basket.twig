@@ -1,12 +1,18 @@
 {% include 'header.twig' %}
 <!-- cart-main-area start -->
+<style>
+    .book-image-small{
+        height: 100px;
+        width: 80px;
+    }
+</style>
 <div class="cart-main-area section-padding--lg bg--white">
     <div class="container">
         <div class="row">
             <div class="col-md-12 col-sm-12 ol-lg-12">
                 <form action="#">
                     <div class="table-content wnro__table table-responsive">
-                        <table>
+                        <table id="basketTab">
                             <thead>
                             <tr class="title-top">
                                 <th class="product-thumbnail">Image</th>
@@ -19,18 +25,20 @@
                             </thead>
                             <tbody>
                             {% set total = 0 %}
+                            {% set index = 0 %}
                             {% for row in rows %}
                                 <tr>
-                                    <td class="product-thumbnail"><a href="#"><img src="/images/product/sm-3/1.jpg"
+                                    <td class="product-thumbnail"><a href="#"><img class="book-image-small" src="http://localhost:5000/book/getBookImage/{{ row.image }}"
                                                                                    alt="product img"></a></td>
                                     <td class="product-name"><a href="#">{{ row.title }}</a></td>
                                     <td class="product-price"><span class="amount">${{ row.price }}</span></td>
-                                    <td class="product-quantity"><input type="number" value="{{ row.bQuantity }}">
+                                    <td class="product-quantity"><input id="qty" onfocusout="updateQte({{ row.book_id }})" type="number" value="{{ row.bQuantity }}">
                                     </td>
                                     <td class="product-subtotal">{{ row.price * row.bQuantity }}</td>
                                     {% set total = total + (row.price * row.bQuantity) %}
-                                    <td class="product-remove"><a href="#">X</a></td>
+                                    <td class="product-remove"><a onclick="removeElement({{ row.book_id }},{{ index }})">X</a></td>
                                 </tr>
+                                {% set index = index+1 %}
                             {% endfor %}
                             </tbody>
                         </table>
@@ -56,8 +64,33 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div>w
     </div>
 </div>
+<span id="noAlert"></span>
+<script>
+    function updateQte(bookId){
+        addToCard(bookId);
+        console.log(document.getElementById("qty").value)
+    }
+    function removeElement(bookId,index){
+        console.log(index)
+        $.ajax({
+            type: "POST",
+            url: "http://localhost:5000/basket/delete",
+            data: JSON.stringify({
+                "userId" : 3/*userId*/,
+                "bookId" : bookId
+            }),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            error: function(errMsg) {
+                console.log("Return of delete book from basket = ",errMsg.responseText)
+                if (errMsg.responseText == "Deleted")
+                    location.reload()
+            }
+        });
+    }
+</script>
 <!-- cart-main-area end -->
 {% include 'footer.twig' %}
