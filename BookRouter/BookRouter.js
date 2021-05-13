@@ -101,4 +101,14 @@ router.get('/library', (req, res) => {
     })
 })
 
+router.get('/booksList', (req, res) => {
+    database.query('SELECT * FROM book ', (err, rows, fields) => {
+        if (err) {
+            res.render('../Views/adminBookList.twig', {books: []})
+        } else {
+            res.render('../Views/adminBookList.twig', {books: rows})
+        }
+    })
+})
+
 module.exports = router;

@@ -1,0 +1,100 @@
+{% include 'header.twig' %}
+
+<!-- cart-main-area start -->
+<div class="cart-main-area section-padding--lg bg--white">
+    <div class="container">
+        <div class="row" >
+            <h2 class="col-md-12 col-sm-12 ol-lg-12 " >Book List</h2>
+            <div class="col-md-12 col-sm-12 ol-lg-12">
+                <form action="#">
+                    <div class="table-content wnro__table table-responsive">
+                        <table>
+                            <thead>
+                            <tr class="title-top">
+                                <th class="product-name">ID</th>
+                                <th class="product-price">Title</th>
+                                <th class="product-quantity">Price</th>
+                                <th class="product-quantity">Published house</th>
+                                <th class="product-subtotal">Summary</th>
+                                <th class="product-subtotal">Release date</th>
+                                <th class="product-subtotal">Quantity</th>
+                                <th class="product-remove">Category</th>
+                                <th class="product-remove">Nombre de page</th>
+                                <th class="product-remove">Author</th>
+                                <th class="product-remove">Online</th>
+
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for row in books %}
+                            <tr>
+                                <td class="product-remove">{{ row.id }}</td>
+                                <td class="product-price">{{ row.title }}</a></td>
+                            <td class="product-price">{{ row.price }}</td>
+                            <td class="product-price">{{ row.pub_house }}</td>
+                            <td class="product-price">{{ row.summary | slice(0,50) }} ...</td>
+                            <td class="product-price">{{ row.release_date }}</td>
+                            <td class="product-quantity">{{ row.quantity }}</td>
+                            <td class="product-price">=cat</td>
+                                <td class="product-quantity">{{ row.nb_page }}</td>
+                                <td class="product-quantity">{{ row.author }}</td>
+                                <td class="product-quantity">online</td>
+
+                            </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </form>
+                <div class="cartbox__btn">
+                    <ul class="cart__btn__list d-flex flex-wrap flex-md-nowrap flex-lg-nowrap justify-content-between">
+                        <li><a href="#">Coupon Code</a></li>
+                        <li><a href="#">Apply Code</a></li>
+                        <li><a href="#">Update Cart</a></li>
+                        <li><a href="#">Check Out</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+{% for order in orders %}
+<div id="orderItemsModal{{ order.id }}" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog"
+     aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content" style="padding: 10px;">
+            <div class="table-content wnro__table table-responsive">
+                <table>
+                    <thead>
+                    <tr class="title-top">
+                        <th class="product-thumbnail">Image {{ index }}</th>
+                        <th class="product-name">Product</th>
+                        <th class="product-price">Price</th>
+                        <th class="product-quantity">Quantity</th>
+                        <th class="product-subtotal">Total</th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for row in order.items %}
+                    <tr>
+                        <td class="product-thumbnail"><a href="#"><img src="http://localhost:5000/book/getBookImage/{{ row.image }}"
+                                                                       alt="product img"></a></td>
+                        <td class="product-name"><a href="#">{{ row.title }}</a></td>
+                        <td class="product-price"><span class="amount">${{ row.price }}</span></td>
+                        <td class="product-quantity"><input readonly type="number"
+                                                            value="{{ row.orderedQuantity }}"></td>
+                        <td class="product-subtotal">{{ row.price * row.orderedQuantity }}</td>
+
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}
+<!-- cart-main-area end -->
+{% include 'footer.twig' %}

@@ -34,7 +34,9 @@ app.get("/home",(req, res) => {
         })
     })
 })
-
+app.get("/contact",(req, res) => {
+    res.render('../Views/adminAddBook.twig', {pageName: "Contact Us"} )
+})
 app.use(function(req, res, next) {
     if (req.originalUrl == '/'){
         if (req.session.currentUser){

@@ -1,0 +1,62 @@
+{% include 'header.twig' %}
+
+
+
+
+<section class="wn_contact_area bg--white pt--80">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-12">
+                    <div class="contact-form-wrap">
+                        <h2 class="contact__title">Add Book </h2>
+                        <form id="contact-form" action="mail.php" method="post">
+                            <div class="single-contact-form space-between">
+                                <input type="text" name="Title" placeholder="Title*">
+                                <input type="text" name="Price" placeholder="Price*">
+                            </div>
+                            <div class="single-contact-form space-between">
+                                <input type="text" name="pub_house" placeholder="Published House*">
+                                <input type="text" name="nb_page" placeholder="Nombre de pages*">
+                            </div>
+                            <div class="single-contact-form space-between ">
+                                <input type="text" name="author" placeholder="Author(s)*">
+                                <input  type="file" class="form-control-file" id="bookImage">
+                            </div>
+
+                            <div class="single-contact-form message">
+                                <textarea name="summary" placeholder="Type your summary here.."></textarea>
+                            </div>
+
+
+                            <div class="form-row">
+                            <div class="form-check col-6">
+                                <input class="form-check-input"  type="checkbox" value="" id="online" onchange="onlineBookVersion()">
+                                <label class="form-check-label" for="online">OnlineBook</label>
+                            </div>
+                                <input type="file" class="form-control-file" id="bookPDF">
+                            </div>
+                            <div class="contact-btn">
+                                <button type="submit">Send Email</button>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+{#<script>
+function onlineBookVersion()
+{
+    if(document.getElementById("online").value){
+        document.getElementById("bookPDF").style.visibility="visible"
+    }else
+    { document.getElementById("bookPDF").style.visibility="hidden"}
+}
+</script>#}
+
+
+
+{% include 'footer.twig' %}
