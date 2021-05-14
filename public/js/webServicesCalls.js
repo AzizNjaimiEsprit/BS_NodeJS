@@ -8,11 +8,10 @@ function insertIntoCard(bookId) {
             "bookId": bookId,
             "quantity": document.getElementById("qty") ? document.getElementById("qty").value :1,
         }),
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        error: function (errMsg) {
-            console.log("Return of add product to basket = ", errMsg.responseText)
-            if (errMsg.responseText == "ok")
+        contentType: "application/json",
+            success: function (response) {
+            console.log("Return of add product to basket = ", response)
+            if (response == "ok")
                 alert("Book added to basket successfully")
         }
     });
@@ -26,10 +25,10 @@ function updateCard(bookId) {
             "bookId": bookId,
             "quantity": document.getElementById("qty") ? document.getElementById("qty").value :1,
         }),
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        error: function (errMsg) {
-            if (errMsg.responseText == "Updated" && document.getElementById("noAlert") == null)
+        contentType: "application/json",
+            success: function (response) {
+                console.log("Return of add product to basket = ", response)
+            if (response == "Updated" && document.getElementById("noAlert") == null)
                 alert("Book Updated to basket successfully")
         }
     });
@@ -76,11 +75,10 @@ function insertIntoWishList(bookId){
             "userId": 3/*userId*/,
             "bookId": bookId,
         }),
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        error: function (errMsg) {
-            console.log("Return of add product to wishlist = ", errMsg.responseText)
-            if (errMsg.responseText == "ok")
+        contentType: "application/json",
+            success: function (response) {
+            console.log("Return of add product to wishlist = ", response)
+            if (response == "ok")
                 alert("Book added to wishlist successfully")
         }
     });

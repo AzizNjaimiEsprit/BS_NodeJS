@@ -82,11 +82,10 @@
                 "userId" : 3/*userId*/,
                 "bookId" : bookId
             }),
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            error: function(errMsg) {
-                console.log("Return of delete book from basket = ",errMsg.responseText)
-                if (errMsg.responseText == "Deleted")
+            contentType: "application/json",
+            success: function(response) {
+                console.log("Return of delete book from basket = ",response)
+                if (response == "Deleted")
                     location.reload()
             }
         });

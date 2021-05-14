@@ -9,10 +9,9 @@
                 "status" : document.getElementById("selectStatus"+orderId).value,
                 "id" : orderId,
             }),
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            error: function(errMsg) {
-                if (errMsg.responseText == "Updated")
+            contentType: "application/json",
+            success: function(response) {
+                if (response == "Updated")
                     location.reload()
             }
         });

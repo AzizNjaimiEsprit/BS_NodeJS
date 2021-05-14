@@ -214,11 +214,10 @@
                 "bookId": bookId,
                 "rate": index + 1,
             }),
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            error: function (errMsg) {
-                console.log("Return of add book rate  = ", errMsg.responseText)
-                if (errMsg.responseText == "ok")
+            contentType: "application/json",
+            success: function (response) {
+                console.log("Return of add book rate  = ", response)
+                if (response == "ok")
                     alert("Rate added successfully")
             }
         });
@@ -238,11 +237,10 @@
                 "bookId": bookId,
                 "text": document.getElementById("commentBody").value,
             }),
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            error: function (errMsg) {
-                console.log("Return of add comment = ", errMsg.responseText)
-                if (errMsg.responseText == "ok")
+            contentType: "application/json",
+            success: function (response) {
+                console.log("Return of add comment = ", response)
+                if (response == "ok")
                     location.reload();
             }
         });
@@ -278,11 +276,10 @@
                 "bookId": bookId,
                 "rate": index ,
             }),
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            error: function (errMsg) {
-                console.log("Return of add book rate  = ", errMsg.responseText)
-                if (errMsg.responseText == "ok")
+            contentType: "application/json",
+            success: function (response) {
+                console.log("Return of add book rate  = ", response)
+                if (response == "ok")
                     alert("Rate updated successfully")
             }
         });

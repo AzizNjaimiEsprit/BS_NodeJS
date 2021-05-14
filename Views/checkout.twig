@@ -18,12 +18,12 @@
                         <a class="showcoupon" href="#">Click here to enter your code</a>
                     </div>
                     <div class="checkout_coupon">
-                        <form action="#">
+
                             <div class="form__coupon">
-                                <input type="text" placeholder="Coupon code">
-                                <button>Apply coupon</button>
+                                <input type="text" id="coupon" placeholder="Coupon code">
+                                <button onclick="applyCoupon()">Apply coupon</button>
                             </div>
-                        </form>
+
                     </div>
                 </div>
             </div>
@@ -81,7 +81,8 @@
 
                     <ul class="total__amount">
                         <li>Order Total <span>{{ total }} TND</span></li>
-                        <span hidden id="totalPrice">{{ total }}</span>
+                        <li  style="color: darksalmon;">Coupon Reduction <span><span style="float: revert;" id="couponValue">0</span> TND</span></li>
+                        <li>To Pay <span><span style="float: revert;" id="totalPrice">{{ total }}</span> TND</span></li>
                     </ul>
                 </div>
                 <div id="accordion" class="checkout_accordion mt--30" role="tablist">
@@ -193,13 +194,10 @@
                 "exp_year": document.getElementById("exp_year").value,
                 "cardNumber": document.getElementById("cardNumber").value
             }),
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-
-            error: (errMsg) => {
-                console.log("Return of check cred = ", errMsg.responseText)
-                alert(errMsg.responseText)
-                if (errMsg.responseText == "ok")
+            contentType: "application/json",
+            success: (response) => {
+                console.log("Return of check cred = ", response)
+                if (response == "ok")
                     $.get("http://localhost:5000/payment/checkBalance/" + document.getElementById("totalPrice").innerHTML, function (data) {
                         console.log("check price", data)
                         if (data == "true") {
@@ -232,11 +230,31 @@
             contentType: "application/json; charset=utf-8",
             dataType: "json",
 
-            error: (errMsg) => {
+            error: (response) => {
 
             }
         });
     }
 
+    function applyCoupon(){
+        let coupon = document.getElementById("coupon").value;
+        $.get("http://localhost:5000/coupon/get/" + coupon, function (data) {
+            console.log("check coupon", data)
+            if (data != "No such coupon") {
+                let obj = JSON.parse(JSON.stringify(data));
+                let tot = Number(document.getElementById("totalPrice").innerHTML) - Number(obj.amount);
+                document.getElementById("totalPrice").innerHTML = tot;
+                document.getElementById("totalPrice").innerHTML = tot;
+                document.getElementById("couponValue").innerHTML = obj.amount
+
+            }else{
+                let tot = Number(document.getElementById("totalPrice").innerHTML) + Number(document.getElementById("couponValue").innerHTML);
+                document.getElementById("totalPrice").innerHTML = tot;
+                document.getElementById("totalPrice").innerHTML = tot;
+                document.getElementById("couponValue").innerHTML = "0"
+                alert("Invalid Coupon !!!")
+            }
+        });
+    }
 </script>
 {% include 'footer.twig' %}

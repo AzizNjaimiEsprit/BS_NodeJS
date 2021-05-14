@@ -24,7 +24,7 @@ router.get('/get/:code', (req, res) => {
     database.query('SELECT * FROM coupon WHERE code = ?', [req.params.code], (err, rows) => {
         if (!err) {
             if (rows.length == 0) res.send('No such coupon');
-            else res.send(rows);
+            else res.send(rows[0]);
         }
         else res.send('Operation failed');
     });

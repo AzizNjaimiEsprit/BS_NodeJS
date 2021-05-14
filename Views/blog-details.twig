@@ -88,11 +88,10 @@
                 "postId" : document.getElementById("postId").value,
                 "body" : document.getElementById("commentBody").value,
             }),
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            error: function(errMsg) {
-                console.log("Return of add comment = ",errMsg.responseText)
-                if (errMsg.responseText == "OK")
+            contentType: "application/json",
+            success: function(response) {
+                console.log("Return of add comment = ",response)
+                if (response == "OK")
                     location.reload();
             }
         });
