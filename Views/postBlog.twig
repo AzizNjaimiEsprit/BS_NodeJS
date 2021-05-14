@@ -56,7 +56,7 @@
             type: "POST",
             url: "http://localhost:5000/blog/add",
             data: JSON.stringify({
-                "publisherId" : 3/*userId*/,
+                "publisherId" : JSON.parse(sessionStorage.currentUser).userId,
                 "title" : document.getElementById("title").value,
                 "body" : document.getElementById("body").value,
             }),

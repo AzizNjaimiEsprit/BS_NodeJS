@@ -273,7 +273,7 @@
 
     function deleteBasket(){
         let coupon = document.getElementById("coupon").value;
-        $.get("http://localhost:5000/basket/deleteUserBasket/" + 3/*userId*/, function (data) {
+        $.get("http://localhost:5000/basket/deleteUserBasket/" + JSON.parse(sessionStorage.currentUser).userId, function (data) {
             if (data == "Deleted") {
                 if (coupon)
                     deleteCoupon()

@@ -4,7 +4,7 @@ function insertIntoCard(bookId) {
         type: "POST",
         url: "http://localhost:5000/basket/add",
         data: JSON.stringify({
-            "userId": 3/*userId*/,
+            "userId": JSON.parse(sessionStorage.currentUser).userId,
             "bookId": bookId,
             "quantity": document.getElementById("qty") ? document.getElementById("qty").value :1,
         }),
@@ -21,7 +21,7 @@ function updateCard(bookId) {
         type: "POST",
         url: "http://localhost:5000/basket/update",
         data: JSON.stringify({
-            "userId": 3/*userId*/,
+            "userId": JSON.parse(sessionStorage.currentUser).userId,
             "bookId": bookId,
             "quantity": document.getElementById("qty") ? document.getElementById("qty").value :1,
         }),
@@ -72,7 +72,7 @@ function insertIntoWishList(bookId){
         type: "POST",
         url: "http://localhost:5000/wishList/add",
         data: JSON.stringify({
-            "userId": 3/*userId*/,
+            "userId": JSON.parse(sessionStorage.currentUser).userId,
             "bookId": bookId,
         }),
         contentType: "application/json",

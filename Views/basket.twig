@@ -79,7 +79,7 @@
             type: "POST",
             url: "http://localhost:5000/basket/delete",
             data: JSON.stringify({
-                "userId" : 3/*userId*/,
+                "userId" : JSON.parse(sessionStorage.currentUser).userId,
                 "bookId" : bookId
             }),
             contentType: "application/json",

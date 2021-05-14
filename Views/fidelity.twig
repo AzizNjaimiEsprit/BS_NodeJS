@@ -63,7 +63,7 @@
             type: "POST",
             url: "http://localhost:5000/coupon/add",
             data: JSON.stringify({
-                "userId" : 3/*userId*/,
+                "userId" : JSON.parse(sessionStorage.currentUser).userId,
                 "amount" : points,
             }),
             contentType: "application/json",
@@ -80,7 +80,7 @@
             type: "POST",
             url: "http://localhost:5000/fidelity/updatePoints",
             data: JSON.stringify({
-                "userId" : 3/*userId*/,
+                "userId" : JSON.parse(sessionStorage.currentUser).userId,
                 "points" : Number(points)*-1,
             }),
             contentType: "application/json",

@@ -210,7 +210,7 @@
             type: "POST",
             url: "http://localhost:5000/bookRate/addRate",
             data: JSON.stringify({
-                "userId": 4/*userId*/,
+                "userId": JSON.parse(sessionStorage.currentUser).userId,
                 "bookId": bookId,
                 "rate": index + 1,
             }),
@@ -233,7 +233,7 @@
             type: "POST",
             url: "http://localhost:5000/bookComment/addComment",
             data: JSON.stringify({
-                "userId": 4/*userId*/,
+                "userId": JSON.parse(sessionStorage.currentUser).userId,
                 "bookId": bookId,
                 "text": document.getElementById("commentBody").value,
             }),
@@ -272,7 +272,7 @@
             type: "POST",
             url: "http://localhost:5000/bookRate/updateRate",
             data: JSON.stringify({
-                "userId": 4/*userId*/,
+                "userId": JSON.parse(sessionStorage.currentUser).userId,
                 "bookId": bookId,
                 "rate": index ,
             }),
