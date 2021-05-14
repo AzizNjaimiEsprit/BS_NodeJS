@@ -2,9 +2,9 @@
 const mysql = require('mysql');
 //local mysql db connection
 const dbConn = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: '',
+    host: 'bosp87eso7g9qoiqeltj-mysql.services.clever-cloud.com',
+    user: 'ufwcrzhlecbvqmn5',
+    password: 'lFBBoU6swhBLissd766v',
     database: 'bosp87eso7g9qoiqeltj'
 });
 dbConn.connect(function (err) {

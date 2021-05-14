@@ -21,13 +21,14 @@
                                 <th class="product-remove">Category</th>
                                 <th class="product-remove">Nombre de page</th>
                                 <th class="product-remove">Author</th>
-                                <th class="product-remove">Online</th>
+                                <th class="product-remove">PDF URL </th>
 
                             </tr>
                             </thead>
                             <tbody>
                             {% for row in books %}
                             <tr>
+
                                 <td class="product-remove">{{ row.id }}</td>
                                 <td class="product-price">{{ row.title }}</a></td>
                             <td class="product-price">{{ row.price }}</td>
@@ -35,10 +36,10 @@
                             <td class="product-price">{{ row.summary | slice(0,50) }} ...</td>
                             <td class="product-price">{{ row.release_date }}</td>
                             <td class="product-quantity">{{ row.quantity }}</td>
-                            <td class="product-price">=cat</td>
+                            <td class="product-price">{{ row.name }}</td>
                                 <td class="product-quantity">{{ row.nb_page }}</td>
                                 <td class="product-quantity">{{ row.author }}</td>
-                                <td class="product-quantity">online</td>
+                                <td class="product-quantity">{{ row.url}}</td>
 
                             </tr>
                                 {% endfor %}
@@ -48,10 +49,8 @@
                 </form>
                 <div class="cartbox__btn">
                     <ul class="cart__btn__list d-flex flex-wrap flex-md-nowrap flex-lg-nowrap justify-content-between">
-                        <li><a href="#">Coupon Code</a></li>
-                        <li><a href="#">Apply Code</a></li>
-                        <li><a href="#">Update Cart</a></li>
-                        <li><a href="#">Check Out</a></li>
+                        <li><a href="#">Add Book</a></li>
+                        <li><a href="#">Update Book</a></li>
                     </ul>
                 </div>
             </div>

@@ -3,9 +3,20 @@ const router = express.Router();
 const database = require('../config/db.config');
 
 var path = require('path');
+const authController = require('../public/js/authConroller');
+var multer = require('multer')
+var storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, 'uploads/BooksImage/')
+    },
+    filename: function (req, file, cb) {
+        cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname))
+    }
+})
 
-router.post('/addBook', (req, res) => {
-    database.query("insert into book values (null,?,?,?,?,?,?,?,?,?,?,?)",
+var upload = multer({storage: storage})
+router.post('/addBook'/*,authController*/, (req, res) => {
+    database.query("insert into book values (null,?,?,?,?,?,?,?,?,'xxxx',?,?)",
         [
             req.body.title,
             req.body.price,
@@ -15,15 +26,14 @@ router.post('/addBook', (req, res) => {
             req.body.quantity,
             req.body.status,
             req.body.category_id,
-            req.body.image,
             req.body.nb_page,
             req.body.author,
         ],
         function (err, data) {
             if (err) {
-                res.send(err);
+                res.json({msg:"fail",error:err});
             } else {
-                res.send('Inserted Book' + data.insertId)
+                res.json({msg: 'ok', insertId: data.insertId})
             }
         });
 })
@@ -102,11 +112,35 @@ router.get('/library', (req, res) => {
 })
 
 router.get('/booksList', (req, res) => {
-    database.query('SELECT * FROM book ', (err, rows, fields) => {
+    database.query('SELECT b.id as idBook ,c.* , b.*, url from online_book right join book b on online_book.book_id = b.id join category c on b.category_id = c.id  ', (err, rows, fields) => {
         if (err) {
             res.render('../Views/adminBookList.twig', {books: []})
         } else {
-            res.render('../Views/adminBookList.twig', {books: rows})
+            res.render('../Views/adminBookList.twig', {books: rows,pageName: "Add Book"})
+        }
+    })
+})
+router.post('/updateImage/:bookId', upload.single('bookImage'), (req, res) => {
+    let filename = req.file.filename;
+    database.query("update book set image = ? where id = ?",
+        [
+            filename,
+            req.params.bookId
+        ],
+        function (err, data) {
+            if (err) {
+                res.send(err);
+            } else {
+                res.send('ok' )
+            }
+        });
+})
+router.get('/adminAddBook', (req, res) => {
+    database.query('SELECT * FROM category', (err, rows, fields) => {
+        if (err) {
+            res.render('../Views/adminAddBook.twig', {categories: []})
+        } else {
+            res.render('../Views/adminAddBook.twig', {categories: rows , pageName :"Add Book"})
         }
     })
 })
