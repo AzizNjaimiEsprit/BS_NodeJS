@@ -1,0 +1,109 @@
+{% include 'header.twig' %}
+
+<section class="wn_contact_area bg--white pt--80">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-12">
+                    <div class="contact-form-wrap">
+                        <div class="text-center">
+                            <h2 class="contact__title">Add Blog</h2>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="title" class="form-label">Title</label>
+                            <input type="text" class="form-control" id="title" placeholder="Title">
+                        </div>
+                        <div class="mb-3">
+                            <label for="body" class="form-label">Body</label>
+                            <textarea class="form-control" id="body" rows="8"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="formFile" class="form-label">Attachment</label>
+                            <input class="form-control" type="file" id="formFile">
+                        </div>
+                        <div class="mb-3 text-center m-5">
+                            <button type="button" onclick="saveBlog()" class="btn btn-primary">Post</button>
+                            <button type="button" onclick="uploadImage(11)" class="btn btn-secondary">Cancel</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+<script>
+
+    function controlDeSaisie(){
+        var files = $('#formFile')[0].files;
+        if (document.getElementById("title").value.length == 0){
+            alert("Please fill in the title field !")
+            return false;
+        }else if (document.getElementById("body").value.length == 0){
+            alert("Please fill in the body field !")
+            return false;
+        }else if (files.length < 0 ){
+            alert("Please select a file !")
+            return false;
+        }
+        return true;
+    }
+
+    function saveBlog(){
+        if (!controlDeSaisie()) return;
+        $.ajax({
+            type: "POST",
+            url: "http://localhost:5000/blog/add",
+            data: JSON.stringify({
+                "publisherId" : 3/*userId*/,
+                "title" : document.getElementById("title").value,
+                "body" : document.getElementById("body").value,
+            }),
+            contentType: "application/json",
+            dataType: "json",
+            success : function (resp) {
+                console.log("succ",resp)
+                var obj = JSON.parse(JSON.stringify(resp));
+                if (obj.msg == 'ok'){
+                    uploadImage(obj.insertId)
+                }
+            },
+            error: function(errMsg) {
+                alert('An error was occurred try again later !!!')
+                console.log("error",errMsg)
+            }
+        });
+    }
+
+    function uploadImage(blogId){
+        var fd = new FormData();
+        var files = $('#formFile')[0].files;
+
+        // Check file selected or not
+        if(files.length > 0 ){
+            fd.append('attachment',files[0]);
+
+            $.ajax({
+                url: 'http://localhost:5000/blog/addAttachment/'+blogId,
+                type: 'post',
+                data: fd,
+                contentType: false,
+                processData: false,
+                success: function(response){
+                   alert('file uploaded');
+                },
+                error:function (resp) {
+                    alert('file not uploaded');
+                }
+            });
+        }else{
+            alert("Please select a file.");
+        }
+    }
+
+</script>
+
+
+
+{% include 'footer.twig' %}

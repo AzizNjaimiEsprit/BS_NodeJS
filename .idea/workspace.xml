@@ -23,9 +23,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b04fed90-904e-45f3-9671-64262759d3d6" name="Default Changelist" comment="Crud Category added">
+      <change afterPath="$PROJECT_DIR$/Views/postBlog.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BlogRouter/PostsRouter.js" beforeDir="false" afterPath="$PROJECT_DIR$/BlogRouter/PostsRouter.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/adminAddBook.twig" beforeDir="false" afterPath="$PROJECT_DIR$/Views/adminAddBook.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/contact.twig" beforeDir="false" afterPath="$PROJECT_DIR$/Views/contact.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Views/header.twig" beforeDir="false" afterPath="$PROJECT_DIR$/Views/header.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Views/homePage.twig" beforeDir="false" afterPath="$PROJECT_DIR$/Views/homePage.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/db.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/config/db.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/server.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -95,15 +103,13 @@
     </key>
   </component>
   <component name="RunManager">
-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -144,7 +150,9 @@
       <workItem from="1620321654645" duration="1918000" />
       <workItem from="1620378336971" duration="608000" />
       <workItem from="1620653645261" duration="6451000" />
-      <workItem from="1620904257071" duration="12629000" />
+      <workItem from="1620904257071" duration="16450000" />
+      <workItem from="1620923870249" duration="622000" />
+      <workItem from="1620989542756" duration="5790000" />
     </task>
     <task id="LOCAL-00001" summary="update">
       <created>1619386325176</created>
@@ -188,7 +196,35 @@
       <option name="project" value="LOCAL" />
       <updated>1620916389673</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Home header fixed">
+      <created>1620917128454</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1620917128454</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Home header fixed">
+      <created>1620917179033</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1620917179033</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Home blog section added">
+      <created>1620918232363</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1620918232363</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Blogs images added">
+      <created>1620920580112</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1620920580112</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -223,53 +259,9 @@
     <MESSAGE value="Crud Category added" />
     <MESSAGE value="Admin side added" />
     <MESSAGE value="Updated" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated" />
-  </component>
-  <component name="WindowStateProjectService">
-    <state x="718" y="327" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1620912787936">
-      <screen x="0" y="0" width="1920" height="1050" />
-    </state>
-    <state x="718" y="326" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1048@0.0.1920.1048" timestamp="1620841474757" />
-    <state x="718" y="327" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1050@0.0.1920.1050" timestamp="1620912787936" />
-    <state x="92" y="92" width="1736" height="866" key="DiffContextDialog" timestamp="1620914488525">
-      <screen x="0" y="0" width="1920" height="1050" />
-    </state>
-    <state x="92" y="92" width="1736" height="866" key="DiffContextDialog/0.0.1920.1050@0.0.1920.1050" timestamp="1620914488525" />
-    <state width="1899" height="261" key="GridCell.Tab.0.bottom" timestamp="1620916481871">
-      <screen x="0" y="0" width="1920" height="1050" />
-    </state>
-    <state width="1899" height="244" key="GridCell.Tab.0.bottom/0.0.1920.1048@0.0.1920.1048" timestamp="1620856395229" />
-    <state width="1899" height="261" key="GridCell.Tab.0.bottom/0.0.1920.1050@0.0.1920.1050" timestamp="1620916481871" />
-    <state width="1899" height="261" key="GridCell.Tab.0.center" timestamp="1620916481871">
-      <screen x="0" y="0" width="1920" height="1050" />
-    </state>
-    <state width="1899" height="244" key="GridCell.Tab.0.center/0.0.1920.1048@0.0.1920.1048" timestamp="1620856395229" />
-    <state width="1899" height="261" key="GridCell.Tab.0.center/0.0.1920.1050@0.0.1920.1050" timestamp="1620916481871" />
-    <state width="1899" height="261" key="GridCell.Tab.0.left" timestamp="1620916481871">
-      <screen x="0" y="0" width="1920" height="1050" />
-    </state>
-    <state width="1899" height="244" key="GridCell.Tab.0.left/0.0.1920.1048@0.0.1920.1048" timestamp="1620856395229" />
-    <state width="1899" height="261" key="GridCell.Tab.0.left/0.0.1920.1050@0.0.1920.1050" timestamp="1620916481871" />
-    <state width="1899" height="261" key="GridCell.Tab.0.right" timestamp="1620916481871">
-      <screen x="0" y="0" width="1920" height="1050" />
-    </state>
-    <state width="1899" height="244" key="GridCell.Tab.0.right/0.0.1920.1048@0.0.1920.1048" timestamp="1620856395229" />
-    <state width="1899" height="261" key="GridCell.Tab.0.right/0.0.1920.1050@0.0.1920.1050" timestamp="1620916481871" />
-    <state x="797" y="227" key="RollbackChangesDialog" timestamp="1620913375613">
-      <screen x="0" y="0" width="1920" height="1050" />
-    </state>
-    <state x="797" y="227" key="RollbackChangesDialog/0.0.1920.1050@0.0.1920.1050" timestamp="1620913375613" />
-    <state x="552" y="258" key="Vcs.Push.Dialog.v2" timestamp="1620916391865">
-      <screen x="0" y="0" width="1920" height="1050" />
-    </state>
-    <state x="552" y="258" key="Vcs.Push.Dialog.v2/0.0.1920.1050@0.0.1920.1050" timestamp="1620916391865" />
-    <state x="464" y="102" width="788" height="823" key="find.popup" timestamp="1620914682805">
-      <screen x="0" y="0" width="1920" height="1050" />
-    </state>
-    <state x="464" y="102" width="788" height="823" key="find.popup/0.0.1920.1050@0.0.1920.1050" timestamp="1620914682805" />
-    <state x="623" y="227" width="672" height="678" key="search.everywhere.popup" timestamp="1620914956142">
-      <screen x="0" y="0" width="1920" height="1050" />
-    </state>
-    <state x="623" y="227" width="672" height="678" key="search.everywhere.popup/0.0.1920.1050@0.0.1920.1050" timestamp="1620914956142" />
+    <MESSAGE value="Home header fixed" />
+    <MESSAGE value="Home blog section added" />
+    <MESSAGE value="Blogs images added" />
+    <option name="LAST_COMMIT_MESSAGE" value="Blogs images added" />
   </component>
 </project>

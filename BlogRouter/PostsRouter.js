@@ -3,39 +3,53 @@ const router = express.Router();
 const database = require('../config/db.config');
 const authController = require('../public/js/authConroller');
 let yyyymmdd = require("yyyy-mm-dd");
-var multer  = require('multer')
+var multer = require('multer')
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, 'uploads/BlogsImages/')
     },
     filename: function (req, file, cb) {
-        cb(null, file.fieldname + '-' + Date.now()+path.extname(file.originalname))
+        cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname))
     }
 })
 
-var upload = multer({ storage: storage })
+var upload = multer({storage: storage})
 var path = require('path');
 
-router.get('/',(req, res) => {
+router.get('/post', (req, res) => {
+    res.render('../Views/postBlog.twig', {rows: [], pageName: "Post Blog"})
+})
+
+router.get('/', (req, res) => {
     database.query('SELECT *,p.id as blogId FROM post p join user u on p.publisher_id = u.id', (err, rows, fields) => {
         if (err) {
-            res.render('../Views/blog.twig',{rows : [],pageName : "Blogs"})
+            res.render('../Views/blog.twig', {rows: [], pageName: "Blogs"})
         } else {
-            res.render('../Views/blog.twig',{rows : rows,pageName : "Blogs"})
+            res.render('../Views/blog.twig', {rows: rows, pageName: "Blogs"})
         }
     })
 })
 
-router.get('/blogDetails/:blogId',(req, res) => {
-    database.query('SELECT *,p.id as blogId FROM post p join user u on p.publisher_id = u.id where p.id=?',[req.params.blogId], (err, rows, fields) => {
+router.get('/blogDetails/:blogId', (req, res) => {
+    database.query('SELECT *,p.id as blogId FROM post p join user u on p.publisher_id = u.id where p.id=?', [req.params.blogId], (err, rows, fields) => {
         if (err || rows.length == 0) {
-            res.render('../Views/blog-details.twig',{blog : [],pageName : "Blog Details"})
+            res.render('../Views/blog-details.twig', {blog: [], pageName: "Blog Details"})
         } else {
             database.query('SELECT * FROM post_comment pc join user u on pc.publisher_id = u.id WHERE post_id = ?', [rows[0].blogId], (err, comments, fields) => {
                 if (err || comments.length == 0) {
-                    res.render('../Views/blog-details.twig',{blog : rows[0],comments : [],userId : req.session.currentUser.userId ,pageName : "Blog Details"})
+                    res.render('../Views/blog-details.twig', {
+                        blog: rows[0],
+                        comments: [],
+                        userId: req.session.currentUser.userId,
+                        pageName: "Blog Details"
+                    })
                 } else {
-                    res.render('../Views/blog-details.twig',{blog : rows[0],comments : comments,userId : req.session.currentUser.userId,pageName : "Blog Details"})
+                    res.render('../Views/blog-details.twig', {
+                        blog: rows[0],
+                        comments: comments,
+                        userId: req.session.currentUser.userId,
+                        pageName: "Blog Details"
+                    })
                 }
             })
         }
@@ -43,7 +57,7 @@ router.get('/blogDetails/:blogId',(req, res) => {
 })
 
 
-router.post('/addAttachment/:postId',upload.single('attachment'), function (req, res, next) {
+router.post('/addAttachment/:postId', upload.single('attachment'), function (req, res, next) {
     let filename = req.file.filename;
     database.query("insert into attachment values (?,?)",
         [
@@ -59,16 +73,15 @@ router.post('/addAttachment/:postId',upload.single('attachment'), function (req,
         });
 })
 
-router.get('/getPostAttachment/:postId',((req, res) => {
+router.get('/getPostAttachment/:postId', ((req, res) => {
     database.query('SELECT * FROM attachment WHERE post_id = ?', [req.params.postId], (err, rows, fields) => {
         if (err) {
-            res.sendFile(path.resolve(__dirname+'/../uploads/no_image.png'));
+            res.sendFile(path.resolve(__dirname + '/../uploads/no_image.png'));
         } else {
-            if(rows.length == 0){
-                res.sendFile(path.resolve(__dirname+'/../uploads/no_image.png'));
-            }
-            else
-                res.sendFile(path.resolve(__dirname+'/../uploads/BlogsImages/'+rows[0].file_name));
+            if (rows.length == 0) {
+                res.sendFile(path.resolve(__dirname + '/../uploads/no_image.png'));
+            } else
+                res.sendFile(path.resolve(__dirname + '/../uploads/BlogsImages/' + rows[0].file_name));
             //res.send(rows)
         }
     })
@@ -84,9 +97,9 @@ router.post('/add', (req, res) => {
         ],
         function (err, data) {
             if (err) {
-                res.send("error" + err);
+                res.json({msg: 'fail', err: err})
             } else {
-                res.send('Inserted' + data.insertId)
+                res.json({msg: 'ok', insertId: data.insertId})
             }
         });
 })
@@ -119,8 +132,6 @@ router.get('/user/get/:userId', (req, res) => {
         }
     })
 })
-
-
 
 
 router.get('/delete/:id', (req, res) => {

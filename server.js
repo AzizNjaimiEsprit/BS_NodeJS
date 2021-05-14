@@ -35,7 +35,10 @@ app.get("/home",(req, res) => {
     })
 })
 app.get("/contact",(req, res) => {
-    res.render('../Views/adminAddBook.twig', {pageName: "Contact Us"} )
+    res.render('../Views/contact.twig', {pageName: "Contact Us"} )
+})
+app.get("/test",(req, res) => {
+    res.render('../Views/postBlog.twig', {pageName: "Contact Us"} )
 })
 app.use(function(req, res, next) {
     if (req.originalUrl == '/'){
