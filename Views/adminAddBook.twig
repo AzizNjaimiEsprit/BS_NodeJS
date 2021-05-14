@@ -6,37 +6,64 @@
         <div class="row">
             <div class="col-lg-12 col-12">
                 <div class="contact-form-wrap">
-                    <h2 class="contact__title">Add Book </h2>
-                    <form id="contact-form" action="mail.php" method="post">
-                        <div class="single-contact-form space-between">
-                            <input type="text" name="Title" placeholder="Title*">
-                            <input type="text" name="Price" placeholder="Price*">
+                    <br id="contact-form form-inline" action="mail.php" method="post">
+                    <div class="single-contact-form space-between">
+                        <input type="text" id="Title"name="Title" placeholder="Title*">
+                        <input type="text" id="Price" name="Price" placeholder="Price*">
+                    </div>
+                    <div class="single-contact-form space-between">
+                        <input type="text" id="pub_house" name="pub_house" placeholder="Published House*">
+                        <input type="text" id="nb_page" name="nb_page" placeholder="Nombre de pages*">
+                    </div>
+
+
+                    <div class="single-contact-form space-between ">
+                        <input type="text" id="author" name="author" placeholder="Author(s)*">
+                        <input type="text" id="quantity" name="quantity" placeholder="Quantity*">
+                    </div>
+
+                    <div class="single-contact-form message">
+                        <textarea name="summary" id="summary" placeholder="Type your summary here.."></textarea>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-check col-6 contact-form-wrap ">
+                            <input class="form-check-input contact-form-wrap" type="checkbox" value="" id="online"
+                                   onchange="onlineBookVersion()">
+                            <label class="form-check-label" for="online">OnlineBook</label>
                         </div>
-                        <div class="single-contact-form space-between">
-                            <input type="text" name="pub_house" placeholder="Published House*">
-                            <input type="text" name="nb_page" placeholder="Nombre de pages*">
+
+                        <select id="cat">
+                            <option value="none">None</option>
+                            {% for c in categories %}
+                                <option value="{{ c.id }}">{{ c.name }}</option>
+                            {% endfor %}
+                        </select>
+                        <p>{{ }}</p>
+                    </div>
+                    </br>
+                    <div class="form-group row">
+                        <label for="example-datetime-local-input" class="col-2 col-form-label">Release Date </label>
+                        <div class="col-10">
+                            <input class="form-control" type="date" name="release_date"
+                                   id="release_date">
                         </div>
-                        <div class="single-contact-form space-between ">
-                            <input type="text" name="author" placeholder="Author(s)*">
+                    </div>
+                    <div class="single-contact-form space-between ">
+                        <div class="mb-5">
+                            <label for="bookImage" class="form-label">Book Image</label>
                             <input type="file" class="form-control-file" id="bookImage">
                         </div>
 
-                        <div class="single-contact-form message">
-                            <textarea name="summary" placeholder="Type your summary here.."></textarea>
-                        </div>
-
-
-                        <div class="form-row">
-                            <div class="form-check col-6">
-                                <input class="form-check-input" type="checkbox" value="" id="online"
-                                       onchange="onlineBookVersion()">
-                                <label class="form-check-label" for="online">OnlineBook</label>
-                            </div>
+                        <div class="mb-5">
+                            <label for="bookPDF" class="form-label">Book PDF</label>
                             <input type="file" class="form-control-file" id="bookPDF">
                         </div>
-                        <div class="contact-btn">
-                            <button type="submit">Send Email</button>
-                        </div>
+                    </div>
+
+                    <div class="contact-btn col-md-12  mb-3 text-center m-5">
+                        <button type="text" onclick="saveBook()">Save</button>
+                        <button type="text" onclick="location.reload()">Cancel</button>
+                    </div>
                     </form>
                 </div>
 
@@ -47,13 +74,140 @@
 </section>
 
 <script>
-    document.getElementById("bookPDF").style.visibility = "hidden"
-    function onlineBookVersion() {
-        if (document.getElementById("online").checked) {
-            document.getElementById("bookPDF").style.visibility = "visible"
+        document.getElementById("bookPDF").style.visibility = "hidden"
+
+       function onlineBookVersion() {
+           if (document.getElementById("online").checked) {
+               document.getElementById("bookPDF").style.visibility = "visible"
+           } else {
+               document.getElementById("bookPDF").style.visibility = "hidden"
+           }
+       }
+
+    function saveBook() {
+        if (!controlDeSaisie()) return;
+        $.ajax({
+            type: "POST",
+            url: "http://localhost:5000/book/addBook",
+            data: JSON.stringify({
+                "title": document.getElementById("Title").value,
+                "price": document.getElementById("Price").value,
+                "pub_house": document.getElementById("pub_house").value,
+                "summary": document.getElementById("summary").value,
+                "release_date": document.getElementById("release_date").value,
+                "quantity": document.getElementById("quantity").value,
+                "status": "xxx",
+                "category_id": document.getElementById("cat").value,
+                "nb_page": document.getElementById("nb_page").value,
+                "author": document.getElementById("author").value,
+            }),
+            contentType: "application/json",
+            dataType: "json",
+            success: function (resp) {
+                console.log("succ", resp)
+                var obj = JSON.parse(JSON.stringify(resp));
+                if (obj.msg == 'ok') {
+                    uploadBookImage(obj.insertId)
+                    uploadBookPDF(obj.insertId)
+                }
+            },
+            error: function (response) {
+                toastr.error('An error was occurred try again later !!!')
+                console.log("error", response)
+            }
+        });
+    }
+
+    function uploadBookImage(bookId) {
+        var fd = new FormData();
+        var files = $('#bookImage')[0].files;
+
+        // Check file selected or not
+        if (files.length > 0) {
+            fd.append('bookImage', files[0]);
+
+            $.ajax({
+                url: 'http://localhost:5000/book/updateImage/'+bookId,
+                type: 'post',
+                data: fd,
+                contentType: false,
+                processData: false,
+                success: function (response) {
+                    toastr.success('file uploaded');
+                },
+                error: function (resp) {
+                    toastr.warning('file not uploaded');
+                }
+            });
         } else {
-            document.getElementById("bookPDF").style.visibility = "hidden"
+            toastr.warning("Please select a file.");
         }
+    }
+
+    function uploadBookPDF(bookId) {
+        var fd = new FormData();
+        var files = $('#bookPDF')[0].files;
+
+        // Check file selected or not
+        if (files.length > 0) {
+            fd.append('bookPDF', files[0]);
+
+            $.ajax({
+                url: 'http://localhost:5000/onlineBook/addBook/'+bookId ,
+                type: 'post',
+                data: fd,
+                contentType: false,
+                processData: false,
+                success: function (response) {
+                    toastr.success('file uploaded');
+                },
+                error: function (resp) {
+                    toastr.warning('file not uploaded');
+                }
+            });
+        } else {
+            toastr.warning("Please select a file.");
+        }
+    }
+
+    function controlDeSaisie(){
+        var filesI = $('#bookImage')[0].files;
+        var filesP = $('#bookPDF')[0].files;
+        if (document.getElementById("Title").value.length == 0){
+            toastr.warning("Please fill in the title field !")
+            return false;
+        }else if (document.getElementById("Price").value.length == 0){
+            toastr.warning("Please fill in the price field !")
+            return false;
+        }else if (document.getElementById("pub_house").value.length == 0){
+            toastr.warning("Please fill in the published house field !")
+            return false;
+        }else if (document.getElementById("summary").value.length == 0){
+            toastr.warning("Please fill in the summary field !")
+            return false;
+        }else if (document.getElementById("release_date").value.length == 0){
+            toastr.warning("Please fill in the release_date field !")
+            return false;
+        }else if (document.getElementById("quantity").value.length == 0){
+            toastr.warning("Please fill in the quantity field !")
+            return false;
+        }else if (document.getElementById("cat").value.length == 0){
+            toastr.warning("Please fill in the categories field !")
+            return false;
+        }else if (document.getElementById("nb_page").value.length == 0){
+            toastr.warning("Please fill in the page number field !")
+            return false;
+        }else if (document.getElementById("author").value.length == 0){
+            toastr.warning("Please fill in the author field !")
+            return false;
+        }else if (filesI.length < 0 ){
+            toastr.warning("Please select an image !")
+            return false;
+        } else if (filesP.length < 0 ){
+            toastr.warning("Please select a PDF !")
+            return false;
+        }
+        return true;
     }
 </script>
 

@@ -1,20 +1,34 @@
 const express = require('express');
 const router = express.Router();
 const database = require('../config/db.config');
+const authController = require('../public/js/authConroller');
+var multer = require('multer')
+var storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, 'uploads/BooksPDF/')
+    },
+    filename: function (req, file, cb) {
+        cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname))
+    }
+})
+
+var upload = multer({storage: storage})
 var path = require('path');
 
-router.post('/addBook', (req, res) => {
+
+router.post('/addBook/:bookId',upload.single('bookPDF'), (req, res) => {
+    let filename = req.file.filename;
     database.query("insert into online_book values (null,?,?)",
         [
-            req.body.url,
-            req.body.book_id
+            filename,
+            req.params.bookId
 
         ],
         function (err, data) {
             if (err) {
                 res.send(err);
             } else {
-                res.send('Inserted Online Book' + data.insertId)
+                res.send('ok' + data.insertId)
             }
         });
 })
@@ -56,4 +70,7 @@ router.post('/deleteOnlineBook', (req, res) => {
 router.get('/getBookPDF/:bookId', ((req, res) => {
     res.sendFile(path.resolve(__dirname + '/../uploads/BooksPDF/' + req.params.bookId+'.pdf'));
 }))
+
+
+
 module.exports = router;
