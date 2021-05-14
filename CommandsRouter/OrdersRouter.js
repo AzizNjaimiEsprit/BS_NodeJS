@@ -77,7 +77,7 @@ router.post('/add', (req, res) => {
                             }
                         });
                     }
-                    res.send("Done" + data.insertId);
+                    res.send("Done");
                 }
             })
         }

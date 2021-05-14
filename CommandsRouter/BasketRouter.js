@@ -62,6 +62,19 @@ router.get('/getCount/:bookId', (req, res) => {
     })
 })
 
+router.get('/deleteUserBasket/:userId', (req, res) => {
+    database.query("delete from basket where user_id = ?",
+        [
+            req.params.userId,
+        ],
+        function (err, data) {
+            if (err) {
+                res.send(err);
+            } else {
+                res.send("Deleted");
+            }
+        });
+})
 
 router.post('/delete', (req, res) => {
     database.query("delete from basket where user_id = ? and book_id = ?",

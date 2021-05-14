@@ -218,7 +218,7 @@
             success: function (response) {
                 console.log("Return of add book rate  = ", response)
                 if (response == "ok")
-                    alert("Rate added successfully")
+                    toastr.success("Rate added successfully")
             }
         });
         //element.setAttribute('src', "/images/png-img/full.png");
@@ -280,7 +280,7 @@
             success: function (response) {
                 console.log("Return of add book rate  = ", response)
                 if (response == "ok")
-                    alert("Rate updated successfully")
+                    toastr.success("Rate updated successfully")
             }
         });
     }

@@ -38,13 +38,13 @@
     function controlDeSaisie(){
         var files = $('#formFile')[0].files;
         if (document.getElementById("title").value.length == 0){
-            alert("Please fill in the title field !")
+            toastr.warning("Please fill in the title field !")
             return false;
         }else if (document.getElementById("body").value.length == 0){
-            alert("Please fill in the body field !")
+            toastr.warning("Please fill in the body field !")
             return false;
         }else if (files.length < 0 ){
-            alert("Please select a file !")
+            toastr.warning("Please select a file !")
             return false;
         }
         return true;
@@ -70,7 +70,7 @@
                 }
             },
             error: function(response) {
-                alert('An error was occurred try again later !!!')
+                toastr.error('An error was occurred try again later !!!')
                 console.log("error",response)
             }
         });
@@ -91,14 +91,14 @@
                 contentType: false,
                 processData: false,
                 success: function(response){
-                   alert('file uploaded');
+                    toastr.success('file uploaded');
                 },
                 error:function (resp) {
-                    alert('file not uploaded');
+                    toastr.warning('file not uploaded');
                 }
             });
         }else{
-            alert("Please select a file.");
+            toastr.warning("Please select a file.");
         }
     }
 

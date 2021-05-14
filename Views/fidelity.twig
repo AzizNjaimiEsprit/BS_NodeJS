@@ -13,7 +13,7 @@
                         <div class="col-6" style="font-size: 30px;padding-left: 100px;">
                             <div>
                                 <p style="margin-bottom: 60px; margin-top: 80px;">You current balance : {{ card.points }} {{ card.points <= 1 ? 'Point' : 'Points' }}</p>
-                                <button style="font-size: 24px;" type="button" class="btn btn-primary">Convert</button>
+                                <button style="font-size: 24px;" data-toggle="modal" data-target="#exampleModalCenter" type="button" class="btn btn-primary">Convert</button>
                             </div>
                         </div>
                         <div class="col">
@@ -26,5 +26,71 @@
         </div>
     </div>
 </div>
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Choose the amount</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="input-group mb-3">
+                    <input id="maxPoints" value="{{ card.points }}" type="number" hidden>
+                    <input id="amount" type="number" min="1" max="{{ card.points }}" value="{{ card.points }}" class="form-control" placeholder="Amount">
+                    <div class="input-group-append">
+                        <button onclick="convertPoints()" class="btn btn-outline-secondary" type="button">Confirm</button>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button onclick="convertPoints()" type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function convertPoints (){
+        let points = document.getElementById("amount").value;
+        let maxPoints = document.getElementById("maxPoints").value;
+        if (Number(points) > Number(maxPoints)){
+            toastr.warning("The entered amount is higher than you current balance !!!")
+            return
+        }
+        $.ajax({
+            type: "POST",
+            url: "http://localhost:5000/coupon/add",
+            data: JSON.stringify({
+                "userId" : 3/*userId*/,
+                "amount" : points,
+            }),
+            contentType: "application/json",
+            success: function(response) {
+                console.log("Return coupon generation = ",response)
+                if (response == "Coupon added successfuly")
+                    doPointsUpdate()
+            }
+        });
+    }
+    function doPointsUpdate(){
+        let points = document.getElementById("amount").value;
+        $.ajax({
+            type: "POST",
+            url: "http://localhost:5000/fidelity/updatePoints",
+            data: JSON.stringify({
+                "userId" : 3/*userId*/,
+                "points" : Number(points)*-1,
+            }),
+            contentType: "application/json",
+            success: function(response) {
+                console.log("Return coupon generation = ",response)
+                if (response == "Updated")
+                    location.reload();
+            }
+        });
+    }
+</script>
 
 {% include 'footer.twig' %}

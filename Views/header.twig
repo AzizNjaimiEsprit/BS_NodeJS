@@ -24,10 +24,23 @@
     <!-- Cusom css -->
     <link rel="stylesheet" href="/css/custom.css">
 
+{#    Toaster#}
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet" />
+
+
     <!-- Modernizer js -->
     <script src="/js/vendor/modernizr-3.5.0.min.js"></script>
-    <script src="/js/webServicesCalls.js"></script>
     <script src="/js/vendor/jquery-3.2.1.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <script>
+        toastr.options = {
+            "closeButton": true,
+            "positionClass": "toast-bottom-full-width",
+            "preventDuplicates": true,
+            "progressBar": true,
+        }
+    </script>
+
 </head>
 <body>
 <!--[if lte IE 9]>

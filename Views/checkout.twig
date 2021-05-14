@@ -173,7 +173,7 @@
             let champs = ['fullName', 'address', 'zipCode', 'numTel', 'email', 'exp_month', 'exp_year', 'cardNumber'];
             champs.forEach(champ => {
                 if (document.getElementById(champ).value.length == 0) {
-                    alert("Merci de completer le champ " + champ);
+                    toastr.warning("Merci de completer le champ " + champ);
                     throw BreakException
                 }
             })
@@ -203,11 +203,11 @@
                         if (data == "true") {
                             doOrderSave()
                         }else{
-                            alert("You don't have enough money !!!")
+                            toastr.warning("You don't have enough money !!!")
                         }
                     });
                 else{
-                    alert("Please check your payment credentials !!!")
+                    toastr.warning("Please check your payment credentials !!!")
                 }
             }
 
@@ -225,19 +225,20 @@
                 "address": document.getElementById("address").value,
                 "zipCode": Number(document.getElementById("zipCode").value),
                 "numTel": document.getElementById("numTel").value,
-                "status": "Non Traite"
+                "status": "untreated"
             }),
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-
-            error: (response) => {
-
+            contentType: "application/json",
+            success:  (response) => {
+                if (response == "Done"){
+                    deleteBasket()
+                }
             }
         });
     }
 
     function applyCoupon(){
         let coupon = document.getElementById("coupon").value;
+        if (!coupon) return
         $.get("http://localhost:5000/coupon/get/" + coupon, function (data) {
             console.log("check coupon", data)
             if (data != "No such coupon") {
@@ -246,15 +247,45 @@
                 document.getElementById("totalPrice").innerHTML = tot;
                 document.getElementById("totalPrice").innerHTML = tot;
                 document.getElementById("couponValue").innerHTML = obj.amount
+                toastr.success('Coupon applied successfully')
 
             }else{
                 let tot = Number(document.getElementById("totalPrice").innerHTML) + Number(document.getElementById("couponValue").innerHTML);
                 document.getElementById("totalPrice").innerHTML = tot;
                 document.getElementById("totalPrice").innerHTML = tot;
                 document.getElementById("couponValue").innerHTML = "0"
-                alert("Invalid Coupon !!!")
+                toastr.warning('Invalid Coupon Code')
+
             }
         });
+    }
+
+    function deleteCoupon(){
+        let coupon = document.getElementById("coupon").value;
+        if (!coupon) return
+        $.get("http://localhost:5000/coupon/delete/" + coupon, function (data) {
+            console.log("delete coupon", data)
+            if (data == "Coupon deleted successfuly") {
+                redirectToMoyOrders()
+            }
+        });
+    }
+
+    function deleteBasket(){
+        let coupon = document.getElementById("coupon").value;
+        $.get("http://localhost:5000/basket/deleteUserBasket/" + 3/*userId*/, function (data) {
+            if (data == "Deleted") {
+                if (coupon)
+                    deleteCoupon()
+                else
+                    redirectToMoyOrders()
+            }
+        });
+    }
+
+    function redirectToMoyOrders(){
+        toastr.success("You order has been saved successfully.")
+        window.location.href = "/order/myOrders/open";
     }
 </script>
 {% include 'footer.twig' %}

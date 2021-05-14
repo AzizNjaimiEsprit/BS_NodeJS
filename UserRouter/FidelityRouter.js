@@ -30,7 +30,7 @@ router.post('/create', (req, res) => {
         });
 })
 
-router.post('/addPoints', (req, res) => {
+router.post('/updatePoints', (req, res) => {
     database.query("update fidelity_cards set points = points + ? where user_id = ?",
         [
             req.body.points,

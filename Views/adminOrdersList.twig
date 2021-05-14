@@ -1,7 +1,6 @@
 ﻿{% include 'header.twig' %}
 <script>
     function updateStatus(orderId){
-        alert(document.getElementById("selectStatus"+orderId).value)
         $.ajax({
             type: "POST",
             url: "http://localhost:5000/order/updateStatus",

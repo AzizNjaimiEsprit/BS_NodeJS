@@ -5,7 +5,7 @@ const codeGenerator = require('./CodeGenerator')
 
 // Add new coupon
 router.post('/add', (req, res) => {
-    code = codeGenerator.getCouponCode(12);
+    code = codeGenerator.getCouponCode(6);
 
     database.query('INSERT INTO coupon VALUES (?,?,?)', [code, req.body.amount, req.body.userId], (err, rows) => {
         if (!err) {
