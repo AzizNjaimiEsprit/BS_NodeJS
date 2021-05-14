@@ -41,8 +41,9 @@
         }
         function hideShowAdminMenu(){
             var data = JSON.parse(sessionStorage.getItem('currentUser'))
+            console.log(data)
             let x = document.getElementById("adminMenu");
-            if (Number(data.role) == 0){
+            if ( !data || Number(data.role) == 0){
                 x.style.visibility = "hidden";
             }else{
                 x.style.visibility = "visible";

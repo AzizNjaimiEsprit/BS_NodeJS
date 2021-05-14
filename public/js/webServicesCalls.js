@@ -47,6 +47,10 @@ function checkIfBookIsInBasket(bookId,add,update){
 }
 
 function addToCard(bookId) {
+    if (!checkUserLoggedIn()){
+        alert("User Not logged in !!!!")
+        return
+    }
     checkIfBookIsInBasket(bookId,insertIntoCard,updateCard);
 }
 
@@ -65,6 +69,10 @@ function checkIfBookIsInWishList(bookId,add){
 }
 
 function addToWishList(bookId) {
+    if (!checkUserLoggedIn()){
+        alert("User Not logged in !!!!")
+        return
+    }
     checkIfBookIsInWishList(bookId,insertIntoWishList);
 }
 function insertIntoWishList(bookId){
@@ -84,6 +92,9 @@ function insertIntoWishList(bookId){
     });
 }
 
+function checkUserLoggedIn(){
+    return sessionStorage.currentUser
+}
 
 
 

@@ -1,8 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const database = require('../config/db.config');
+const authController = require('../public/js/authConroller');
 
-router.post('/add', (req, res) => {
+router.post('/add',(req, res) => {
     database.query("insert into wishlist values (?,?)",
         [
             req.body.bookId,
@@ -17,7 +18,7 @@ router.post('/add', (req, res) => {
         });
 })
 
-router.get('/', (req, res) => {
+router.get('/', authController,(req, res) => {
     database.query('SELECT * FROM wishlist bs join book bk on bs.book_id = bk.id  WHERE user_id = ?', [req.session.currentUser.userId], (err, rows, fields) => {
         res.render('../Views/wishlist.twig',{rows : rows,pageName : 'WishList'})
     })

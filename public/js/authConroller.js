@@ -6,7 +6,6 @@ function isAuthenticated(req, res, next) {
         if(true){ //adminCheck
             return next();
         }
-
     }else{
         res.redirect('/account/loginPage');
     }
