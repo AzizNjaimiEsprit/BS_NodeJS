@@ -6186,3 +6186,18 @@ a.checkout__title {
   text-transform: capitalize;
   font-size: 12px;
 }
+
+
+.col {
+  width: 100%;
+}
+.my_account_area {
+  width: 100%;
+  text-align: center;
+}
+
+.my__account__wrapper {
+  display: inline-block;
+  margin: 0 auto;
+  width: 50%;
+}

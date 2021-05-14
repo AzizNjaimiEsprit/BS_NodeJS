@@ -1,44 +1,126 @@
 const express = require('express');
 const router = express.Router();
 const database = require('../config/db.config');
+const bcrypt = require('bcrypt');
+const nodeMailer = require('nodemailer');
 
-router.get('/login/:login',(req, res) => {
-    database.query('SELECT *, id as userId FROM user WHERE login = ?', [req.params.login], (err, rows, fields) => {
-        if (!err) {
-            if (rows.length > 0){
-                req.session.currentUser = rows[0];
-                res.render('../Views/login.twig',{ currentUser : req.session.currentUser })
-            }
-            else
-                res.send('No such login found');
-        } else {
-            res.send('Database operation failed');
-        }
-    });
-})
+// Redirect to login page
 
-
-// Add new user to database
-router.post('/add', (req, res) => {
-    database.query('INSERT INTO user VALUES (NULL,?,?,?,?,?,?,?,?)', [
-        req.body.fullName,
-        req.body.email,
-        req.body.phoneNumber,
-        req.body.login,
-        req.body.password,
-        req.body.role,
-        req.body.adress,
-        req.body.zipCode
-    ], (err, rows) => {
-        if (!err) res.send('User added successfuly');
-        else {
-            res.send('Adding user failed');
-            console.log(err);
-        }
-    })
+router.get('/', (req, res) => {
+    res.render('../Views/my-account.twig');
 });
 
 
+// Add new user to database
+
+
+async function registerUser (req, res) {
+    try{
+        const hashedPwd = await bcrypt.hash(req.body.password, 10);
+        database.query('INSERT INTO user VALUES (NULL,?,?,?,?,?,?,?,?)', [
+            req.body.fullName,
+            req.body.email,
+            req.body.phoneNumber,
+            req.body.login,
+            hashedPwd,
+            req.body.role,
+            req.body.adress,
+            req.body.zipCode
+        ], (err, rows) => {
+            if (!err) res.send('User added successfuly');
+            else {
+                res.send('Adding user failed');
+                console.log(err);
+            }
+        })    
+    } catch {
+        res.status(500).send();
+    }
+    
+}
+
+
+
+router.post('/add', async (req, res) => registerUser(req, res));
+
+router.post('/register', async (req, res) => registerUser(req, res));
+
+// Get user by login
+
+function getUserByLogin (req, res) {
+
+    return new Promise((resolve, reject) => {
+        database.query('SELECT *, id as userId FROM user WHERE login = ?', [req.body.login], (err, rows, fields) => {
+            if (!err) {
+                resolve(rows);
+            } else {
+                reject(err);
+            }
+        });
+    });
+}
+
+router.post('/login',async (req, res) => {
+    console.log("Endpoint is called right here");
+    console.log(req.body);
+    const result = await getUserByLogin(req, res);
+    console.log('the query result : ');
+    console.log(result);
+    if (result.length == 0) return res.status(200).send({
+        result: 0,
+        message: 'Cannot find User with this login'
+    });
+    try {
+        if (await bcrypt.compare(req.body.password, result[0].password)) { 
+            req.session.currentUser = result[0];
+            res.status(200).send({
+                result: 1,
+                message: 'Login success',
+                data: result[0]
+            });
+        }
+        else res.status(200).send({
+            result: 0,
+            message: 'Wrong password'
+        });
+    } catch {
+        res.status(500).send('Some error here');
+    }
+    console.log("Endpoint call is ended right here");
+});
+
+const transporter = nodeMailer.createTransport({
+    service: 'gmail',
+    auth: {
+        user: 'mahdi.riahi@esprit.tn',
+        pass: ''
+    }
+});
+
+router.post('/sendCode',async (req, res) => {
+    const result = await getUserByLogin(req, res);
+    if (result.length == 0) return res.status(400).send('Cannot find User with this login');
+    else {
+        let code = require('crypto').randomBytes(15).toString('hex');
+        const email = result[0].email;
+        let mailOptions = {
+            from: 'mahdi.riahi@esprit.tn',
+            to: email,
+            subject: 'Password reset request',
+            text: `You requested a password change for your bookstore account\nCode : ${code}`
+        }
+        transporter.sendMail(mailOptions, (err, infos) => {
+            if (err) res.status(200).send();
+            else res.status(400).send("Verification code has been sent to you gmail account please write it down so we can verify it's you")
+        });
+    }
+});
+
+router.post('/verifyCode', (req, res) => {
+    const userCode = req.body.code;
+    const email = req.body.email;
+    
+});
 
 // Update existing user in the database
 
@@ -70,18 +152,7 @@ router.post('/update/:id', (req, res) => {
     })
 });
 
-// Get user by login
 
-router.get('/get/login/:login', (req, res) => {
-    database.query('SELECT * FROM user WHERE login = ?', [req.params.login], (err, rows, fields) => {
-        if (!err) {
-            if (rows.length > 0) res.send(rows);
-            else res.send('No such login found');
-        } else {
-            res.send('Database operation failed');
-        }
-    });
-});
 
 // Get user by id
 

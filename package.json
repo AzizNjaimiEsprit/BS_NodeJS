@@ -10,6 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^5.0.1",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
@@ -19,6 +20,7 @@
     "https": "^1.0.0",
     "multer": "^1.4.2",
     "mysql": "^2.18.1",
+    "nodemailer": "^6.6.0",
     "pdfjs": "^2.4.3",
     "request": "^2.88.2",
     "stripe": "^8.145.0",
