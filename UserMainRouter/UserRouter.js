@@ -6,7 +6,7 @@ const nodeMailer = require('nodemailer');
 
 // Redirect to login page
 
-router.get('/', (req, res) => {
+router.get('/loginPage', (req, res) => {
     res.render('../Views/my-account.twig');
 });
 
@@ -61,11 +61,9 @@ function getUserByLogin (req, res) {
 }
 
 router.post('/login',async (req, res) => {
-    console.log("Endpoint is called right here");
-    console.log(req.body);
+
     const result = await getUserByLogin(req, res);
-    console.log('the query result : ');
-    console.log(result);
+
     if (result.length == 0) return res.status(200).send({
         result: 0,
         message: 'Cannot find User with this login'
@@ -86,7 +84,7 @@ router.post('/login',async (req, res) => {
     } catch {
         res.status(500).send('Some error here');
     }
-    console.log("Endpoint call is ended right here");
+
 });
 
 const transporter = nodeMailer.createTransport({

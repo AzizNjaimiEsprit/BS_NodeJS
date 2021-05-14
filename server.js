@@ -38,15 +38,13 @@ app.get("/home",(req, res) => {
 app.get("/contact",(req, res) => {
     res.render('../Views/contact.twig', {pageName: "Contact Us"} )
 })
-app.get("/test",(req, res) => {
-    res.render('../Views/postBlog.twig', {pageName: "Contact Us"} )
-})
+
 app.use(function(req, res, next) {
     if (req.originalUrl == '/'){
         if (req.session.currentUser){
             res.redirect('/home');
         }else{
-            res.redirect('/users/login/aziz');
+            res.redirect('/account/loginPage');
         }
     }else{
         res.render('../Views/error404.twig',{pageName : "404"})

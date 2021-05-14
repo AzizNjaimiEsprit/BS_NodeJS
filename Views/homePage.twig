@@ -29,7 +29,13 @@
 	<script src="/js/webServicesCalls.js"></script>
 	<script>
 		function hideShowAdminMenu(){
-			console.log(document.getElementById("adminMenu"))
+			var data = JSON.parse(sessionStorage.getItem('currentUser'))
+			let x = document.getElementById("adminMenu");
+			if (Number(data.role) == 0){
+				x.style.visibility = "hidden";
+			}else{
+				x.style.visibility = "visible";
+			}
 		}
 	</script>
 

@@ -39,10 +39,19 @@
             "preventDuplicates": true,
             "progressBar": true,
         }
+        function hideShowAdminMenu(){
+            var data = JSON.parse(sessionStorage.getItem('currentUser'))
+            let x = document.getElementById("adminMenu");
+            if (Number(data.role) == 0){
+                x.style.visibility = "hidden";
+            }else{
+                x.style.visibility = "visible";
+            }
+        }
     </script>
 
 </head>
-<body>
+<body onload="hideShowAdminMenu()">
 <!--[if lte IE 9]>
 <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
 <![endif]-->

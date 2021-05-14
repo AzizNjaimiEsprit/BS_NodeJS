@@ -20,9 +20,10 @@ function loginUser(e) {
                 userId : res.data.id,
                 numTel  : res.data.telephone,
                 email : res.data.email,
+                role : res.data.role
             }
             sessionStorage.setItem("currentUser", JSON.stringify(obj));
-            console.log(sessionStorage.currentUser);
+            console.log(JSON.parse(sessionStorage.currentUser).userId);
             window.location.href = '/home';
         }
         

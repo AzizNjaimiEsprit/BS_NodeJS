@@ -7,10 +7,9 @@ function isAuthenticated(req, res, next) {
             return next();
         }
 
+    }else{
+        res.redirect('/account/loginPage');
     }
-
-
-    res.redirect('/users/login/aziz');
 }
 
 module.exports = isAuthenticated;
