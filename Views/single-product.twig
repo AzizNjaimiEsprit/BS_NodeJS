@@ -240,8 +240,10 @@
             contentType: "application/json",
             success: function (response) {
                 console.log("Return of add comment = ", response)
-                if (response == "ok")
-                    location.reload();
+                if (response == "ok") {
+                    toastr.success("Comment added successfully")
+                    setTimeout(()=>location.reload(),3000)
+                ws}
             }
         });
     }

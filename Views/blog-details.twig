@@ -84,7 +84,7 @@
             type: "POST",
             url: "http://localhost:5000/comment/add",
             data: JSON.stringify({
-                "publisherId" : document.getElementById("userId").value,
+                "publisherId" : JSON.parse(sessionStorage.currentUser).userId,
                 "postId" : document.getElementById("postId").value,
                 "body" : document.getElementById("commentBody").value,
             }),

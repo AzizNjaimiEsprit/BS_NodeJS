@@ -107,7 +107,7 @@
                                 <td class="product-thumbnail"><a href="#"><img src="http://localhost:5000/book/getBookImage/{{ row.image }}"
                                                                                alt="product img"></a></td>
                                 <td class="product-name"><a href="#">{{ row.title }}</a></td>
-                                <td class="product-price"><span class="amount">${{ row.price }}</span></td>
+                                <td class="product-price"><span class="amount">{{ row.price }} TND</span></td>
                                 <td class="product-quantity"><input readonly type="number"
                                                                     value="{{ row.orderedQuantity }}"></td>
                                 <td class="product-subtotal">{{ row.price * row.orderedQuantity }}</td>

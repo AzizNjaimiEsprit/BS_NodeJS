@@ -3,7 +3,7 @@ const router = express.Router();
 const database = require('../config/db.config');
 const authController = require('../public/js/authConroller');
 
-router.post('/addComment',authController, (req, res) => {
+router.post('/addComment', (req, res) => {
     database.query("insert into comment values (null,?,?,?)",
         [
             req.body.text,

@@ -40,14 +40,12 @@ router.get('/blogDetails/:blogId', (req, res) => {
                     res.render('../Views/blog-details.twig', {
                         blog: rows[0],
                         comments: [],
-                        userId: req.session.currentUser.userId,
                         pageName: "Blog Details"
                     })
                 } else {
                     res.render('../Views/blog-details.twig', {
                         blog: rows[0],
                         comments: comments,
-                        userId: req.session.currentUser.userId,
                         pageName: "Blog Details"
                     })
                 }
