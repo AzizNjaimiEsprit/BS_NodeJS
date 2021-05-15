@@ -23,8 +23,22 @@ function loginUser(e) {
                 role : res.data.role
             }
             sessionStorage.setItem("currentUser", JSON.stringify(obj));
-            console.log(JSON.parse(sessionStorage.currentUser).userId);
             window.location.href = '/home';
+        }
+        else {
+            let note = document.querySelector("#note");
+            if (res.message == 'Wrong password'){
+                if (note) {
+                    note.textContent = "Check your password !";
+                    note.style.display = "block";
+                }
+            }
+            else {
+                if (note) {
+                    note.textContent = "There is no such login !";
+                    note.style.display = "block";
+                }
+            }
         }
         
     });
