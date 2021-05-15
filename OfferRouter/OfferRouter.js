@@ -3,63 +3,95 @@ const router = express.Router();
 const database = require('../config/db.config');
 const request = require('request');
 const MessagingResponse = require('twilio').twiml.MessagingResponse;
+const multer = require('multer');
+const fs = require('fs');
 
 const functions = require('./Utilities/functions');
 
-// Add new offer
-router.post('/add', (req, res) => {
-    const twiml = new MessagingResponse();
-    if (req.body.NumMedia !== 0) {
-        const filename = `${req.body.imageUrl}.png`;
-        const url = req.body.MediaUrl0;
-        request(url).pipe(fs.createWriteStream('../images/' + filename))
-        .on('close', () => console.log('Image downloaded.'));
-        twiml.message('Image received and downloaded in the server');
-    } else {
-        twiml.message('No image received');
+const path = require('path');
+/*onst uploader = multer({
+    dest: "C:/Users/mariahi/Desktop/Projects/Esprit/BooksCovers"
+}); */
+
+const storage = multer.diskStorage({
+    destination: function(req, file, callback) {
+        callback(null, "uploads/offersBooksImages/")
+    },
+    filename: function(req, file, callback) {
+        callback(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
     }
-
-    res.send(twiml.toString());
-
-    database.query('INSERT INTO offers VALUES (NULL,?,?,?,?,?,?,?)', [
-        req.body.author,
-        req.body.description,
-        req.body.imageUrl,
-        req.body.price,
-        req.body.status,
-        req.body.title,
-        req.body.userId,
-    ], (err, rows, fields) => {
-        if (!err) res.send('Offer added successfuly');
-        else res.send('Adding offer failed');
-    })
 });
-
+const uploader = multer({storage: storage}).array('files', 4); 
+router.post('/addOffer', (req, res) => {
+    // Save offer images
+    uploader(req, res, function(err) {
+        console.log(req.body);
+        if (err) {
+            return res.send("Something went wrong");
+        }
+        else {
+            // Add Offer details to database
+            database.query('INSERT INTO offers VALUES (NULL,?,?,?,?,?,?,?)', [
+                req.body.author,
+                req.body.description,
+                functions.composeImagePaths(req.files),
+                parseFloat(req.body.price.replace(",", ".")),
+                "not bought",
+                req.body.title,
+                req.body.userId,
+            ], (err, rows, fields) => {
+                if (!err) res.send({
+                    status: 1,
+                    message: 'Your offer is saved'
+                });
+                else res.send({
+                    status: 0,
+                    message: 'An error occured while saving your offer please try again later'
+                });;
+            });
+        }
+    });
+    
+});
+    
+router.get('/add', (req, res) => {
+    if (req.session.currentUser) res.render('../Views/offer.twig');
+    else res.redirect('/account');
+    
+});
 // Update existing offers
 
 router.post('/update/:offerId', (req, res) => {
     
-    database.query(`UPDATE user SET author = ?,
-                                    description = ?,
-                                    image = ?,
-                                    price = ?,
-                                    status = ?,
-                                    title = ?,
-                                    user_id = ?,
-                                WHERE id = ?`
-    , [
-        req.body.author,
-        req.body.description,
-        req.body.imageUrl,
-        req.body.price,
-        req.body.status,
-        req.body.title,
-        req.body.userId,
-        req.params.offerId
-    ], (err, rows, fields) => {
-        if (!err) res.send('Offer updated successfuly');
-        else res.send('Updating offer failed');
-    })
+    uploader(req, res, function(err) {
+        if (err) {
+            return res.send("Something went wrong");
+        }
+        else {
+            database.query(`UPDATE user SET author = ?,
+                                            description = ?,
+                                            image = ?,
+                                            price = ?,
+                                            status = ?,
+                                            title = ?,
+                                            user_id = ?,
+                                        WHERE id = ?`
+            , [
+                req.body.author,
+                req.body.description,
+                functions.composeImagePaths(req.files),
+                req.body.price,
+                req.body.status,
+                req.body.title,
+                req.body.userId,
+                req.params.offerId
+            ], (err, rows, fields) => {
+                if (!err) res.send('Offer updated successfuly');
+                else res.send('Updating offer failed');
+            });
+        }
+    });
+
 });
 
 
@@ -78,7 +110,7 @@ router.get('/get/:offerId', (req, res) => {
 
 // Get list of offers
 
-router.get('/get/:offerId', (req, res) => {
+router.get('/get/', (req, res) => {
     database.query('SELECT * FROM offers',  (err, rows) => {
         if (!err) {
             if (rows.length > 0) res.send(rows);

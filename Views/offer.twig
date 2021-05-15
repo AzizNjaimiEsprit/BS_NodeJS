@@ -1,0 +1,61 @@
+{% include 'header.twig' %}
+
+<section class="offer_area pt--80 pb--55 bg--white">
+	<div class="container">
+		<div class="row">
+			<div class="col">
+				<div class="offer__wrapper">
+					<h3 class="account__title">Sell your books</h3>
+					<form id="offer-form">
+						<div class="account__form">
+							<div class="input__box">
+								<label>Title <span>*</span></label>
+								<input type="text" id="title-field" required>
+							</div>
+							
+							<div class="input__box">
+								<label>Author<span>*</span></label>
+								<input type="text" id="author-field" required>
+							</div>
+
+							<div class="input__box">
+								<label>Description<span>*</span></label>
+								<input type="text" id="description-field">
+							</div>
+
+							<div class="input__box">
+								<label>Price <span>*</span></label>
+								<input type="text" id="price-field" min=0 required>
+							</div>
+
+
+							<div class="input__box">
+								<label>Pictures <span>*</span></label>
+								<div class="custom-file">
+									<input type="file" class="custom-file-input" id="customFile" required>
+									<label class="custom-file-label" for="customFile">Choose file</label>
+								</div>
+							</div>
+
+							<div class="form__btn">
+								<button>Submit offer</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>	
+		</div>
+	</div>
+</section>
+	
+
+<!-- JS Files -->
+<script src="/js/offer.js"></script>
+<script>
+	// Add the following code if you want the name of the file appear on select
+	$(".custom-file-input").on("change", function() {
+	var fileName = $(this).val().split("\\").pop();
+	$(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+	});
+</script>
+{% include 'footer.twig' %}
