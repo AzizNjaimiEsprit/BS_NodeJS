@@ -43,8 +43,9 @@ function registerUser(event) {
         url: 'http://localhost:5000/account/registerUser',
         data: data
     }).done(res => {
-        alert(res);
-        window.location.href = '/account';
+        alert(res.message);
+        if (res.status == 1)
+            window.location.href = '/account/loginPage';
     });
 }
 
