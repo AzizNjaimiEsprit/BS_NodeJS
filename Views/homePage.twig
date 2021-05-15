@@ -270,9 +270,9 @@
 					<div class="col-md-12 col-lg-12 col-sm-12">
 						<div class="product__nav nav justify-content-center" role="tablist">
 
-                            <a class="nav-item nav-link active" data-toggle="tab" href="#nav-all" role="tab">ALL</a>
+                            <a class="nav-item nav-link active" onclick="showHide('nav-all')" data-toggle="tab" href="#nav-all" role="tab">ALL</a>
 							{% for c in categories%}
-                            <a class="nav-item nav-link " data-toggle="tab" href="#nav-{{ c.name }}" role="tab">{{ c.name}}</a>
+                            <a class="nav-item nav-link " onclick="showHide('nav-{{ c.name }}')" data-toggle="tab" href="#nav-{{ c.name }}" role="tab">{{ c.name}}</a>
 							{% endfor %}
 
                         </div>
@@ -280,7 +280,7 @@
 				</div>
 				<div class="tab__container mt--60">
 					<!-- Start Single Tab Content -->
-					<div class="row single__tab tab-pane fade show active" id="nav-all" role="tabpanel">
+					<div class="row single__tab tab-pane fade show active catTabs" id="nav-all" role="tabpanel">
 						<div class="product__indicator--4 arrows_style owl-carousel owl-theme">
 							{% for b in books %}
 									<div class="single__product">
@@ -326,7 +326,7 @@
 						</div>
 					</div>
 					{% for c in categories%}
-					<div class="row single__tab tab-pane fade show active" id="nav-{{ c.name }}" role="tabpanel">
+					<div class="row single__tab tab-pane fade show active catTabs" id="nav-{{ c.name }}" role="tabpanel">
 						<div class="product__indicator--4 arrows_style owl-carousel owl-theme">
 							{% for b in books %}
 							{% if b.cat==c.name  %}
@@ -415,6 +415,17 @@
 				</div>
 			</div>
 		</section>
+		<script>
+			function showHide (id){
+				let tab = document.getElementsByClassName("catTabs");
+				for (let i=0;i<tab.length;i++){
+					if (tab[i].style.display != 'none'){
+						tab[i].style.display = 'none'
+					}
+				}
+				document.getElementById(id).style.display = 'flex'
+			}
+		</script>
 		<!-- End Recent Post Area -->
 		<!-- Best Sale Area -->
 		<!-- Best Sale Area Area -->
