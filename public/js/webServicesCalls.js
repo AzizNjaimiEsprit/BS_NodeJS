@@ -1,5 +1,5 @@
 // Basket WS
-function insertIntoCard(bookId) {
+function insertIntoCard(bookId,type) {
     $.ajax({
         type: "POST",
         url: "http://localhost:5000/basket/add",
@@ -7,6 +7,7 @@ function insertIntoCard(bookId) {
             "userId": JSON.parse(sessionStorage.currentUser).userId,
             "bookId": bookId,
             "quantity": document.getElementById("qty") ? document.getElementById("qty").value :1,
+            "type": type ? type : 'PHYSICAL',
         }),
         contentType: "application/json",
             success: function (response) {
@@ -16,7 +17,7 @@ function insertIntoCard(bookId) {
         }
     });
 }
-function updateCard(bookId) {
+function updateCard(bookId,type) {
     $.ajax({
         type: "POST",
         url: "http://localhost:5000/basket/update",
@@ -24,6 +25,7 @@ function updateCard(bookId) {
             "userId": JSON.parse(sessionStorage.currentUser).userId,
             "bookId": bookId,
             "quantity": document.getElementById("qty") ? document.getElementById("qty").value :1,
+            "type": type ? type : 'PHYSICAL',
         }),
         contentType: "application/json",
             success: function (response) {
@@ -34,24 +36,24 @@ function updateCard(bookId) {
     });
 }
 
-function checkIfBookIsInBasket(bookId,add,update){
+function checkIfBookIsInBasket(bookId,type,add,update){
     $.get("http://localhost:5000/basket/getCount/" + bookId, function (data, status) {
         console.log("Data: " + data + "\nStatus: " + status);
         if (Number(data) > 0){
-            update(bookId)
+            update(bookId,type)
         }else{
-            add(bookId)
+            add(bookId,type)
         }
 
     });
 }
 
-function addToCard(bookId) {
+function addToCard(bookId,type) {
     if (!checkUserLoggedIn()){
         alert("User Not logged in !!!!")
         return
     }
-    checkIfBookIsInBasket(bookId,insertIntoCard,updateCard);
+    checkIfBookIsInBasket(bookId,type,insertIntoCard,updateCard);
 }
 
 // WishList WS

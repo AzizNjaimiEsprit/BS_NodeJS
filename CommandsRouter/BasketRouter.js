@@ -5,11 +5,12 @@ const authController = require('../public/js/authConroller');
 let yyyymmdd = require("yyyy-mm-dd");
 
 router.post('/add', (req, res) => {
-    database.query("insert into basket values (?,?,?)",
+    database.query("insert into basket values (?,?,?,?)",
         [
             req.body.bookId,
             req.body.userId,
             req.body.quantity,
+            req.body.type,
         ],
         function (err, data) {
             if (err) {
@@ -21,9 +22,10 @@ router.post('/add', (req, res) => {
 })
 
 router.post('/update', (req, res) => {
-    database.query("update basket set quantity = ? where user_id = ? and book_id = ?",
+    database.query("update basket set quantity = ? , type = ? where user_id = ? and book_id = ?",
         [
             req.body.quantity,
+            req.body.type,
             req.body.userId,
             req.body.bookId
         ],

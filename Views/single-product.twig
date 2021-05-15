@@ -50,9 +50,11 @@
                                     <input id="qty" class="input-text qty" name="qty" min="1" value="1" title="Qty"
                                            type="number">
                                     <div class="addtocart__actions">
-                                        <button class="tocart" type="button" title="Add to Cart"
-                                                onclick="addToCard({{ book.bookId }})">Add to Cart
-                                        </button>
+                                        <button data-toggle="dropdown" class="tocart dropdown-toggle" type="button" title="Add to Cart">Add to Cart</button>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            <a class="dropdown-item" onclick="addToCard({{ book.bookId }},'PHYSICAL')">Physical</a>
+                                            <a class="dropdown-item" onclick="addToCard({{ book.bookId }},'ONLINE')">Online</a>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="product-addto-links clearfix" style="display: inline-flex">
