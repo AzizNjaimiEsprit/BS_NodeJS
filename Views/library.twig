@@ -41,7 +41,8 @@
         pdfOpenParams: { view: 'FitV', page: '34' }
     };
 
-    PDFObject.embed("", "#example1",options);
+
+    PDFObject.embed("http://localhost:5000/onlineBook/getBookPDF/"+{{ books[0].id }}, "#example1",options);
 
 
     function showPDF(bookId){

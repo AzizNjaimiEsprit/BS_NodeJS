@@ -106,7 +106,7 @@ router.get('/library', (req, res) => {
         if (err) {
             res.render('../Views/library.twig', {books: []})
         } else {
-            res.render('../Views/library.twig', {books: rows})
+            res.render('../Views/library.twig', {books: rows,pageName: "Online Library "})
         }
     })
 })

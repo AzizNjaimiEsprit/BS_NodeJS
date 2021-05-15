@@ -16,7 +16,7 @@ var upload = multer({storage: storage})
 var path = require('path');
 
 
-router.post('/addBook/:bookId',upload.single('bookPDF'), (req, res) => {
+router.post('/addBook/:bookId', upload.single('bookPDF'), (req, res) => {
     let filename = req.file.filename;
     database.query("insert into online_book values (null,?,?)",
         [
@@ -32,8 +32,8 @@ router.post('/addBook/:bookId',upload.single('bookPDF'), (req, res) => {
             }
         });
 })
-router.get('/getById/:onlineBookId',  (req, res) => {
-    database.query("SELECT c.* , b.*, url from online_book join book b on online_book.book_id = b.id join category c on b.category_id = c.id WHERE b.id=?", [req.params.onlineBookId],  (err, rows, fields) => {
+router.get('/getById/:onlineBookId', (req, res) => {
+    database.query("SELECT c.* , b.*, url from online_book join book b on online_book.book_id = b.id join category c on b.category_id = c.id WHERE b.id=?", [req.params.onlineBookId], (err, rows, fields) => {
         if (err) {
             res.send(err);
         } else {
@@ -41,9 +41,20 @@ router.get('/getById/:onlineBookId',  (req, res) => {
         }
     })
 })
+router.get('/isOnline/:bookId', (req, res) => {
+    database.query("SELECT url FROM online_book where book_id=?", [req.params.bookId], (err, rows, fields) => {
+        if (err) {
+            res.send(err);
+        } else {
+            if (rows.length==0) {res.send(false)}
+            else res.send(true)
+        }
+    })
+})
 
-router.get('/getAll',  (req, res) => {
-    database.query("SELECT c.* , b.*, url from online_book join book b on online_book.book_id = b.id join category c on b.category_id = c.id ",  (err, rows, fields) => {
+
+router.get('/getAll', (req, res) => {
+    database.query("SELECT c.* , b.*, url from online_book join book b on online_book.book_id = b.id join category c on b.category_id = c.id ", (err, rows, fields) => {
         if (err) {
             res.send(err);
         } else {
@@ -67,10 +78,17 @@ router.post('/deleteOnlineBook', (req, res) => {
             }
         });
 })
-router.get('/getBookPDF/:bookId', ((req, res) => {
-    res.sendFile(path.resolve(__dirname + '/../uploads/BooksPDF/' + req.params.bookId+'.pdf'));
-}))
 
+
+router.get('/getBookPDF/:bookId', ((req, res) => {
+    database.query("SELECT url from online_book  WHERE book_id = ?", [req.params.bookId], (err, rows, fields) => {
+        if (err || rows.length == 0) {
+            res.sendFile(path.resolve(__dirname + '/../uploads/BooksPDF/not-found.pdf'));
+        } else {
+            res.sendFile(path.resolve(__dirname + '/../uploads/BooksPDF/' + rows[0].url));
+        }
+    })
+}))
 
 
 module.exports = router;

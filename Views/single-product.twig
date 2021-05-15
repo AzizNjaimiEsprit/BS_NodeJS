@@ -23,10 +23,17 @@
                         </div>
                         <div class="col-lg-6 col-12">
                             <div class="product__info__main">
-                                <h1>{{ book.title }}</h1>
-                                <div class="product-info-stock-sku d-flex">
-                                    <p>Availability:<span> {{ book.quantity }}</span></p>
+                                <div>
+                                    <h1>{{ book.title }}</h1>
+                                    <div class="float-right" id="isonline" style="display: flex">
+                                        <p>Online Version</p>
+                                        <i class="fa fa-check-square" style="margin: 6.5px" aria-hidden="true"></i>
+                                    </div>
+                                    <div class="product-info-stock-sku d-flex">
+                                        <p>Availability:<span> {{ book.quantity }}</span></p>
+                                    </div>
                                 </div>
+
                                 <div class="product-reviews-summary d-flex">
                                     <ul class="rating-summary d-flex">
                                         {% for i in 0..4 %}
@@ -53,7 +60,7 @@
                                         <button data-toggle="dropdown" class="tocart dropdown-toggle" type="button" title="Add to Cart">Add to Cart</button>
                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                             <a class="dropdown-item" onclick="addToCard({{ book.bookId }},'PHYSICAL')">Physical</a>
-                                            <a class="dropdown-item" onclick="addToCard({{ book.bookId }},'ONLINE')">Online</a>
+                                            <a class="dropdown-item" id="addonlinebook" onclick="addToCard({{ book.bookId }},'ONLINE')">Online</a>
                                         </div>
                                     </div>
                                 </div>
@@ -195,7 +202,7 @@
     </div>
 </section>
 <script>
-    function setRate(index){
+    function setRate(index) {
         let tab = document.getElementsByClassName("star")
         for (let i = 0; i <= index; i++) {
             tab[i].setAttribute('src', "/images/png-img/full.png");
@@ -204,6 +211,7 @@
             tab[i].setAttribute('src', "/images/png-img/blank.png");
         }
     }
+
     function addRate(index, bookId) {
 
         document.getElementById("rate").value = index + 1
@@ -229,7 +237,6 @@
     var currentUser = JSON.parse(sessionStorage.getItem("currentUser"));
 
 
-
     function addComment(bookId) {
         $.ajax({
             type: "POST",
@@ -244,8 +251,8 @@
                 console.log("Return of add comment = ", response)
                 if (response == "ok") {
                     toastr.success("Comment added successfully")
-                    setTimeout(()=>location.reload(),3000)
-                ws}
+                    setTimeout(() => location.reload(), 3000)
+                }
             }
         });
     }
@@ -260,7 +267,17 @@
 
         });
     }
-    function loadRatePerUser(bookId,userId) {
+
+    function isOnline(bookId) {
+        $.get("http://localhost:5000/onlineBook/isOnline/" + bookId, function (data, status) {
+            console.log("Data: " + data + "\nStatus: " + status);
+            if (data == "false") {
+                document.getElementById("isonline").style.visibility = "hidden"
+                document.getElementById("addonlinebook").style.visibility = "hidden"
+            }
+        });
+    }
+    function loadRatePerUser(bookId, userId) {
         $.get("http://localhost:5000/bookRate/getListRatePerUser/" + bookId + "/" + userId, function (data, status) {
             console.log("Data: " + data + "\nStatus: " + status);
             let tab = document.getElementsByClassName("bookRate")
@@ -278,7 +295,7 @@
             data: JSON.stringify({
                 "userId": JSON.parse(sessionStorage.currentUser).userId,
                 "bookId": bookId,
-                "rate": index ,
+                "rate": index,
             }),
             contentType: "application/json",
             success: function (response) {
@@ -303,8 +320,10 @@
             }
         })
     }
+
     loadRate(document.getElementById("bookId"))
     loadRatePerUser(document.getElementById("bookId"))
+    isOnline(document.getElementById("bookId"))
 </script>
 <!-- End NEwsletter Area -->
 
