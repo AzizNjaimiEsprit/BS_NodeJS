@@ -43,8 +43,12 @@ async function registerUser (req, res) {
 
 router.post('/add', async (req, res) => registerUser(req, res));
 
-router.post('/register', async (req, res) => registerUser(req, res));
+router.post('/registerUser', async (req, res) => registerUser(req, res));
 
+
+router.get('/register', (req, res) => {
+    res.render('../Views/register.twig');
+});
 // Get user by login
 
 function getUserByLogin (req, res) {
@@ -61,9 +65,7 @@ function getUserByLogin (req, res) {
 }
 
 router.post('/login',async (req, res) => {
-
     const result = await getUserByLogin(req, res);
-
     if (result.length == 0) return res.status(200).send({
         result: 0,
         message: 'Cannot find User with this login'
@@ -84,7 +86,6 @@ router.post('/login',async (req, res) => {
     } catch {
         res.status(500).send('Some error here');
     }
-
 });
 
 const transporter = nodeMailer.createTransport({

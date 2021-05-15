@@ -1,0 +1,54 @@
+{% include 'header.twig' %}
+<!-- Start My Account Area -->
+<section class="my_account_area pt--80 pb--55 bg--white">
+	<div class="container">
+		<div class="row">
+			<div class="col">
+				<div class="my__account__wrapper">
+					<h3 class="account__title">Register</h3>
+					<form id="register-form">
+						<div class="account__form">
+							<div class="input__box">
+								<label>Full name <span>*</span></label>
+								<input type="text" id="fullname-field" required>
+							</div>
+							
+							<div class="input__box">
+								<label>Login<span>*</span></label>
+								<input type="text" id="login-field" required>
+							</div>
+
+							<div class="input__box">
+								<label>Email <span>*</span></label>
+								<input type="email" id="email-field" required>
+							</div>
+
+							
+							<div class="input__box">
+								<label>Phone <span>*</span></label>
+								<input type="text" id="phone-field" required>
+							</div>
+
+							<div class="input__box">
+								<label>Password<span>*</span></label>
+								<input type="password" id="pwd-field" required>
+							</div>
+							
+						
+							<div class="form__btn">
+								<button>Register</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>	
+		</div>
+	</div>
+</section>
+<!-- End My Account Area -->
+<!-- Footer Area -->
+		
+
+<!-- JS Files -->
+<script src="/js/register.js"></script>
+{% include 'footer.twig' %}

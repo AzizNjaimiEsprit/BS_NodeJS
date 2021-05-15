@@ -6187,10 +6187,10 @@ a.checkout__title {
   font-size: 12px;
 }
 
-
 .col {
   width: 100%;
 }
+
 .my_account_area {
   width: 100%;
   text-align: center;
@@ -6201,3 +6201,21 @@ a.checkout__title {
   margin: 0 auto;
   width: 50%;
 }
+
+
+
+#note {
+  margin-top: 0;
+  font-size: 12px;
+  display: none;
+  margin-bottom: 2%;
+}
+
+#prop {
+  margin-top: 0;
+  font-size: 12px;
+  display: none;
+  margin-bottom: 2%;
+}
+
+

@@ -44,7 +44,7 @@ app.use(function(req, res, next) {
         if (req.session.currentUser){
             res.redirect('/home');
         }else{
-            res.redirect('/account/loginPage');
+            res.redirect('/account/login');
         }
     }else{
         res.render('../Views/error404.twig',{pageName : "404"})

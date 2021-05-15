@@ -4,7 +4,7 @@ const database = require('../config/db.config');
 const request = require('request');
 const MessagingResponse = require('twilio').twiml.MessagingResponse;
 
-
+const functions = require('./Utilities/functions');
 
 // Add new offer
 router.post('/add', (req, res) => {
