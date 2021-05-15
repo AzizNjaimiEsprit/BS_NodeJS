@@ -27,9 +27,15 @@ async function registerUser (req, res) {
             req.body.adress,
             req.body.zipCode
         ], (err, rows) => {
-            if (!err) res.send('User added successfuly');
+            if (!err) res.send({
+                status: 1,
+                message: 'Your account has been added'
+            });
             else {
-                res.send('Adding user failed');
+                res.send({
+                    status: 0,
+                    message: 'Sorry an error has been occured try again'
+                });
                 console.log(err);
             }
         })    
@@ -39,17 +45,6 @@ async function registerUser (req, res) {
     
 }
 
-
-
-router.post('/add', async (req, res) => registerUser(req, res));
-
-router.post('/registerUser', async (req, res) => registerUser(req, res));
-
-
-router.get('/register', (req, res) => {
-    res.render('../Views/register.twig');
-});
-// Get user by login
 
 function getUserByLogin (req, res) {
 
@@ -63,6 +58,28 @@ function getUserByLogin (req, res) {
         });
     });
 }
+
+
+router.post('/add', async (req, res) => registerUser(req, res));
+
+router.post('/registerUser', async (req, res) => {
+    let users = await getUserByLogin(req, res);
+    if (users.length == 0)
+        registerUser(req, res);
+    else {
+        res.send({
+        status: 0,
+        message: 'Login already exist'
+        });
+    }   
+});
+
+
+router.get('/register', (req, res) => {
+    res.render('../Views/register.twig');
+});
+// Get user by login
+
 
 router.post('/login',async (req, res) => {
     const result = await getUserByLogin(req, res);
