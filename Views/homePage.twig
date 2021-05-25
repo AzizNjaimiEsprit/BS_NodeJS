@@ -20,13 +20,15 @@
 	<link rel="stylesheet" href="/css/bootstrap.min.css">
 	<link rel="stylesheet" href="/css/plugins.css">
 	<link rel="stylesheet" href="/css/style.css">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet" />
 
 	<!-- Cusom css -->
    <link rel="stylesheet" href="/css/custom.css">
 
 	<!-- Modernizer js -->
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 	<script src="/js/vendor/modernizr-3.5.0.min.js"></script>
-	<script src="/js/webServicesCalls.js"></script>
+
 	<script>
 		function hideShowAdminMenu(){
 			var data = JSON.parse(sessionStorage.getItem('currentUser'))
@@ -101,8 +103,10 @@
 														<span><a href="/order/myOrders/open">My Orders</a></span>
 														<span><a href="/wishlist">My Wishlist</a></span>
 														<span><a href="/fidelity">Fidelity Card</a></span>
-														<span><a href="#">Sign In</a></span>
-														<span><a href="#">Create An Account</a></span>
+														<hr>
+														<span><a href="/account/register">Create An Account</a></span>
+														<span><a href="/account/loginPage">Sign In</a></span>
+														<span><a onclick="logout()">Log Out</a></span>
 													</div>
 												</div>
 											</div>

@@ -1,3 +1,5 @@
+//import { toastr } from '/public/js/toastr'
+var toastr = require('toastr');
 // Basket WS
 function insertIntoCard(bookId,type) {
     $.ajax({
@@ -13,7 +15,7 @@ function insertIntoCard(bookId,type) {
             success: function (response) {
             console.log("Return of add product to basket = ", response)
             if (response == "ok")
-                alert("Book added to basket successfully")
+                toastr.info("Book added to basket successfully")
         }
     });
 }

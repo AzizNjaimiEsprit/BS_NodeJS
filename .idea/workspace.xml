@@ -22,17 +22,24 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b04fed90-904e-45f3-9671-64262759d3d6" name="Default Changelist" comment="Crud Category added">
-      <change afterPath="$PROJECT_DIR$/Views/postBlog.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+    <list default="true" id="b04fed90-904e-45f3-9671-64262759d3d6" name="Default Changelist" comment="BASKET UPDATE">
+      <change afterPath="$PROJECT_DIR$/Views/communScripts.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/readme.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/9e3b96a3-a9ec-4cbd-bd4e-ca31d296af0b.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/9e3b96a3-a9ec-4cbd-bd4e-ca31d296af0b.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BlogRouter/PostsRouter.js" beforeDir="false" afterPath="$PROJECT_DIR$/BlogRouter/PostsRouter.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Views/adminAddBook.twig" beforeDir="false" afterPath="$PROJECT_DIR$/Views/adminAddBook.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Views/contact.twig" beforeDir="false" afterPath="$PROJECT_DIR$/Views/contact.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CommandsRouter/OrdersRouter.js" beforeDir="false" afterPath="$PROJECT_DIR$/CommandsRouter/OrdersRouter.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserMainRouter/UserRouter.js" beforeDir="false" afterPath="$PROJECT_DIR$/UserMainRouter/UserRouter.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/adminOrdersList.twig" beforeDir="false" afterPath="$PROJECT_DIR$/Views/adminOrdersList.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/basket.twig" beforeDir="false" afterPath="$PROJECT_DIR$/Views/basket.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/footer.twig" beforeDir="false" afterPath="$PROJECT_DIR$/Views/footer.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Views/header.twig" beforeDir="false" afterPath="$PROJECT_DIR$/Views/header.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Views/homePage.twig" beforeDir="false" afterPath="$PROJECT_DIR$/Views/homePage.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/myOrders.twig" beforeDir="false" afterPath="$PROJECT_DIR$/Views/myOrders.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config/db.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/config/db.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/login.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/login.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/webServicesCalls.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/webServicesCalls.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/server.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -49,9 +56,6 @@
         <option value="JavaScript File" />
       </list>
     </option>
-  </component>
-  <component name="Git.Pull.Settings">
-    <option name="BRANCH" value="master" />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -80,15 +84,16 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="database.data.extractors.current.export.id" value="Comma-separated (CSV)_id" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/Views" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/public/js" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="restartRequiresConfirmation" value="false" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
-    <property name="ts.external.directory.path" value="C:\Program Files\JetBrains\WebStorm 2020.2.3\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
+    <property name="ts.external.directory.path" value="C:\Program Files\JetBrains\IntelliJ IDEA 2021.1\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="W:\Esprit\NodeJS\Booksotre\public\js" />
       <recent name="W:\Esprit\NodeJS\Booksotre\Views" />
       <recent name="W:\Esprit\NodeJS\Booksotre\uploads\BooksPDF" />
       <recent name="C:\Users\sneji\Desktop\Node Project\BS_NodeJS\uploads" />
@@ -152,7 +157,9 @@
       <workItem from="1620653645261" duration="6451000" />
       <workItem from="1620904257071" duration="16450000" />
       <workItem from="1620923870249" duration="622000" />
-      <workItem from="1620989542756" duration="5790000" />
+      <workItem from="1620989542756" duration="23884000" />
+      <workItem from="1621068970659" duration="11589000" />
+      <workItem from="1621928612263" duration="8030000" />
     </task>
     <task id="LOCAL-00001" summary="update">
       <created>1619386325176</created>
@@ -224,7 +231,70 @@
       <option name="project" value="LOCAL" />
       <updated>1620920580112</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Add Blog Added">
+      <created>1620995805717</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1620995805717</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Ajax WS fixed">
+      <created>1620999874248</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1620999874248</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Toaster Added">
+      <created>1621004922097</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1621004922097</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Security updates">
+      <created>1621029075789</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1621029075789</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Static variables replaced">
+      <created>1621029228314</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1621029228314</updated>
+    </task>
+    <task id="LOCAL-00016" summary="Security updates">
+      <created>1621031427606</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1621031427606</updated>
+    </task>
+    <task id="LOCAL-00017" summary="HomePage categories tabs fixed">
+      <created>1621074650088</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1621074650088</updated>
+    </task>
+    <task id="LOCAL-00018" summary="No found pdf">
+      <created>1621078579806</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1621078579806</updated>
+    </task>
+    <task id="LOCAL-00019" summary="BASKET UPDATE">
+      <created>1621081067393</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1621081067393</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -262,6 +332,14 @@
     <MESSAGE value="Home header fixed" />
     <MESSAGE value="Home blog section added" />
     <MESSAGE value="Blogs images added" />
-    <option name="LAST_COMMIT_MESSAGE" value="Blogs images added" />
+    <MESSAGE value="Add Blog Added" />
+    <MESSAGE value="Ajax WS fixed" />
+    <MESSAGE value="Toaster Added" />
+    <MESSAGE value="Static variables replaced" />
+    <MESSAGE value="Security updates" />
+    <MESSAGE value="HomePage categories tabs fixed" />
+    <MESSAGE value="No found pdf" />
+    <MESSAGE value="BASKET UPDATE" />
+    <option name="LAST_COMMIT_MESSAGE" value="BASKET UPDATE" />
   </component>
 </project>

@@ -5,22 +5,22 @@ const authController = require('../public/js/authConroller');
 let yyyymmdd = require("yyyy-mm-dd");
 
 
-router.get('/checkout',authController, (req, res) => {
+router.get('/checkout', authController, (req, res) => {
     database.query('SELECT *,bs.quantity as bQuantity FROM basket bs join book bk on bs.book_id = bk.id WHERE user_id = ?', [req.session.currentUser.userId], (err, rows, fields) => {
-        res.render('../Views/checkout.twig', {rows: rows, currentUser: req.session.currentUser,pageName : 'Checkout'})
+        res.render('../Views/checkout.twig', {rows: rows, currentUser: req.session.currentUser, pageName: 'Checkout'})
     })
 })
 
-router.get('/ordersList/:status',authController, (req, res) => {
+router.get('/ordersList/:status', authController, (req, res) => {
     let critere = ""
-    if (req.params.status == "all"){
+    if (req.params.status == "all") {
         critere = "status" //all
-    }else if (req.params.status == "closed"){
+    } else if (req.params.status == "closed") {
         critere = "'treated'"
-    }else if (req.params.status == "open"){
+    } else if (req.params.status == "open") {
         critere = "'untreated' OR status = 'inDelivery'"
     }
-    database.query('SELECT * FROM orders WHERE status = '+critere+' ORDER BY order_date ASC', (err, rows, fields) => {
+    database.query('SELECT * FROM orders WHERE status = ' + critere + ' ORDER BY order_date ASC', (err, rows, fields) => {
         if (!err && rows.length != 0) {
             for (let i = 0; i < rows.length; i++) {
                 database.query('SELECT *, oi.quantity as orderedQuantity FROM order_item oi join book b on b.id = oi.book_id WHERE order_id = ' + Number(rows[i].id), [], (err2, rows2, fields2) => {
@@ -34,16 +34,16 @@ router.get('/ordersList/:status',authController, (req, res) => {
     })
 })
 
-router.get('/myOrders/:status',authController, (req, res) => {
+router.get('/myOrders/:status', authController, (req, res) => {
     let critere = ""
-    if (req.params.status == "all"){
+    if (req.params.status == "all") {
         critere = "status" //all
-    }else if (req.params.status == "closed"){
+    } else if (req.params.status == "closed") {
         critere = "'treated'"
-    }else if (req.params.status == "open"){
+    } else if (req.params.status == "open") {
         critere = "'untreated' OR status = 'inDelivery'"
     }
-    database.query('SELECT * FROM orders WHERE user_id = ? and status = '+critere+' ORDER BY order_date ASC', [req.session.currentUser.userId], (err, rows, fields) => {
+    database.query('SELECT * FROM orders WHERE user_id = ? and status = ' + critere + ' ORDER BY order_date ASC', [req.session.currentUser.userId], (err, rows, fields) => {
         if (!err && rows.length != 0) {
             for (let i = 0; i < rows.length; i++) {
                 database.query('SELECT *, oi.quantity as orderedQuantity FROM order_item oi join book b on b.id = oi.book_id WHERE order_id = ' + Number(rows[i].id), [], (err2, rows2, fields2) => {
@@ -69,13 +69,22 @@ router.post('/add', (req, res) => {
                     res.send(err);
                 } else {
                     for (let i = 0; i < items.length; i++) {
-                        database.query("insert into order_item values (NULL,?,?,?)", [items[i].quantity, items[i].book_id, data.insertId], function (err, data2) {
+                        database.query("insert into order_item values (NULL,?,?,?,?)", [items[i].quantity, items[i].book_id, data.insertId,items[i].type], function (err, data2) {
                             if (err) {
                                 console.log(err);
                             } else {
                                 console.log("Done" + data2.insertId);
                             }
                         });
+                        if (items[i].type == "ONLINE") {
+                            database.query("insert into library values (?,?,?)", [items[i].book_id, req.session.currentUser.userId, 0], function (err3, data3) {
+                                if (err3) {
+                                    console.log(err3);
+                                } else {
+                                    console.log("Added To library" + items[i].book_id);
+                                }
+                            });
+                        }
                     }
                     res.send("Done");
                 }

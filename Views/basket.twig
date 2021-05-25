@@ -17,6 +17,7 @@
                             <tr class="title-top">
                                 <th class="product-thumbnail">Image</th>
                                 <th class="product-name">Product</th>
+                                <th class="product-price">Type</th>
                                 <th class="product-price">Price</th>
                                 <th class="product-quantity">Quantity</th>
                                 <th class="product-subtotal">Total</th>
@@ -31,6 +32,7 @@
                                     <td class="product-thumbnail"><a href="#"><img class="book-image-small" src="http://localhost:5000/book/getBookImage/{{ row.image }}"
                                                                                    alt="product img"></a></td>
                                     <td class="product-name"><a href="#">{{ row.title }}</a></td>
+                                    <td class="product-price"><span class="amount">{{ row.type }}</span></td>
                                     <td class="product-price"><span class="amount">{{ row.price }} TND</span></td>
                                     <td class="product-quantity"><input id="qty" onfocusout="updateQte({{ row.book_id }})" type="number" value="{{ row.bQuantity }}">
                                     </td>
@@ -64,7 +66,7 @@
                     </div>
                 </div>
             </div>
-        </div>w
+        </div>
     </div>
 </div>
 <span id="noAlert"></span>

@@ -4,7 +4,14 @@
 <div class="cart-main-area section-padding--lg bg--white">
     <div class="container">
         <div class="row">
+
             <div class="col-md-12 col-sm-12 ol-lg-12">
+                <select id="filterStatus" onchange="filterByStatus()" class="form-select float-right mb-3" aria-label="Default select example">
+                    <option value="all" selected>Order Status</option>
+                    <option value="all">All</option>
+                    <option value="open">Open</option>
+                    <option value="closed">Closed</option>
+                </select>
                 <form action="#">
                     <div class="table-content wnro__table table-responsive">
                         <table>
@@ -43,14 +50,7 @@
                         </table>
                     </div>
                 </form>
-                <div class="cartbox__btn">
-                    <ul class="cart__btn__list d-flex flex-wrap flex-md-nowrap flex-lg-nowrap justify-content-between">
-                        <li><a href="#">Coupon Code</a></li>
-                        <li><a href="#">Apply Code</a></li>
-                        <li><a href="#">Update Cart</a></li>
-                        <li><a href="#">Check Out</a></li>
-                    </ul>
-                </div>
+
             </div>
         </div>
 
@@ -68,6 +68,7 @@
                             <th class="product-thumbnail">Image {{ index }}</th>
                             <th class="product-name">Product</th>
                             <th class="product-price">Price</th>
+                            <th class="product-price">Type</th>
                             <th class="product-quantity">Quantity</th>
                             <th class="product-subtotal">Total</th>
 
@@ -75,11 +76,12 @@
                         </thead>
                         <tbody>
                         {% for row in order.items %}
-                            <tr>
+                            <tr style="{{ row.type == 'ONLINE' ? 'opacity : 30%' : '' }}">
                                 <td class="product-thumbnail"><a href="#"><img src="http://localhost:5000/book/getBookImage/{{ row.image }}"
                                                                                alt="product img"></a></td>
                                 <td class="product-name"><a href="#">{{ row.title }}</a></td>
                                 <td class="product-price"><span class="amount">{{ row.price }} TND</span></td>
+                                <td class="product-price">{{ row.type }}</td>
                                 <td class="product-quantity"><input readonly type="number"
                                                                     value="{{ row.orderedQuantity }}"></td>
                                 <td class="product-subtotal">{{ row.price * row.orderedQuantity }} TND</td>
@@ -93,5 +95,11 @@
         </div>
     </div>
 {% endfor %}
+<script>
+    function filterByStatus(){
+        let select  = document.getElementById("filterStatus").value;
+        window.location.href = '/order/myOrders/'+select;
+    }
+</script>
 <!-- cart-main-area end -->
 {% include 'footer.twig' %}
