@@ -1,0 +1,39 @@
+{% include 'header.twig' %}
+<!-- Start My Account Area -->
+<section class="my_account_area pt--80 pb--55 bg--white">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="my__account__wrapper">
+                    <h3 class="account__title">Password reset</h3>
+                    <p class="email-target"></p>
+                    <form id="pass-form">
+                        <div class="code__form">
+                            <div class="input__box">
+                                <label>Your login <span>*</span></label>
+                                <input type="text" id="login-field">
+                            </div>
+                            <div class="input__box">
+                                <label>New Password <span>*</span></label>
+                                <input type="password" id="pass-field" required>
+                            </div>
+
+                            <div class="input__box">
+                                <label>Confirm Password <span>*</span></label>
+                                <input type="password" id="conf-pass-field" required>
+                            </div>
+                            <p class="text-danger" id="note"></p>
+
+                            <div class="form__btn">
+                                <button class="btn btn-light">Change password</button>
+                            </div>                        
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End My Account Area -->
+<script src="/js/pass-changing-script.js"></script>
+{% include 'footer.twig' %}

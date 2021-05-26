@@ -28,12 +28,12 @@ async function registerUser (req, res) {
             req.body.zipCode
         ], (err, rows) => {
             if (!err) res.send({
-                status: 1,
+                result: 1,
                 message: 'Your account has been added'
             });
             else {
                 res.send({
-                    status: 0,
+                    result: 0,
                     message: 'Sorry an error has been occured try again'
                 });
                 console.log(err);
@@ -68,7 +68,7 @@ router.post('/registerUser', async (req, res) => {
         registerUser(req, res);
     else {
         res.send({
-        status: 0,
+        result: 0,
         message: 'Login already exist'
         });
     }   
@@ -105,19 +105,40 @@ router.post('/login',async (req, res) => {
     }
 });
 
+
+// Don't forget to remove email credentials
 const transporter = nodeMailer.createTransport({
     service: 'gmail',
     auth: {
         user: 'mahdi.riahi@esprit.tn',
-        pass: ''
+        pass: 'rqttzhatbceiixay'
     }
 });
 
+
+function saveCode(code, email) {
+    return new Promise((resolve, reject) => {
+        database.query('INSERT INTO pwdCodes VALUES (NULL,?,?)', [email, code], (err, rows, fields) => {
+            if (!err) {
+                console.log("Code saved");
+                resolve();
+            } else {
+                reject(err);
+            }
+        });
+    });
+}
+
+
 router.post('/sendCode',async (req, res) => {
     const result = await getUserByLogin(req, res);
-    if (result.length == 0) return res.status(400).send('Cannot find User with this login');
+    if (result.length == 0) return res.send({
+        result: 0,
+        message: 'No account with this login : ' + req.body.login
+    });
     else {
         let code = require('crypto').randomBytes(15).toString('hex');
+        console.log(code);
         const email = result[0].email;
         let mailOptions = {
             from: 'mahdi.riahi@esprit.tn',
@@ -125,17 +146,86 @@ router.post('/sendCode',async (req, res) => {
             subject: 'Password reset request',
             text: `You requested a password change for your bookstore account\nCode : ${code}`
         }
-        transporter.sendMail(mailOptions, (err, infos) => {
-            if (err) res.status(200).send();
-            else res.status(400).send("Verification code has been sent to you gmail account please write it down so we can verify it's you")
-        });
+        await saveCode(code, email).then(() => {
+            console.log("Sending email to user...");
+            transporter.sendMail(mailOptions, (err, infos) => {
+                if (err) console.log(err);
+                else {
+                    console.log("Mail has been sent successfully");
+                    return res
+                    .send({
+                        result: 1,
+                        message: 'Code has been sent',
+                        email: email
+                    })
+
+                }
+            });
+
+            
+        }).catch(err => {
+            console.log("Something wrong happened");
+        })
+        
+
+        
+    
     }
 });
 
-router.post('/verifyCode', (req, res) => {
-    const userCode = req.body.code;
-    const email = req.body.email;
-    
+router.get('/verif-code', (req, res) => {
+    res.render('../Views/verif-code.twig');
+});
+
+
+
+function getUserByEmail (req, res) {
+
+    return new Promise((resolve, reject) => {
+        database.query('SELECT *, id as userId FROM user WHERE email = ?', [req.body.email], (err, rows, fields) => {
+            if (!err) {
+                resolve(rows);
+            } else {
+                reject(err);
+            }
+        });
+    });
+}
+
+function getCode (req, res) {
+
+    return new Promise((resolve, reject) => {
+        database.query('SELECT * FROM pwdCodes WHERE email = ? AND code_text = ?', [[req.body.email], [req.body.code]], (err, rows, fields) => {
+            if (!err) {
+                resolve(rows);
+            } else {
+                reject(err);
+            }
+        });
+    });
+}
+
+router.post('/verifyCode',async (req, res) => {
+    console.log(req.body)
+    let result = await getCode(req, res); 
+
+    if (result.length != 0) {
+        let user = await getUserByEmail(req, res);
+        console.log(user);
+        return res.send({
+            result: 1,
+            message: "Code is correct",
+            login: user[0].login
+        });
+    }
+    else res.send({
+        result: 0,
+        message: "Code incorrect"
+    })
+});
+
+router.get('/change-password', (req, res) => {   
+    res.render('../Views/change-pass.twig');
 });
 
 // Update existing user in the database
@@ -201,4 +291,26 @@ router.get('/delete/:id', (req, res) => {
     })
 });
 
+
+async function updatePass (req, res) {
+    const hashedPwd = await bcrypt.hash(req.body.password, 10);
+    return new Promise((resolve, reject) => {
+        database.query('UPDATE user SET password = ? WHERE login = ?', [hashedPwd, req.body.login], (err, rows, fields) => {
+            if (!err) {
+                console.log("Password updated successfully")
+                resolve();
+            } else {
+                reject(err);
+            }
+        });
+    });
+}
+router.post('/update-password',async (req, res) => {
+    await updatePass(req, res)
+    .then( () => {
+        res.status(200).send();
+    })
+    .catch(err => console.log(err));
+    
+});
 module.exports = router;
