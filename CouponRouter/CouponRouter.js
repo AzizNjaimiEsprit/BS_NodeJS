@@ -3,14 +3,16 @@ const router = express.Router();
 const database = require('../config/db.config');
 const codeGenerator = require('./CodeGenerator')
 
+
 // Add new coupon
 router.post('/add', (req, res) => {
-    code = codeGenerator.getCouponCode(6);
+    code = codeGenerator.getCouponCode(15);
 
     database.query('INSERT INTO coupon VALUES (?,?,?)', [code, req.body.amount, req.body.userId], (err, rows) => {
-        if (!err) {
-            res.send('Coupon added successfuly');
-            // Send SMS using nexmo API ....
+        if (!err) { 
+            res.status(200).send({
+                coupon: code
+            });
         }
         else {res.send('Operation failed');
             console.log(err);

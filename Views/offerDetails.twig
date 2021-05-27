@@ -1,0 +1,59 @@
+{% include 'header.twig' %}
+<!-- Start Offers list Area -->
+
+<div class="offer-container">
+    <div class="cover-cont">
+        <img src="http://localhost:5000/offers/getOfferImage/{{ offer.image }}" id="{{offer.id}}" alt="Offer image">
+        <div class="img-text">
+            <h4>{{offer.title}}</h4>
+            <p>Written by {{offer.author}}</p>
+            <p>Offer from {{offer.full_name}}</p>
+            <h5>{{ offer.price }} TND</h5>
+        </div>
+    </div>
+    <div class="offer-desc">
+        <h6>Description :</h6>
+        <p>{{ offer.description }}</p>
+    </div>
+    
+</div>
+{% if offer.status == 'not bought' %}
+    <div class="offer-btns">
+            <button type="button" data-toggle="modal" data-target="#confirm-modal" id = "{{ offer.id }}" class="btn btn-success">Accept</button>
+            <button type="button" class="btn btn-dark dismiss-btn">Decline</button>
+    </div> 
+{% endif %}
+
+
+<!-- Modal -->
+<div class="modal fade" id="confirm-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Confirmation</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        By accepting this offer {{ offer.full_name }} is going to get a coupon of {{ offer.price }} TND
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" id = "{{ offer.id }}" class="btn btn-primary save-change-btn">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- End Offers List Area -->
+<script type="text/javascript">
+var userName = '{{ offer.full_name }}';
+var userId = '{{ offer.user_id }}';
+var id = '{{ offer.id }}';
+var price = '{{ offer.price}}';
+var phone = '{{ offer.phone }}';
+</script>
+<script src="/js/acceptOffer.js"></script>
+<script src="/js/declineOffer.js"></script>
+{% include 'footer.twig' %}

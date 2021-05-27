@@ -1,0 +1,33 @@
+{% include 'header.twig' %}
+<!-- Start Offers list Area -->
+
+<div class="grid-container">
+    {% for offer in offers %}
+        <div class="grid-item offer">
+            <a class="details-link" href="/offers/getOffer/{{ offer.id }}">
+                <img src="http://localhost:5000/offers/getOfferImage/{{ offer.image }}" id="{{offer.id}}" alt="Offer image">
+            </a>
+            <div class="offer-infos">
+                <h4>{{offer.title}}</h4>
+                <p>Written by {{offer.author}}</p>
+                <p>Offer from {{offer.full_name}}</p>
+                <h5>{{ offer.price }} TND</h5>
+                <div class="static-btn">
+                    {% if offer.status == 'yes'  %}
+                        <h6>Offer already accepted</h6>
+                    {% elseif offer.status == 'no' %}
+                        <h6>Offer is not accepted</h6>
+                    {% else %}
+                        <h6>Still waiting for confirmation</h6>
+                    {% endif %}
+                </div>
+            </div>
+        </div>  
+    {% endfor %}
+</div> 
+
+<script>
+
+</script>
+<!-- End Offers List Area -->
+{% include 'footer.twig' %}
